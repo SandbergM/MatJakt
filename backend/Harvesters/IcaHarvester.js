@@ -34,18 +34,21 @@ module.exports = class IcaHarvester {
             category.forEach(x => {
                 x["type"] === "product" ? cleanIds.push(x["id"]) : "";
             })
-        })
+        });
+
         return await cleanIds;
     }
     static async fetchProducts() {
         let productIds = await this.getProductIds();
         let products = [];
-        let i = 0;
-        for (let id of productIds) {
-            let raw = await fetch(`https://handla.ica.se/api/content/v1/collection/customer-type/B2C/store/ica-supermarket-linero-torg-id_15172/products-data?skus=${id}`)
+        for (let i = 0; i < productIds.length; i += 100) {
+            let query = []; // Ica only allows to fetch 100 products on a single fetch
+            for (let j = 0; j < 100; j++) {
+                query.push(productIds[j])
+            }
+            let raw = await fetch(`https://handla.ica.se/api/content/v1/collection/customer-type/B2C/store/ica-supermarket-linero-torg-id_15172/products-data?skus=${query.join(",")}`)
             let res = await raw.json();
-            console.log(`${++i} produkter hämtade`);
-            products.push(res)
+            products = [...products, ...res]
         }
         return await products;
     }
