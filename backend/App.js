@@ -1,7 +1,7 @@
 const CoopHarvester = require('./Harvesters/CoopHarvester');
 const IcaHarvester = require('./Harvesters/IcaHarvester');
 
-CoopHarvester.getCategories();
+//CoopHarvester.getCategories();
 //IcaHarvester.fetchProducts();
 
 /*
