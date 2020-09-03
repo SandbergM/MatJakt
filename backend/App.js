@@ -4,9 +4,8 @@ const IcaScrubber = require('./Scrubbers/IcaScrubber')
 
 
 async function updateDatabase() {
-  //let products = await IcaHarvester.fetchProducts();
-  //let rawIcaProducts = await IcaScrubber.scrubAll(products);
+  //let rawIcaProducts = await IcaHarvester.fetchProducts();
+  //let icaScrubbedData = await IcaScrubber.scrubAll(rawIcaProducts);
   //CoopHarvester.getCategories();
-  //IcaHarvester.fetchProducts();
 }
 updateDatabase();
