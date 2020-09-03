@@ -25,8 +25,7 @@ module.exports = class IcaHarvester {
 
         for (let category of categories) {
             let res = await fetch(`
-            https://handla.ica.se/api/content/v1/collections/facets/customer-type/B2C/store
-            /ica-supermarket-linero-torg-id_15172/products?categories=${category}&sortBy=MYUSUALS&bb=true`
+            https://handla.ica.se/api/content/v1/collections/facets/customer-type/B2C/store/ica-supermarket-linero-torg-id_15172/products?categories=${category}&sortBy=MYUSUALS&bb=true`
             );
             let items = await res.json();
             await productIds.push(items.items)
@@ -59,8 +58,7 @@ module.exports = class IcaHarvester {
             }
 
             let raw = await fetch(`
-            https://handla.ica.se/api/content/v1/collection/customer-type/B2C/store
-            /ica-supermarket-linero-torg-id_15172/products-data?skus=${query.join(",")}`
+            https://handla.ica.se/api/content/v1/collection/customer-type/B2C/store/ica-supermarket-linero-torg-id_15172/products-data?skus=${query.join(",")}`
             )
 
             let res = await raw.json();
