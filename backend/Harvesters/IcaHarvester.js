@@ -11,7 +11,7 @@ module.exports = class IcaHarvester {
 
     static async getCategories() {
 
-        const storeId = "15172"; // Uniqe id for ica-supermarket-linero-torg
+        const storeId = "15172"; // Unique id for ica-supermarket-linero-torg
         let raw = await fetch(`https://handla.ica.se/api/product-info/v1/store/${storeId}/category/catalog80002`)
         let categories = await raw.json();
 
