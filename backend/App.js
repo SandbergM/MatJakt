@@ -2,12 +2,14 @@ const CoopHarvester = require('./Harvesters/CoopHarvester');
 const IcaHarvester = require('./Harvesters/IcaHarvester');
 const WillyHarvester = require('./Harvesters/WillyHarvester');
 
+const fs = require('fs');
+
 //CoopHarvester.getCategories();
 //IcaHarvester.fetchProducts();
 
 async function test() {
-  let x = await WillyHarvester.getProducts();
-  console.log(x);
+  let x = await WillyHarvester.getAllProducts();
+  console.log(x.length + "Products fetched");
 }
 test()
 /*

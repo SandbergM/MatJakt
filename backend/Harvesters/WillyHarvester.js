@@ -9,30 +9,25 @@ module.exports = class WillysHarvester {
   static async getCategories() {
     let raw = await fetch('https://www.willys.se/leftMenu/categorytree'
       + this.bustCache());
-    return await raw.json();
+    let categories = await raw.json();
+    return await categories.children.map(x => x.url)
   }
 
   static async getProducts(categoryURL) {
     let raw = await fetch('https://www.willys.se/c/'
-      + "Mejeri-ost-och-agg" + this.bustCache() + '&size=10000');
+      + categoryURL + this.bustCache() + '&size=10000');
     return (await raw.json()).results;
   }
 
-  /*static async getProducts() {
-    let categories = await this.getCategories();
-    for (let category of categories) {
-      let raw = await fetch(
-        "https://www.willys.se/c/" + category + this.bustCache() + "&size=10000"
-      );
-      return (await raw.json()).results;
-    }
-  }*/
-
   static async getAllProducts() {
-    // NOT WRITTEN YET!
+    console.log("Starting harvest");
     let categories = await this.getCategories();
-    // now loop basic categories and getProducts for each category...
-    // how would you write this?
+    let products = [];
+    for (let category of categories) {
+      let x = await this.getProducts(category);
+      products = [...products, ...x]
+    }
+    console.log("Done");
+    return products;
   }
-
 }
