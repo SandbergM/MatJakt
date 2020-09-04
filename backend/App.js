@@ -1,9 +1,15 @@
 const CoopHarvester = require('./Harvesters/CoopHarvester');
 const IcaHarvester = require('./Harvesters/IcaHarvester');
+const WillyHarvester = require('./Harvesters/WillyHarvester');
 
 //CoopHarvester.getCategories();
 //IcaHarvester.fetchProducts();
 
+async function test() {
+  let x = await WillyHarvester.getProducts();
+  console.log(x);
+}
+test()
 /*
 async function getdata() {
   let data = await CoopHarvester.getCategories();
