@@ -28,7 +28,7 @@ module.exports = class IcaHarvester {
             https://handla.ica.se/api/content/v1/collections/facets/customer-type/B2C/store/ica-supermarket-linero-torg-id_15172/products?categories=${category}&sortBy=MYUSUALS&bb=true`
             );
             let items = await res.json();
-            await productIds.push(items.items)
+            productIds.push(items.items)
         }
 
         let cleanIds = [];
@@ -39,7 +39,7 @@ module.exports = class IcaHarvester {
             });
         });
 
-        return await cleanIds;
+        return cleanIds;
     }
 
     static async fetchProducts() {
@@ -67,6 +67,6 @@ module.exports = class IcaHarvester {
             console.log(products.length);
         }
         console.log("Done *cough* borrowing *cough* some data from Ica Supermarket Linero Torg");
-        return await products;
+        return products;
     }
 };
