@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
     name: { type: String, required: true },
-    store_id: { type: mongoose.Types.ObjectId, ref: "Store", required: true },
+    storeId: { type: mongoose.Types.ObjectId, ref: "Store", required: true },
     categoryId: [{ type: mongoose.Types.ObjectId, ref: "Category" }],
     brand: { type: String },
     price: { type: Number, required: true },
