@@ -6,7 +6,7 @@ module.exports = class WillysScrubber extends Scrubber {
   static translateSchema = {
     name: (x) => x.name,
     categoryId: (x) => this.getCategoryId(x),
-    storeId: (x) => "Willys",
+    storeId: (x) => "Willys", // TODO: Add real storeId
     brand: (x) => x.manufacturer,
     price: (x) => x.priceValue,
     pricePerUnit: (x) => parseFloat(x.comparePrice.replace(/,/, ".")),
@@ -17,14 +17,17 @@ module.exports = class WillysScrubber extends Scrubber {
     countryOfOrigin: async (x) => await this.getCountryOfOrigin(x.code),
   };
 
+  // TODO: Add logic
   static getCategoryId(product) {
     return "CategoryId";
   }
 
+  // TODO: Add logic
   static getLabels(product) {
     return ["This", "is", "a", "label"];
   }
 
+  // Fetches the detailed product view and returns the country of origin.
   static async getCountryOfOrigin(productCode) {
     let productUrl = `https://www.willys.se/axfood/rest/p/${productCode}?avoidCache=${getRandomNumber()}`;
     let rawProduct = await fetch(productUrl);
