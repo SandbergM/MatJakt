@@ -63,10 +63,13 @@ module.exports = class IcaHarvester {
 
             let res = await raw.json();
 
-            products = [...products, ...res] // Add the newly fetched products to the products array
-            console.log(products.length);
+            try {
+                products = [...products, ...res]
+            } catch (error) {
+                console.log(error);
+            }
+
         }
-        console.log("Done *cough* borrowing *cough* some data from Ica Supermarket Linero Torg");
         return products;
     }
 };
