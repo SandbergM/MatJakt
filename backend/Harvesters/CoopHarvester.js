@@ -4,6 +4,12 @@ const Entities = require("html-entities").XmlEntities;
 const entities = new Entities();
 
 module.exports = class CoopHarvester {
+  static coopApiBaseUrl =
+    "https://www.coop.se/ws/v2/coop/users/anonymous/" +
+    "products/discover?categoryId=XXX&storeId=016001" +
+    "&placements=category_page.Discover&rrSessionId=1" +
+    "&currentPage=0&pageSize=10000&fields=FULL";
+
   static async getCategories() {
     let raw = await fetch("https://www.coop.se/handla/");
     //in this case we use cheerio to get categories from hardcoded html data
@@ -16,27 +22,30 @@ module.exports = class CoopHarvester {
       .each((i, x) => {
         categories.push({
           name: entities.decode($(x).html()),
-          url: $(x).parent().attr("data-code"),
+          code: $(x).parent().attr("data-code"),
           level: $(x).parents("ul").length,
         });
       });
     let filteredCategories = categories.filter((x) => x.level === 1);
-    return filteredCategories.map((category) => delete category.level);
+    
+    return filteredCategories.map((x) => {
+      delete x.level;
+      return x;
+    });
   }
 
-  static async getProducts(categoryURL) {
-    let raw = await fetch(
-      "https://www.willys.se/c/" +
-      categoryURL +
-      this.bustCache() +
-      "&size=10000"
-    );
-    return (await raw.json()).results;
+  static async getProducts(categoryCode) {
+    let raw = await fetch(this.coopApiBaseUrl.replace(/XXX/, categoryCode));
+    return (await raw.json()).products;
   }
 
   static async getAllProducts() {
+    const products = [];
     let categories = await this.getCategories();
-    // now loop basic categories and getProducts for each category...
-    // how would you write this?
+    for (let category of categories) {
+      let categoryProducts = await this.getProducts(category.code);
+      products.push(...categoryProducts);
+    }
+    return products;
   }
 };
