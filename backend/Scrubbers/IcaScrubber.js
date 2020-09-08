@@ -24,8 +24,10 @@ async function filterCategories(categories) {
     let productCategoryArray = []
     for await (category of categories) {
         translateCategory(category.slug).then(res => { console.log(res.categoryTranslation); }).catch((e) => { /*console.log(e);*/ })
+        for await (subCategories of category.path) {
+            translateCategory(subCategories.slug).then(res => { console.log(res.categoryTranslation); }).catch((e) => { /*console.log(e);*/ })
+        }
     }
-
     return [...new Set(productCategoryArray)]
 }
 
