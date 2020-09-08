@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const storeSchema = new Schema({
-    address_id: { type: mongoose.Types.ObjectId, ref: "Address", required: true },
+    addressId: { type: mongoose.Types.ObjectId, ref: "Address", required: true },
     name: { type: String, required: true },
     websiteUrl: { type: String },
     openingHours: { type: Array },

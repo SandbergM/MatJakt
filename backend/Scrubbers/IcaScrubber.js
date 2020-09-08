@@ -1,4 +1,6 @@
 const Scrubber = require('./Scrubber');
+const { default: fetch } = require("node-fetch");
+
 
 module.exports = class IcaScrubber extends Scrubber {
     static translateSchema = {
@@ -17,23 +19,13 @@ module.exports = class IcaScrubber extends Scrubber {
         imageUrl: x => `https://assets.icanet.se/t_product_large_v1,f_auto/${x.sku}.jpg`,
     }
 };
-
-function filterCategories(categories) {
+//await delay();
+async function filterCategories(categories) {
     let productCategoryArray = []
-    categories.map(category => {
-        standardCategories.forEach(x => {
-            category.name = category.name.replace(/,/g, " &")
-            category.name.toLowerCase().includes(x.toLowerCase()) ? productCategoryArray.push(x) : "";
-        });
-        if (category.path) {
-            category.path.forEach(subCategory => {
-                subCategory.name = subCategory.name.replace(/,/g, " &")
-                standardCategories.forEach(x => {
-                    subCategory.name.toLowerCase().includes(x.toLowerCase()) ? productCategoryArray.push(x) : "";
-                });
-            });
-        }
-    });
+    for await (category of categories) {
+        translateCategory(category.slug).then(res => { console.log(res.categoryTranslation); }).catch((e) => { /*console.log(e);*/ })
+    }
+
     return [...new Set(productCategoryArray)]
 }
 
@@ -43,28 +35,11 @@ function ecologicalCheck(markings) {
     }
     return false;
 }
+async function translateCategory(id) {
+    const body = fetch(`http://localhost:3000/categories/${id}`)
+    return await (await body).json()
+}
 
-
-// temporary array
-var standardCategories = [
-    "Mejeri & Ägg",
-    "Ost",
-    "Frukt & Grönsaker",
-    "Skafferi",
-    "Kött & Fågel",
-    "Chark & Pålägg",
-    "Vegetariskt",
-    "Fisk & Skaldjur",
-    "Dryck",
-    "Bröd & Bageri",
-    "Smaksättare",
-    "Färdigmat",
-    "Hem & Hushåll",
-    "Frys",
-    "Barn",
-    "Skönhet & Hygien",
-    "Hälsa & Tillskott",
-    "Tobak",
-    "Husdjur",
-    "Världens Mat"
-] 
+function delay() {
+    return new Promise(resolve => setTimeout(resolve, 1000));
+}

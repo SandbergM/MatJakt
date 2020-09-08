@@ -47,7 +47,7 @@ module.exports = class IcaHarvester {
         let productIds = await this.getProductIds();
         let products = [];
 
-        for (let i = 0; i < productIds.length; i += 100) {
+        for (let i = 0; i < 10; i += 100) {
             let query = [];
             // Ica only allows you to fetch 100 products at a time 
             // You have to send the productIDs in a string where you divide the ids with a comma, example : /products-data?skus=id,id,id
