@@ -1,6 +1,6 @@
 "use strict";
 module.exports = function (app) {
-    var restRoute = require("./CategoriesRestController");
+    var restRoute = require("./CategoriesController");
 
     app
         .route("/categories/:id")

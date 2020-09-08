@@ -7,7 +7,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 
-const routesCat = require("./CategoriesRestRoutes"); //importing routes
+const routesCat = require("./CategoriesRoutes"); //importing routes
 const routes = require("./RestRoutes"); //importing routes
 
 routes(app); //register the routes
