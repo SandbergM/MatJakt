@@ -1,53 +1,53 @@
-const Scrubber = require('./Scrubber');
-const { default: fetch } = require("node-fetch");
+const Scrubber = require("./Scrubber");
 const Translator = require("../Translator");
-let x = Translator.categories();
-
+let categoryTranslations = Translator.categories();
 
 module.exports = class IcaScrubber extends Scrubber {
-    static translateSchema = {
-        name: x => x.name,
-        store_id: x => "ica-supermarket-linero-torg",
-        categoryId: x => filterCategories(x.inCategories),
-        brand: x => x.brand,
-        price: x => x.price === undefined ? "N/A" : x.price,
-        packagingSize: x => "TODO",// TODO
-        pricePerUnit: x => x.compare === undefined ? "N/A" : x.compare.price,
-        quantityType: x => x.soldInUnit === "pce" ? "st" : "kg",
-        discount: x => x.promotions, // TODO
-        labels: x => "N/A", // TODO
-        isEcological: x => x.markings.environmental === undefined ? false : ecologicalCheck(x.markings.environmental),
-        countryOfOrigin: x => x.countryOfOrigin === undefined ? "N/A" : x.countryOfOrigin.name,
-        imageUrl: x => `https://assets.icanet.se/t_product_large_v1,f_auto/${x.sku}.jpg`,
-    }
+  static translateSchema = {
+    name: (x) => x.name,
+    store_id: (x) => "ica-supermarket-linero-torg",
+    categoryId: (x) => filterCategories(x.inCategories),
+    brand: (x) => x.brand,
+    price: (x) => (x.price === undefined ? "N/A" : x.price),
+    packagingSize: (x) => "TODO", // TODO
+    pricePerUnit: (x) => (x.compare === undefined ? "N/A" : x.compare.price),
+    quantityType: (x) => (x.soldInUnit === "pce" ? "st" : "kg"),
+    discount: (x) => x.promotions, // TODO
+    labels: (x) => "N/A", // TODO
+    isEcological: (x) =>
+      x.markings.environmental === undefined
+        ? false
+        : ecologicalCheck(x.markings.environmental),
+    countryOfOrigin: (x) =>
+      x.countryOfOrigin === undefined ? "N/A" : x.countryOfOrigin.name,
+    imageUrl: (x) =>
+      `https://assets.icanet.se/t_product_large_v1,f_auto/${x.sku}.jpg`,
+  };
 };
-//await delay();
 async function filterCategories(categories) {
-    let productCategoryArray = []
-    for await (category of categories) {
-        x.has(category.slug) ? productCategoryArray.push(x.get(category.slug)) : "";
-        //translateCategory(category.slug).then(res => { console.log(res.categoryTranslation); }).catch((e) => { /*console.log(e);*/ })
-        for await (subCategories of category.path) {
-            let current = ""
-            console.log(subCategories);
-            x.has(subCategories.slug) ? console.log(x.get(subCategories.slug)) : "";
-            //translateCategory(subCategories.slug).then(res => console.log(res.categoryTranslation)).catch((e) => { /*console.log(e);*/ })
-        }
+  let productCategoryArray = [];
+  categories.forEach((category) => {
+    categoryTranslations.has(category.slug)
+      ? productCategoryArray.push(categoryTranslations.get(category.slug))
+      : "";
+    if (category.path) {
+      category.path.forEach((subCategory) => {
+        categoryTranslations.has(subCategory.slug)
+          ? productCategoryArray.push(
+              categoryTranslations.get(subCategory.slug)
+            )
+          : "";
+      });
     }
-    return [...new Set(productCategoryArray)]
+  });
+  return [...new Set(productCategoryArray)];
 }
 
 function ecologicalCheck(markings) {
-    for (let i = 0; i < markings.length; i++) {
-        if (markings[i].code === "EU_ORGANIC_FARMING") { return true }
+  for (let i = 0; i < markings.length; i++) {
+    if (markings[i].code === "EU_ORGANIC_FARMING") {
+      return true;
     }
-    return false;
-}
-async function translateCategory(id) {
-    const body = fetch(`http://localhost:3000/categories/${id}`)
-    return await (await body).json()
-}
-
-function delay() {
-    return new Promise(resolve => setTimeout(resolve, 1000));
+  }
+  return false;
 }
