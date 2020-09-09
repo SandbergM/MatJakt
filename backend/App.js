@@ -36,13 +36,11 @@ async function updateDatabase() {
     test()
   }, 1000)
 
-  //let rawIcaProducts = await IcaHarvester.fetchProducts();
-  //let icaScrubbedData = await IcaScrubber.scrubAll(rawIcaProducts);
+  let rawIcaProducts = await IcaHarvester.fetchProducts();
+  let icaScrubbedData = await IcaScrubber.scrubAll(rawIcaProducts);
   //console.log(icaScrubbedData);
 }
 updateDatabase();
 async function test() {
   await Translator.fetchCategories()
-  let x = await Translator.categories();
-  console.log(x);
 }

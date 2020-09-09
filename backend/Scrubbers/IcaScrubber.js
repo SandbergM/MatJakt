@@ -1,5 +1,7 @@
 const Scrubber = require('./Scrubber');
 const { default: fetch } = require("node-fetch");
+const Translator = require("../Translator");
+let x = Translator.categories();
 
 
 module.exports = class IcaScrubber extends Scrubber {
@@ -23,10 +25,13 @@ module.exports = class IcaScrubber extends Scrubber {
 async function filterCategories(categories) {
     let productCategoryArray = []
     for await (category of categories) {
-        translateCategory(category.slug).then(res => { console.log(res.categoryTranslation); }).catch((e) => { /*console.log(e);*/ })
+        x.has(category.slug) ? productCategoryArray.push(x.get(category.slug)) : "";
+        //translateCategory(category.slug).then(res => { console.log(res.categoryTranslation); }).catch((e) => { /*console.log(e);*/ })
         for await (subCategories of category.path) {
             let current = ""
-            translateCategory(subCategories.slug).then(res => console.log(res.categoryTranslation)).catch((e) => { /*console.log(e);*/ })
+            console.log(subCategories);
+            x.has(subCategories.slug) ? console.log(x.get(subCategories.slug)) : "";
+            //translateCategory(subCategories.slug).then(res => console.log(res.categoryTranslation)).catch((e) => { /*console.log(e);*/ })
         }
     }
     return [...new Set(productCategoryArray)]
