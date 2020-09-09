@@ -9,7 +9,7 @@ const fs = require('fs');
 
 async function test() {
   let x = await WillyHarvester.getAllProducts();
-  console.log(x.length + "Products fetched");
+  console.log(x.length + " Products fetched");
 }
 test()
 /*
