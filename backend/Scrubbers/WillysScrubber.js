@@ -3,35 +3,69 @@ const Scrubber = require("./Scrubber");
 const { getRandomNumber } = require("../Shared/Helpers");
 
 module.exports = class WillysScrubber extends Scrubber {
+  static detailedProduct;
+
   static translateSchema = {
     name: (x) => x.name,
-    categoryId: (x) => this.getCategoryId(x),
+    categoryId: async (x) => await this.getCategoryId(x.code),
     storeId: (x) => "Willys", // TODO: Add real storeId
     brand: (x) => x.manufacturer,
     price: (x) => x.priceValue,
+    packagingSize: (x) =>
+      this.convertSize(
+        this.getVolumeUnit(x.displayVolume),
+        this.getVolume(x.displayVolume)
+      ),
     pricePerUnit: (x) => parseFloat(x.comparePrice.replace(/,/, ".")),
     quantityType: (x) => x.comparePriceUnit,
     discount: (x) => x.savingsAmount,
-    labels: (x) => this.getLabels(x),
+    labels: async (x) => await this.getLabels(x.code),
     isEcological: (x) => x.labels.includes("ecological"),
     countryOfOrigin: async (x) => await this.getCountryOfOrigin(x.code),
+    imageUrl: (x) => x.image && x.image.url,
   };
 
+  static async getDetailedProduct(productCode) {
+    return this.detailedProduct && this.detailedProduct.code === productCode
+      ? this.detailedProduct
+      : this.fetchDetailedProduct(productCode);
+  }
+
+  // Fetches the detailed product view
+  static async fetchDetailedProduct(productCode) {
+    let productUrl = `https://www.willys.se/axfood/rest/p/${productCode}?avoidCache=${getRandomNumber()}`;
+    let rawProduct = await fetch(productUrl);
+    let product = await rawProduct.json();
+    this.detailedProduct = product;
+    return this.detailedProduct;
+  }
+
   // TODO: Add logic
-  static getCategoryId(product) {
+  static async getCategoryId(productCode) {
+    let product = await this.getDetailedProduct(productCode);
     return "CategoryId";
   }
 
   // TODO: Add logic
-  static getLabels(product) {
+  static async getLabels(productCode) {
+    let product = await this.getDetailedProduct(productCode);
     return ["This", "is", "a", "label"];
   }
 
-  // Fetches the detailed product view and returns the country of origin.
   static async getCountryOfOrigin(productCode) {
-    let productUrl = `https://www.willys.se/axfood/rest/p/${productCode}?avoidCache=${getRandomNumber()}`;
-    let rawProduct = await fetch(productUrl);
-    let product = await rawProduct.json();
+    let product = await this.getDetailedProduct(productCode);
     return product.tradeItemCountryOfOrigin;
+  }
+
+  static getVolume(displayVolume) {
+    let regex = /[^\d.]/g;
+    let volume = displayVolume.replace(regex, "");
+    console.log(volume);
+    return parseFloat(volume);
+  }
+
+  static getVolumeUnit(displayVolume) {
+    let regex = /^([\S]*\s?\d+[.]?\d*)/;
+    return displayVolume.replace(regex, "").toLowerCase();
   }
 };
