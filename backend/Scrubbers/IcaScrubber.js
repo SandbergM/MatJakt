@@ -9,7 +9,7 @@ module.exports = class IcaScrubber extends Scrubber {
     categoryId: (x) => filterCategories(x.inCategories),
     brand: (x) => x.brand,
     price: (x) => (x.price === undefined ? "N/A" : x.price),
-    packagingSize: (x) => Math.round(x.price / x.compare.price), // TODO
+    packagingSize: (x) => x.price / x.compare.price, // TODO
     pricePerUnit: (x) => x.compare.price,
     quantityType: (x) => x.compare.priceText.slice(x.compare.priceText.lastIndexOf('/') + 1, x.compare.priceText.length),
     discount: (x) => x.promotions, // TODO
