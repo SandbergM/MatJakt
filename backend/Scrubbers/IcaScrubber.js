@@ -1,5 +1,5 @@
 const Scrubber = require("./Scrubber");
-const Translator = require("../Translator");
+const Translator = require("../Shared/Translator");
 let categoryTranslations = Translator.categories();
 
 module.exports = class IcaScrubber extends Scrubber {
@@ -9,9 +9,9 @@ module.exports = class IcaScrubber extends Scrubber {
     categoryId: (x) => filterCategories(x.inCategories),
     brand: (x) => x.brand,
     price: (x) => (x.price === undefined ? "N/A" : x.price),
-    packagingSize: (x) => "TODO", // TODO
-    pricePerUnit: (x) => (x.compare === undefined ? "N/A" : x.compare.price),
-    quantityType: (x) => (x.soldInUnit === "pce" ? "st" : "kg"),
+    packagingSize: (x) => Math.round(x.price / x.compare.price), // TODO
+    pricePerUnit: (x) => x.compare.price,
+    quantityType: (x) => x.compare.priceText.slice(x.compare.priceText.lastIndexOf('/') + 1, x.compare.priceText.length),
     discount: (x) => x.promotions, // TODO
     labels: (x) => "N/A", // TODO
     isEcological: (x) =>
@@ -34,8 +34,8 @@ async function filterCategories(categories) {
       category.path.forEach((subCategory) => {
         categoryTranslations.has(subCategory.slug)
           ? productCategoryArray.push(
-              categoryTranslations.get(subCategory.slug)
-            )
+            categoryTranslations.get(subCategory.slug)
+          )
           : "";
       });
     }
