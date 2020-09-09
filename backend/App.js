@@ -1,9 +1,11 @@
 const CoopHarvester = require("./Harvesters/CoopHarvester");
 const CoopScrubber = require("./Scrubbers/CoopScrubber");
+const WillysHarvester = require("./Harvesters/WillyHarvester");
+const WillysScrubber = require("./Scrubbers/WillysScrubber");
 const IcaHarvester = require("./Harvesters/IcaHarvester");
 const IcaScrubber = require("./Scrubbers/IcaScrubber");
 const Translator = require("./Translator");
-const Product = require("./models/product");
+const { Product, TempProduct } = require("./models/product");
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
@@ -16,7 +18,7 @@ routesCat(app); //register the routes
 
 //connect to MongoDB with mongoose
 const dbURI =
-  "mongodb+srv://SandbergM:asdf@matjakt.qb4vo.mongodb.net/MatJakt?retryWrites=true&w=majority";
+  "mongodb+srv://matjakt:FoodHunt123@mat-jakt.mpf5m.mongodb.net/mat-jakt?retryWrites=true&w=majority";
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) =>
@@ -27,15 +29,37 @@ mongoose
   .catch((err) => console.log(err));
 
 async function updateDatabase() {
-  setTimeout(() => {
-    test();
-  }, 1000);
+  let products = [];
 
-  let rawIcaProducts = await IcaHarvester.fetchProducts();
-  let icaScrubbedData = await IcaScrubber.scrubAll(rawIcaProducts);
-  console.log(icaScrubbedData);
+  await Translator.fetchCategories();
+
+  let startTime = Date.now();
+  let coop = await CoopHarvester.getAllProducts();
+  let coopScrubbed = await CoopScrubber.scrubAll(coop);
+  console.log(" Coopharvesting completed",coopScrubbed.length, Date.now() - startTime);
+  products.push(...coopScrubbed);
+
+  startTime = Date.now();
+  let willys = await WillysHarvester.getAllProducts();
+  let willysScrubbed = await WillysScrubber.scrubAll(willys);
+  console.log(" Willysharvesting completed",willysScrubbed.length, Date.now() - startTime);
+  products.push(...willysScrubbed);
+  
+  startTime = Date.now();
+  let ica = await IcaHarvester.getAllProducts();
+  let icaScrubbed = await IcaScrubber.scrubAll(ica);
+  console.log(" Icasharvesting completed",icaScrubbed.length, Date.now() - startTime);
+  products.push(...icaScrubbed);
+
+  startTime = Date.now();
+
+  let db = mongoose.connection.db;
+
+  await TempProduct.collection.insertMany(products);
+  console.log("Database write took : ", Date.now() - startTime);
+  startTime = Date.now();
+  Product.collection.drop();
+  await db.collection("tempproducts").rename("products");
+  console.log("Database down for : ", Date.now() - startTime);
 }
 updateDatabase();
-async function test() {
-  await Translator.fetchCategories();
-}

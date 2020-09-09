@@ -20,14 +20,12 @@ module.exports = class WillysHarvester {
   }
 
   static async getAllProducts() {
-    console.log("Starting harvest");
     let categories = await this.getCategories();
     let products = [];
     for (let category of categories) {
       let x = await this.getProducts(category);
       products = [...products, ...x]
     }
-    console.log("Done");
     return products;
   }
 }
