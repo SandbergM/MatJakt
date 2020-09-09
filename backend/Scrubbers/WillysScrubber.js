@@ -21,7 +21,8 @@ module.exports = class WillysScrubber extends Scrubber {
     discount: (x) => x.savingsAmount,
     labels: async (x) => await this.getLabels(x.code),
     isEcological: (x) => x.labels.includes("ecological"),
-    countryOfOrigin: async (x) => await this.getCountryOfOrigin(x.code),
+    countryOfOrigin: (x) =>
+      x.labels.includes("swedish_flag") ? "Sweden" : "Other",
     imageUrl: (x) => x.image && x.image.url,
   };
 
@@ -35,26 +36,39 @@ module.exports = class WillysScrubber extends Scrubber {
   static async fetchDetailedProduct(productCode) {
     let productUrl = `https://www.willys.se/axfood/rest/p/${productCode}?avoidCache=${getRandomNumber()}`;
     let rawProduct = await fetch(productUrl);
-    let product = await rawProduct.json();
+    let product;
+    try {
+      product = await rawProduct.json();
+    } catch {
+      product = null;
+    }
     this.detailedProduct = product;
     return this.detailedProduct;
   }
 
   // TODO: Add logic
   static async getCategoryId(productCode) {
-    let product = await this.getDetailedProduct(productCode);
-    return "CategoryId";
+    // let product = await this.getDetailedProduct(productCode);
+    // if (product) {
+    //   return "CategoryId";
+    // }
+    return "Not found";
   }
 
   // TODO: Add logic
   static async getLabels(productCode) {
-    let product = await this.getDetailedProduct(productCode);
-    return ["This", "is", "a", "label"];
+    // let product = await this.getDetailedProduct(productCode);
+    // if (product) {
+    //   return ["This", "is", "a", "label"];
+    // }
+    return ["Not found"];
   }
 
   static async getCountryOfOrigin(productCode) {
-    let product = await this.getDetailedProduct(productCode);
-    return product.tradeItemCountryOfOrigin;
+    // let product = await this.getDetailedProduct(productCode);
+    // return product && product.tradeItemCountryOfOrigin;
+
+    return "Nåt land";
   }
 
   static getVolume(displayVolume) {
