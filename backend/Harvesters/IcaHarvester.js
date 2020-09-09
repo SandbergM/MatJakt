@@ -40,7 +40,7 @@ module.exports = class IcaHarvester {
     return cleanIds;
   }
 
-  static async fetchProducts() {
+  static async getAllProducts() {
     let productIds = await this.getProductIds();
     let products = [];
     let steps = 100;
@@ -71,14 +71,12 @@ module.exports = class IcaHarvester {
       try {
         products = [...products, ...res];
       } catch (error) {
-        console.log(error);
         if (res.message == "Internal server error") {
           if (steps === 100) {
             i--;
             adjustStepsBackAt = i + 99;
             steps = 1;
           }
-          console.log(query.join(","));
           continue;
         }
       }

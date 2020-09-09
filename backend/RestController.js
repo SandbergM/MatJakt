@@ -2,9 +2,8 @@
 
 const { db } = require("./models/product");
 
-
 const mongoose = require("mongoose"),
-  Product = mongoose.model("Products")
+  Product = mongoose.model("Product");
 
 exports.get_all_products = function (req, res) {
   Product.find({}, function (err, product) {
@@ -39,4 +38,3 @@ exports.update_one_product = function (req, res) {
     }
   );
 };
-
