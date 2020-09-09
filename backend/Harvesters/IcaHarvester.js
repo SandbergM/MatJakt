@@ -40,12 +40,12 @@ module.exports = class IcaHarvester {
     return cleanIds;
   }
 
-  static async fetchProducts() {
+  static async getAllProducts() {
     let productIds = await this.getProductIds();
     let products = [];
     let steps = 100;
     let adjustStepsBackAt;
-    for (let i = 0; i < 10; i += steps) {
+    for (let i = 0; i < productIds.length; i += steps) {
       let query = [];
       // Ica only allows you to fetch 100 products at a time
       // You have to send the productIDs in a string where you divide the ids with a comma, example : /products-data?skus=id,id,id
@@ -71,14 +71,12 @@ module.exports = class IcaHarvester {
       try {
         products = [...products, ...res];
       } catch (error) {
-        console.log(error);
         if (res.message == "Internal server error") {
           if (steps === 100) {
             i--;
             adjustStepsBackAt = i + 99;
             steps = 1;
           }
-          console.log(query.join(","));
           continue;
         }
       }
