@@ -2,6 +2,7 @@ const CoopHarvester = require("./Harvesters/CoopHarvester");
 const CoopScrubber = require("./Scrubbers/CoopScrubber");
 const IcaHarvester = require("./Harvesters/IcaHarvester");
 const IcaScrubber = require("./Scrubbers/IcaScrubber");
+const Translator = require("./Translator");
 const Product = require("./models/product");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -31,8 +32,17 @@ mongoose
 
 
 async function updateDatabase() {
-  let rawIcaProducts = await IcaHarvester.fetchProducts();
-  let icaScrubbedData = await IcaScrubber.scrubAll(rawIcaProducts);
+  setTimeout(() => {
+    test()
+  }, 1000)
+
+  //let rawIcaProducts = await IcaHarvester.fetchProducts();
+  //let icaScrubbedData = await IcaScrubber.scrubAll(rawIcaProducts);
   //console.log(icaScrubbedData);
 }
 updateDatabase();
+async function test() {
+  await Translator.fetchCategories()
+  let x = await Translator.categories();
+  console.log(x);
+}
