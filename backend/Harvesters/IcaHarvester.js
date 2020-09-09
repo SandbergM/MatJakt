@@ -11,7 +11,7 @@ module.exports = class IcaHarvester {
 
     static async getCategories() {
 
-        const storeId = "15172"; // Uniqe id for ica-supermarket-linero-torg
+        const storeId = "15172"; // Unique id for ica-supermarket-linero-torg
         let raw = await fetch(`https://handla.ica.se/api/product-info/v1/store/${storeId}/category/catalog80002`)
         let categories = await raw.json();
 
@@ -25,11 +25,10 @@ module.exports = class IcaHarvester {
 
         for (let category of categories) {
             let res = await fetch(`
-            https://handla.ica.se/api/content/v1/collections/facets/customer-type/B2C/store
-            /ica-supermarket-linero-torg-id_15172/products?categories=${category}&sortBy=MYUSUALS&bb=true`
+            https://handla.ica.se/api/content/v1/collections/facets/customer-type/B2C/store/ica-supermarket-linero-torg-id_15172/products?categories=${category}&sortBy=MYUSUALS&bb=true`
             );
             let items = await res.json();
-            await productIds.push(items.items)
+            productIds.push(items.items)
         }
 
         let cleanIds = [];
@@ -40,7 +39,7 @@ module.exports = class IcaHarvester {
             });
         });
 
-        return await cleanIds;
+        return cleanIds;
     }
 
     static async fetchProducts() {
@@ -59,8 +58,7 @@ module.exports = class IcaHarvester {
             }
 
             let raw = await fetch(`
-            https://handla.ica.se/api/content/v1/collection/customer-type/B2C/store
-            /ica-supermarket-linero-torg-id_15172/products-data?skus=${query.join(",")}`
+            https://handla.ica.se/api/content/v1/collection/customer-type/B2C/store/ica-supermarket-linero-torg-id_15172/products-data?skus=${query.join(",")}`
             )
 
             let res = await raw.json();
@@ -69,6 +67,6 @@ module.exports = class IcaHarvester {
             console.log(products.length);
         }
         console.log("Done *cough* borrowing *cough* some data from Ica Supermarket Linero Torg");
-        return await products;
+        return products;
     }
 };

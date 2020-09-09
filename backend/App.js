@@ -1,17 +1,17 @@
-const CoopHarvester = require('./Harvesters/CoopHarvester');
-const IcaHarvester = require('./Harvesters/IcaHarvester');
-const WillyHarvester = require('./Harvesters/WillyHarvester');
+const CoopHarvester = require("./Harvesters/CoopHarvester");
+const IcaHarvester = require("./Harvesters/IcaHarvester");
+const WillyHarvester = require("./Harvesters/WillyHarvester");
+const WillysScrubber = require("./Scrubbers/WillysScrubber");
 
-const fs = require('fs');
-
-//CoopHarvester.getCategories();
-//IcaHarvester.fetchProducts();
+const fs = require("fs");
+const IcaScrubber = require("./Scrubbers/IcaScrubber");
 
 async function test() {
-  let x = await WillyHarvester.getAllProducts();
-  console.log(x.length + " Products fetched");
+  let products = await WillyHarvester.getAllProducts();
+  let scrubbed = await WillysScrubber.scrubAll(products);
+  console.log(scrubbed);
 }
-test()
+test();
 /*
 async function getdata() {
   let data = await CoopHarvester.getCategories();
@@ -23,8 +23,10 @@ async function getdata() {
 
   //console.log(data.products[0].categories[0].name);
   console.log(categories);
+async function updateDatabase() {
+  //let rawIcaProducts = await IcaHarvester.fetchProducts();
+  //let icaScrubbedData = await IcaScrubber.scrubAll(rawIcaProducts);
+  //CoopHarvester.getCategories();
 }
-
-
-
- */
+updateDatabase();
+*/
