@@ -14,9 +14,6 @@ const routes = require("./RestRoutes"); //importing routes
 routes(app); //register the routes
 routesCat(app); //register the routes
 
-let categoryTranslationRegister = [];
-
-
 //connect to MongoDB with mongoose
 const dbURI =
   "mongodb+srv://SandbergM:asdf@matjakt.qb4vo.mongodb.net/MatJakt?retryWrites=true&w=majority";
@@ -29,12 +26,10 @@ mongoose
   )
   .catch((err) => console.log(err));
 
-
-
 async function updateDatabase() {
   setTimeout(() => {
-    test()
-  }, 1000)
+    test();
+  }, 1000);
 
   //let rawIcaProducts = await IcaHarvester.fetchProducts();
   //let icaScrubbedData = await IcaScrubber.scrubAll(rawIcaProducts);
@@ -42,7 +37,7 @@ async function updateDatabase() {
 }
 updateDatabase();
 async function test() {
-  await Translator.fetchCategories()
+  await Translator.fetchCategories();
   let x = await Translator.categories();
   console.log(x);
 }
