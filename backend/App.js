@@ -38,6 +38,4 @@ async function updateDatabase() {
 updateDatabase();
 async function test() {
   await Translator.fetchCategories();
-  let x = await Translator.categories();
-  console.log(x);
 }
