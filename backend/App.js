@@ -47,6 +47,7 @@ mongoose
   .catch((err) => console.log(err));
 
 async function updateDatabase() {
+
   let products = [];
 
   setTimeout(() => {
@@ -56,28 +57,27 @@ async function updateDatabase() {
   let startTime = Date.now();
   let coop = await CoopHarvester.getAllProducts();
   let coopScrubbed = await CoopScrubber.scrubAll(coop);
-  console.log(" Coopharvesting completed", coopScrubbed.length, Date.now() - startTime);
+  console.log(`${coopScrubbed.length} products fetched and scrubbed from Coop in ${(Date.now() - startTime) / 1000} seconds`);
   products.push(...coopScrubbed);
 
   startTime = Date.now();
   let willys = await WillysHarvester.getAllProducts();
   let willysScrubbed = await WillysScrubber.scrubAll(willys);
-  console.log(" Willysharvesting completed", willysScrubbed.length, Date.now() - startTime);
+  console.log(`${willys.length} products fetched and scrubbed from Willys in ${(Date.now() - startTime) / 1000} seconds`);
   products.push(...willysScrubbed);
 
   startTime = Date.now();
 
   let ica = await IcaHarvester.getAllProducts();
   let icaScrubbed = await IcaScrubber.scrubAll(ica);
-  console.log(icaScrubbed);
-  console.log(" Icasharvesting completed", icaScrubbed.length, Date.now() - startTime);
+  console.log(`${icaScrubbed.length} products fetched and scrubbed from Ica Supermarket Linero Torg in ${(Date.now() - startTime) / 1000} seconds`);
   products.push(...icaScrubbed);
 
   startTime = Date.now();
 
-  let db = mongoose.connection.db;
-
   await TempProduct.collection.insertMany(products);
+
+  let db = mongoose.connection.db;
 
   console.log("Database write took : ", Date.now() - startTime);
   startTime = Date.now();
