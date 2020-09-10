@@ -10,5 +10,4 @@ const addressSchema = new Schema({
     streetName: { type: String },
 });
 
-const Address = mongoose.model('address', addressSchema);
-module.exports = Address;
+module.exports = mongoose.model('address', addressSchema);

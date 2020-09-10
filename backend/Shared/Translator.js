@@ -1,8 +1,10 @@
+const fetch = require("node-fetch");
+
 let categories = new Map();
-const { default: fetch } = require("node-fetch");
+
 module.exports = class Translator {
   static async fetchCategories() {
-    let data = fetch(`http://localhost:3000/categoryTranslation`);
+    let data = fetch(`http://localhost:3000/categoryTranslations`);
     try {
       let dataJson = await (await data).json();
       Object.entries(dataJson).map((obj) => {

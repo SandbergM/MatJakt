@@ -6,4 +6,4 @@ const categoryTranslationSchema = new Schema({
     categoryTranslation: { type: String, required: false }
 });
 
-module.exports = mongoose.model('categoryTranslation', categoryTranslationSchema);
+module.exports = mongoose.model('categorytranslation', categoryTranslationSchema);

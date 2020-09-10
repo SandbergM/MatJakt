@@ -1,21 +1,38 @@
-const CoopHarvester = require("./Harvesters/CoopHarvester");
-const CoopScrubber = require("./Scrubbers/CoopScrubber");
-const WillysHarvester = require("./Harvesters/WillyHarvester");
-const WillysScrubber = require("./Scrubbers/WillysScrubber");
-const IcaHarvester = require("./Harvesters/IcaHarvester");
-const IcaScrubber = require("./Scrubbers/IcaScrubber");
-const Translator = require("./Shared/Translator");
-const { Product, TempProduct } = require("./models/product");
-const categoryTranslation = require("./models/categoryTranslation");
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 
-const routesCat = require("./categoryTranslationRoutes"); //importing routes
-const routes = require("./RestRoutes"); //importing routes
+const Translator = require("./Shared/Translator");
 
-routes(app); //register the routes
-routesCat(app); //register the routes
+//Harvesters
+const CoopHarvester = require("./harvesters/CoopHarvester");
+const IcaHarvester = require("./harvesters/IcaHarvester");
+const WillysHarvester = require("./harvesters/WillyHarvester");
+//Scrubbers
+const CoopScrubber = require("./scrubbers/CoopScrubber");
+const WillysScrubber = require("./scrubbers/WillysScrubber");
+const IcaScrubber = require("./scrubbers/IcaScrubber");
+
+//Mongoose models
+const Address = require("./models/address");
+const Category = require("./models/category");
+const Store = require("./models/store");
+const { Product, TempProduct } = require("./models/product");
+const CategoryTranslation = require("./models/categoryTranslation");
+
+
+//Routes
+const productRoutes = require("./routes/ProductRoutes");
+productRoutes(app);
+const addressRoutes = require("./routes/AddressRoutes");
+addressRoutes(app);
+const categoryRoutes = require("./routes/CategoryRoutes");
+categoryRoutes(app);
+const storeRoutes = require("./routes/StoreRoutes");
+storeRoutes(app);
+const categorytranslationsRoutes = require("./routes/categoryTranslationRoutes");
+categorytranslationsRoutes(app);
+
 
 //connect to MongoDB with mongoose
 const dbURI =
@@ -32,11 +49,9 @@ mongoose
 async function updateDatabase() {
   let products = [];
 
-
-
   setTimeout(() => {
     Translator.fetchCategories();
-  }, 2000)
+  }, 3000)
 
   let startTime = Date.now();
   let coop = await CoopHarvester.getAllProducts();

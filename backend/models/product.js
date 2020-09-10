@@ -18,6 +18,6 @@ const productSchema = new Schema({
 });
 
 module.exports = {
-  Product: mongoose.model("Product", productSchema),
+  Product: mongoose.model("product", productSchema),
   TempProduct: mongoose.model("tempProduct", productSchema),
 };
