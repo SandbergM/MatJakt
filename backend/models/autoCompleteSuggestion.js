@@ -7,5 +7,4 @@ const autoCompleteSuggestionSchema = new Schema({
     categoryId: { type: Array },
 });
 
-const AutoCompleteSuggestion = mongoose.model('autoCompleteSuggestion', autoCompleteSuggestionSchema);
-module.exports = AutoCompleteSuggestion;
+module.exports = mongoose.model('autoCompleteSuggestion', autoCompleteSuggestionSchema);

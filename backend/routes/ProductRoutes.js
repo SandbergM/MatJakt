@@ -1,15 +1,15 @@
 "use strict";
 module.exports = function (app) {
-  var restRoute = require("../controllers/ProductController");
+  const productRoutes = require("../controllers/ProductController");
 
   //TODO: Routes
   app
     .route("/products")
-    .get(restRoute.get_all_products)
-    .post(restRoute.create_one_product);
+    .get(productRoutes.get_all_products)
+    .post(productRoutes.create_one_product);
 
   app
     .route("/products/:productId")
-    .get(restRoute.get_one_product)
-    .put(restRoute.update_one_product);
+    .get(productRoutes.get_one_product)
+    .put(productRoutes.update_one_product);
 };

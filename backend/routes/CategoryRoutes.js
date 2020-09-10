@@ -1,6 +1,6 @@
 "use strict";
 module.exports = function (app) {
-    var categoriesRoute = require("../controllers/CategoryController");
+    const categoriesRoute = require("../controllers/CategoryController");
 
     app
         .route("/categories")
