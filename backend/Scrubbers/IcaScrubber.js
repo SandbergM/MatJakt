@@ -9,9 +9,9 @@ module.exports = class IcaScrubber extends Scrubber {
     categoryId: (x) => filterCategories(x.inCategories),
     brand: (x) => x.brand,
     price: (x) => (x.price === undefined ? "N/A" : x.price),
-    packagingSize: (x) => x.price / x.compare.price, // TODO
-    pricePerUnit: (x) => x.compare.price,
-    quantityType: (x) => x.compare.priceText.slice(x.compare.priceText.lastIndexOf('/') + 1, x.compare.priceText.length),
+    packagingSize: (x) => getpackagingSize(x.name), // TODO
+    pricePerUnit: (x) => x.compare === undefined ? "N/A" : x.compare.price,
+    quantityType: (x) => getQuantityType(x.name),
     discount: (x) => x.promotions, // TODO
     labels: (x) => "N/A", // TODO
     isEcological: (x) =>
@@ -51,3 +51,28 @@ function ecologicalCheck(markings) {
   }
   return false;
 }
+function getQuantityType(productName) {
+  productName = productName.replace(/[0-9]/g, "_");
+  for (let i = 0; i < productName.length - 1; i++) {
+    if (productName[i] === "_") {
+      switch (productName[i + 1].toUpperCase()) {
+        case "G":
+          return 'GRM'
+        case "M":
+          return "MLT"
+        case "D":
+          return "DL"
+        case "K":
+          return "KG";
+        case "L":
+          return "LTR"
+      }
+    }
+  }
+  return "ST"
+}
+function getpackagingSize(productName) {
+  return "TODO"
+}
+
+
