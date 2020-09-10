@@ -32,8 +32,6 @@ mongoose
 async function updateDatabase() {
   let products = [];
 
-
-
   setTimeout(() => {
     Translator.fetchCategories();
   }, 2000)
@@ -71,4 +69,4 @@ async function updateDatabase() {
   console.log("Database down for : ", Date.now() - startTime);
 
 }
-updateDatabase();
+//updateDatabase();

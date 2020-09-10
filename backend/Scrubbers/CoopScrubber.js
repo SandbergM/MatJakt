@@ -1,6 +1,8 @@
 const fetch = require("node-fetch");
 const Scrubber = require("./Scrubber");
 
+const mongoose = require("mongoose");
+
 module.exports = class CoopScrubber extends Scrubber {
   static translateSchema = {
     name: (x) => x.name,
@@ -17,7 +19,7 @@ module.exports = class CoopScrubber extends Scrubber {
     discount: (x) => x.potentialPromotions,
     labels: (x) => this.getLabels(x),
     isEcological: (x) => this.getEcological(x),
-    countryOfOrigin: (x) => x.fromSweden ? "Sweden" : "Other", //TODO: Can't find the specific country on Coop if not from Sweden - it seems to be in some of the product titles though
+    countryOfOrigin: (x) => (x.fromSweden ? "Sverige" : "Inte från Sverige"), //Country of origin doesn't exist as a property (But it seems to exist in some productnames instead)
     imageUrl: (x) => x.images[0].url,
   };
 
@@ -74,7 +76,7 @@ module.exports = class CoopScrubber extends Scrubber {
   static getEcological(product) {
     if (product.name.includes("Eko")) {
       return true;
-    } 
+    }
     return false;
   }
 };
