@@ -72,7 +72,10 @@ function getQuantityType(productName) {
   return "ST"
 }
 function getpackagingSize(productName) {
-  return "TODO"
+  productName = productName.replace(/[%]/g, "").split(" ");
+  let measurements = ["g", "ml", "dl", "kg", "cl", "l"]
+  for (let i = 0; i < productName.length; i++) {
+    if (measurements.includes(productName[i].replace(/[0-9]/g, ""))) { return productName[i].replace(/[^0-9]/g, "") }
+  }
+  return "N/A"
 }
-
-
