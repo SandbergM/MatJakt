@@ -1,14 +1,30 @@
-const CoopHarvester = require("./Harvesters/CoopHarvester");
-const CoopScrubber = require("./Scrubbers/CoopScrubber");
-const IcaHarvester = require("./Harvesters/IcaHarvester");
-const IcaScrubber = require("./Scrubbers/IcaScrubber");
-const Product = require("./models/product");
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 
-const routes = require("./RestRoutes"); //importing routes
-routes(app); //register the routes
+//Harvesters
+const CoopHarvester = require("./Harvesters/CoopHarvester");
+const IcaHarvester = require("./Harvesters/IcaHarvester");
+
+//Scrubbers
+const CoopScrubber = require("./Scrubbers/CoopScrubber");
+const IcaScrubber = require("./Scrubbers/IcaScrubber");
+
+//Mongoose models
+const Product = require("./models/product");
+const Address = require("./models/address");
+const Category = require("./models/category");
+const Store = require("./models/store");
+
+//Routes
+const productRoutes = require("./routes/ProductRoutes");
+productRoutes(app);
+const addressRoutes = require("./routes/AddressRoutes");
+addressRoutes(app);
+const categoryRoutes = require("./routes/CategoryRoutes");
+categoryRoutes(app);
+const storeRoutes = require("./routes/StoreRoutes");
+storeRoutes(app);
 
 //connect to MongoDB with mongoose
 const dbURI =
@@ -23,11 +39,6 @@ mongoose
   .catch((err) => console.log(err));
 
 async function updateDatabase() {
-  //let rawIcaProducts = await IcaHarvester.fetchProducts();
-  //let icaScrubbedData = await IcaScrubber.scrubAll(rawIcaProducts);
 
-  let rawCoopProducts = await CoopHarvester.getAllProducts();
-  let coopScrubbedData = await CoopScrubber.scrubAll(rawCoopProducts);
-  console.log(coopScrubbedData);
 }
 //updateDatabase();

@@ -1,6 +1,6 @@
 "use strict";
 module.exports = function (app) {
-  var restRoute = require("./RestController");
+  var restRoute = require("../controllers/ProductController");
 
   //TODO: Routes
   app

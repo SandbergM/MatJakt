@@ -1,6 +1,6 @@
 "use strict";
 const mongoose = require("mongoose"),
-  Product = mongoose.model("Products");
+  Product = mongoose.model("product");
 
 exports.get_all_products = function (req, res) {
   Product.find({}, function (err, product) {
