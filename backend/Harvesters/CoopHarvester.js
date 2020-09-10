@@ -27,7 +27,7 @@ module.exports = class CoopHarvester {
         });
       });
     let filteredCategories = categories.filter((x) => x.level === 1);
-    
+
     return filteredCategories.map((x) => {
       delete x.level;
       return x;
