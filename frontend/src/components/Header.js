@@ -25,7 +25,7 @@ export default function Header(props) {
           
           </div>
           <Modal isOpen={modal} toggle={toggle} className={className}>
-            <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+            <ModalHeader toggle={toggle}>Om MatJakt.se</ModalHeader>
             <ModalBody>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -36,12 +36,7 @@ export default function Header(props) {
               sunt in culpa qui officia deserunt mollit anim id est laborum.
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={toggle}>
-                Do Something
-              </Button>{" "}
-              <Button color="secondary" onClick={toggle}>
-                Cancel
-              </Button>
+              
             </ModalFooter>
           </Modal>
         </div>
