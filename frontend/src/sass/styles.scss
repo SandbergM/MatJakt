@@ -19,7 +19,7 @@
   background-color: white;
   display: flex;
   padding: 10px;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 
 }
@@ -28,6 +28,7 @@
    font-family: rage;
    font-size: 30px;
    color:#66C46C;
+   padding-left: 30px;
 }
 
 .shoppingLista{
@@ -35,5 +36,6 @@
 }
 
 .omOss{
+  padding-right: 30px;
   color:#66C46C;
 }
