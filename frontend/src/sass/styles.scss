@@ -14,4 +14,25 @@
   min-width: 100vw !important;
   flex-direction: column !important;
 }
+footer {
+    position: fixed;
+  display: flex;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: green;
+  text-align: center;
+ height: 30px;
+ align-items: center;
+  justify-content: center;
+ font-family: rage;
+
+ 
+}
+
+// .footertext{
+//  align-items:center;
+//         justify-content:center;
+// }
 
