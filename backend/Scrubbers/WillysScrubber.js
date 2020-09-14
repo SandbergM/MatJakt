@@ -3,7 +3,7 @@ const Scrubber = require("./Scrubber");
 const { getRandomNumber } = require("../Shared/Helpers");
 
 module.exports = class WillysScrubber extends Scrubber {
-  static detailedProduct;
+  detailedProduct;
 
   static translateSchema = {
     name: (x) => x.name,
@@ -21,19 +21,18 @@ module.exports = class WillysScrubber extends Scrubber {
     discount: (x) => x.savingsAmount,
     labels: async (x) => await this.getLabels(x.code),
     isEcological: (x) => x.labels.includes("ecological"),
-    countryOfOrigin: (x) =>
-      x.labels.includes("swedish_flag") ? "Sweden" : "Other",
+    countryOfOrigin: (x) => this.getCountryOfOrigin(x.code),
     imageUrl: (x) => x.image && x.image.url,
   };
 
-  static async getDetailedProduct(productCode) {
+  async getDetailedProduct(productCode) {
     return this.detailedProduct && this.detailedProduct.code === productCode
       ? this.detailedProduct
-      : this.fetchDetailedProduct(productCode);
+      : await this.fetchDetailedProduct(productCode);
   }
 
   // Fetches the detailed product view
-  static async fetchDetailedProduct(productCode) {
+  async fetchDetailedProduct(productCode) {
     let productUrl = `https://www.willys.se/axfood/rest/p/${productCode}?avoidCache=${getRandomNumber()}`;
     let rawProduct = await fetch(productUrl);
     let product;
@@ -47,7 +46,7 @@ module.exports = class WillysScrubber extends Scrubber {
   }
 
   // TODO: Add logic
-  static async getCategoryId(productCode) {
+  async getCategoryId(productCode) {
     // let product = await this.getDetailedProduct(productCode);
     // if (product) {
     //   return "CategoryId";
@@ -56,7 +55,7 @@ module.exports = class WillysScrubber extends Scrubber {
   }
 
   // TODO: Add logic
-  static async getLabels(productCode) {
+  async getLabels(productCode) {
     // let product = await this.getDetailedProduct(productCode);
     // if (product) {
     //   return ["This", "is", "a", "label"];
@@ -64,20 +63,18 @@ module.exports = class WillysScrubber extends Scrubber {
     return ["Not found"];
   }
 
-  static async getCountryOfOrigin(productCode) {
-    // let product = await this.getDetailedProduct(productCode);
-    // return product && product.tradeItemCountryOfOrigin;
-
-    return "Nåt land";
+  async getCountryOfOrigin(productCode) {
+    let product = await this.getDetailedProduct(productCode);
+    return product && product.tradeItemCountryOfOrigin;
   }
 
-  static getVolume(displayVolume) {
+  getVolume(displayVolume) {
     let regex = /[^\d.]/g;
     let volume = displayVolume.replace(regex, "");
     return parseFloat(volume);
   }
 
-  static getVolumeUnit(displayVolume) {
+  getVolumeUnit(displayVolume) {
     let regex = /^([\S]*\s?\d+[.]?\d*)/;
     return displayVolume.replace(regex, "").toLowerCase();
   }
