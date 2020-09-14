@@ -9,9 +9,31 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: scroll;
-  display: flex !important;
+  //display: flex !important;
   min-height: 100vh !important;
   min-width: 100vw !important;
-  flex-direction: column !important;
+  //flex-direction: column !important;
 }
 
+.container2 {
+  background-color: white;
+  display: flex;
+  padding: 10px;
+  justify-content: space-evenly;
+  align-items: center;
+
+}
+
+.logo{
+   font-family: rage;
+   font-size: 30px;
+   color:#66C46C;
+}
+
+.shoppingLista{
+  color: #245A2F;
+}
+
+.omOss{
+  color:#66C46C;
+}
