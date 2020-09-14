@@ -1,3 +1,5 @@
+@import "./matjakt-searchbar";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,4 +16,21 @@
   min-width: 100vw !important;
   flex-direction: column !important;
 }
-
+.matjatkDarkGreen-bg {
+  background-color: #245a2f;
+}
+.matjaktRed-bg {
+  background-color: #e83f39;
+}
+.matJaktLightGreen-bg {
+  background-color: #66c46c;
+}
+.matjaktLightPurple-bg {
+  background-color: #743ebb;
+}
+.matjaktWhite-bg {
+  background-color: #ffffff;
+}
+.matjaktWhite-text {
+  color: #ffffff;
+}

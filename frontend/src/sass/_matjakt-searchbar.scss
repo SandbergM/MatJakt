@@ -1,0 +1,28 @@
+#matjakt-searchbar-main {
+  min-height: 10vh !important;
+  min-width: 100vw !important;
+}
+#matjakt-searchbar-header {
+  height: 6vh !important;
+  width: 100em !important;
+  justify-items: center !important;
+  border-radius: 15px 15px 0px 0px;
+  padding: 0 30px 0px 30px;
+}
+#matjakt-searchbar-content-container {
+  height: 20vh !important;
+  width: 100vw !important;
+  padding: 30px 30px 0px 30px;
+  opacity: 80%;
+  border-radius: 0 0 15px 15px;
+}
+#searchbar-header-title {
+  font-size: 25px;
+  font-weight: 400;
+  margin: 0;
+}
+
+/*
+      <div id="matjakt-searchbar-header" class="matjaktDarkGreen"></div>
+      <div id="matjakt-searchbar-content-container" class="matjaktWhite"></div>
+*/
