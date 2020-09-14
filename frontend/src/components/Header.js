@@ -4,7 +4,7 @@ export default function Header(props) {
 
   return (
     <header>
-      <p>I am a Header TOOT</p>
+      <div><p>Matjakt.se</p></div>
     </header>
   );
 }
