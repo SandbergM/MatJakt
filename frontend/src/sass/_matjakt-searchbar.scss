@@ -10,8 +10,8 @@
   justify-items: center !important;
   border-radius: 15px 15px 0px 0px;
   padding: 10px 30px 0px 30px;
-  font-size: 25px;
-  font-weight: 400;
+  font-size: 22.5px;
+  font-weight: 600;
 }
 
 #matjakt-searchbar-content-container {
@@ -22,6 +22,8 @@
   padding-top: 10px!important;
   border-radius: 0 0 15px 15px;
   background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
 }
 
 input.matjakt-inputfield::placeholder {
@@ -40,20 +42,84 @@ input.matjakt-inputfield:focus {
   font-weight: 400!important;
 }
 .matjakt-inputfield{
-  height: 5.5vh!important;
+  height: 3.5vh!important;
   font-size: 20px!important;
   font-weight: 400!important;
   margin-top: 2px!important;
   text-align: center;
   margin-bottom: 10px;
+  font-weight: 500!important;
 }
 .matjakt-inputfield-select{
   font-size: 20px!important;
   color: #66c46c!important;
   border-radius: 25px!important;
   text-align-last: center!important;
-  height: 5.5vh!important;
+  height: 3.5vh!important;
+  margin: 0!important;
+  padding: 0px!important;
+  font-size: 20px!important;
+}
+.matjakt-inputfield-select{
+  font-size: 20px!important;
+  color: #66c46c!important;
+  border-radius: 25px!important;
+  text-align-last: center!important;
+  height: 3.5vh!important;
   margin: 0!important;
   padding: auto 0!important;
+  font-size: 20px!important;
+  font-weight: 500!important;
+}
+.small-inputfield{
+  width: 47.5%!important;
+  font-weight: 500!important;
+}
+
+#matjakt-checkbox-container{
+  display: flex;
+  align-items: center;
+}
+.matjakt-button-container{
+  display: flex;
+  align-items: center;
+}
+Label{
+  margin: 0!important;
+}
+#custom-add-to-list-button{
+  height: 3.5vh!important;
+  width: 70px;
+  background-color: #66c46c!important;
+  border-radius: 25px!important;
+  border: none;
+}
+#custom-add-to-list-button span{
+  display: flex;
+  justify-content: center;
+  margin-bottom:25%!important;
+  line-height: 21.5%!important;
+  font-size: 5.5vh;
+  font-weight: 100;
+}
+
+#custom-ecological-toggle-button{
+  height: 3.5vh!important;
+  width: 70px;
+  background-color: #ffffff!important;
+  border: 1px solid rgba(128, 128, 128, 0.39)!important;
+  border-radius: 25px!important;
+  border: none;
+}
+#custom-ecological-toggle-button span{
+  display: flex;
+  justify-content: center;
+  line-height: 30%!important;
+  margin-bottom: 10%!important;
+  font-size: 5.75vh!important;
+  font-weight: bold;
+  color: #66c46c!important;
+}
+#custom-ecological-toggle-button-label{
   font-size: 20px!important;
 }
