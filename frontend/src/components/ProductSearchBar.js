@@ -11,7 +11,7 @@ export default function ProductSearchBar(props) {
   const [isEcological, setIsEcological] = useState(false);
 
   const submitProdctSearch = async (e) => {
-    // TODO
+    console.log(`I searched for ${productName}`);
   };
 
   const addProductToList = async (e) => {
@@ -25,24 +25,20 @@ export default function ProductSearchBar(props) {
   const autoCompleteHelper = async (e) => {
     if (e.length >= 3) {
       setProductName(e)
-      console.log(`Fetching top 5 products with ${e} in the name`); // TODO
+      console.log(`Fetching top X number of products with ${e} in the name`); // TODO
     }
   }
 
   return (
     <div
       id="matjakt-searchbar-main"
-      className="container-fluid row justify-content-center"
-    >
+      className="container row justify-content-center">
       <div
         id="matjakt-searchbar-header"
-        className="matjatkDarkGreen-bg col-lg-10"
-        style={{ display: "flex" }}
-      >
+        className="matjatkDarkGreen-bg col-lg-10">
         <p
           id="searchbar-header-title"
-          className="matjaktWhite-text align-self-center"
-        >
+          className="matjaktWhite-text align-self-center">
           Sök efter produkt
         </p>
       </div>
@@ -71,25 +67,31 @@ export default function ProductSearchBar(props) {
           <div className="col-xl-5 col-lg-5 col-md-12 d-flex justify-content-between mb-2">
             <Input type="select" placeholder="Volym" className="matjakt-inputfield-select oblique small-inputfield"
               onChange={(e) => setCategory(e.target.value)}>
-              <option selected disabled>Kategori</option> {/* TODO, Categories should come as props */}
+              <option selected disabled>Välj kategori</option> {/* TODO, Categories should come as props */}
             </Input>
             <Input type="select" placeholder="Volym" className="matjakt-inputfield-select oblique small-inputfield"
               onChange={(e) => setCountryOfOrigin(e.target.value)}>
-              <option selected disabled>Land</option> {/* TODO, countries should come as props */}
+              <option selected disabled>Välj ursprungsland</option> {/* TODO, countries should come as props */}
             </Input>
           </div>
-          <div className="col-xl-7 col-lg-7 col-md-12 justify-content-between d-flex mb-2">
+          <div className="col-xl-7 col-lg-7 col-md-12 justify-content-between d-flex mb-4">
             <div className="small-inputfield ml-1">
-              <Button className="custom-searchbar-button matjaktWhite-bg"
-                onClick={toggleEco}
-              ><span >{isEcological ? <span className="matJaktLightGreen-text">&#10003;</span> : ""}</span></Button>
-              <Label className="ml-3 searchbar-label matjatkDarkGreen-text">Endast ekologiskt</Label>
+              <Label className="ml-3 searchbar-label matjatkDarkGreen-text oblique">Ekologisk</Label>
+              <Button className="custom-searchbar-button matjaktWhite-bg ml-3" onClick={toggleEco}>
+                <span >{isEcological ? <span className="matJaktLightGreen-text">&#10003;</span> : ""}</span>
+              </Button>
             </div>
-            <div className="matjakt-button-container small-inputfield flex-row-reverse mr-2">
+            <div className="matjakt-button-container small-inputfield flex-row-reverse mr-4">
               <Button className="custom-searchbar-button matJaktLightGreen-bg matjaktWhite-text" onClick={addProductToList}>
                 <span>+</span>
               </Button>
             </div>
+          </div>
+          <div id="single-product-search-container" className="col-xl-3 offset-xl-9 col-lg-5 offset-lg-7 col-md-10 offset-md-1 col-sm-12  ">
+            <Button id="single-product-search-button"
+              className="matjatkDarkGreen-bg"
+              onClick={submitProdctSearch}>
+              Sök efter produkt</Button>
           </div>
         </div>
       </div>
