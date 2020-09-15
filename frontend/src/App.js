@@ -1,9 +1,10 @@
-import React from 'react';
-import { Button } from "reactstrap";
+import React from "react";
+//import { Button } from "reactstrap";
 
 // COMPONENTS
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+//import Footer from "./components/Footer";
+//import Header from "./components/Header";
+import List from "./components/List";
 
 // CSS/SASS
 import "./sass/styles.scss";
@@ -11,9 +12,7 @@ import "./sass/styles.scss";
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Button color="danger">Danger!</Button>
-      <Footer />
+      <List />
     </div>
   );
 }
