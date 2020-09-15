@@ -5,13 +5,15 @@ export default function ProductSearchBar(props) {
 
   const [productName, setProductName] = useState();
   const [quantity, setQuantity] = useState();
-  const [quantityType, setQuantityType] = useState();
+  const [quantityType, setQuantityType] = useState("kg");
   const [category, setCategory] = useState();
   const [countryOfOrigin, setCountryOfOrigin] = useState();
   const [isEcological, setIsEcological] = useState(false);
 
   const submitProdctSearch = async (e) => {
-    console.log(`I searched for ${productName}`);
+    if (productName && productName.length >= 3) {
+      console.log(`I searched for ${productName}, ${quantity}, ${quantityType} , ${category}, ${countryOfOrigin}`);
+    }
   };
 
   const addProductToList = async (e) => {
@@ -35,7 +37,7 @@ export default function ProductSearchBar(props) {
       className="container row justify-content-center">
       <div
         id="matjakt-searchbar-header"
-        className="matjatkDarkGreen-bg col-lg-10">
+        className="matjatkDarkGreen-bg col-lg-10 col-sm-10 col-10">
         <p
           id="searchbar-header-title"
           className="matjaktWhite-text align-self-center">
@@ -44,7 +46,7 @@ export default function ProductSearchBar(props) {
       </div>
       <div
         id="matjakt-searchbar-content-container"
-        className="col-lg-10 d-flex justify-content-around">
+        className="col-lg-10 col-sm-10 col-10 d-flex justify-content-around">
         <div className="row container-fluid">
           <div className="col-xl-9 col-lg-6 col-md-12 mb-2">
             <Input
@@ -55,9 +57,9 @@ export default function ProductSearchBar(props) {
           <div className="col-xl-3 col-lg-6 col-md-12 d-flex justify-content-between mb-2">
             <Input placeholder="Volym" className="matjakt-inputfield oblique small-inputfield"
               onChange={(e) => setQuantity(e.target.value)} />
-            <Input type="select" placeholder="Volym" className="matjakt-inputfield-select oblique small-inputfield"
+            <Input type="select" defaultValue placeholder="Volym" className="matjakt-inputfield-select oblique small-inputfield"
               onChange={(e) => setQuantityType(e.target.value)}>
-              <option defaultValue value={"kg"}> Kilogram </option>
+              <option value={"kg"}> Kilogram </option>
               <option value={"gr"}> Gram </option>
               <option value={"ml"}> Milliliter </option>
               <option value={"l"}> Liter </option>
@@ -67,27 +69,27 @@ export default function ProductSearchBar(props) {
           <div className="col-xl-5 col-lg-5 col-md-12 d-flex justify-content-between mb-2">
             <Input type="select" placeholder="Volym" className="matjakt-inputfield-select oblique small-inputfield"
               onChange={(e) => setCategory(e.target.value)}>
-              <option selected disabled>Välj kategori</option> {/* TODO, Categories should come as props */}
+              <option defaultValue value="">Välj kategori</option> {/* TODO, Categories should come as props */}
             </Input>
             <Input type="select" placeholder="Volym" className="matjakt-inputfield-select oblique small-inputfield"
               onChange={(e) => setCountryOfOrigin(e.target.value)}>
-              <option selected disabled>Välj ursprungsland</option> {/* TODO, countries should come as props */}
+              <option defaultValue value="">Välj ursprungsland</option> {/* TODO, countries should come as props */}
             </Input>
           </div>
-          <div className="col-xl-7 col-lg-7 col-md-12 justify-content-between d-flex mb-4">
-            <div className="small-inputfield ml-1">
-              <Label className="ml-3 searchbar-label matjatkDarkGreen-text oblique">Ekologisk</Label>
-              <Button className="custom-searchbar-button matjaktWhite-bg ml-3" onClick={toggleEco}>
-                <span >{isEcological ? <span className="matJaktLightGreen-text">&#10003;</span> : ""}</span>
-              </Button>
-            </div>
-            <div className="matjakt-button-container small-inputfield flex-row-reverse mr-4">
-              <Button className="custom-searchbar-button matJaktLightGreen-bg matjaktWhite-text" onClick={addProductToList}>
-                <span>+</span>
-              </Button>
-            </div>
+
+          <div className="small-inputfield col-12 col-xl-2 justify-content-between d-flex mb-2">
+            <Button className="custom-searchbar-button matjaktWhite-bg" onClick={toggleEco}>
+              <span >{isEcological ? <span className="matJaktLightGreen-text">&#10003;</span> : ""}</span>
+            </Button>
+            <Label className="ml-3 searchbar-label matjatkDarkGreen-text oblique">Ekologisk</Label>
           </div>
-          <div id="single-product-search-container" className="col-xl-3 offset-xl-9 col-lg-5 offset-lg-7 col-md-10 offset-md-1 col-sm-12  ">
+          <div className="matjakt-button-container small-inputfield col-12 col-xl-5 justify-content-end justify-content-xl-end mb-2">
+            <Button className="custom-searchbar-button matJaktLightGreen-bg matjaktWhite-text" onClick={addProductToList}>
+              <span>+</span>
+            </Button>
+
+          </div>
+          <div id="single-product-search-container" className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 offset-md-6 offset-lg-8 offset-xl-8">
             <Button id="single-product-search-button"
               className="matjatkDarkGreen-bg"
               onClick={submitProdctSearch}>
