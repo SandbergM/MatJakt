@@ -1,28 +1,59 @@
 #matjakt-searchbar-main {
   min-height: 10vh !important;
   min-width: 100vw !important;
+  margin: 0!important;
 }
+
 #matjakt-searchbar-header {
   height: 6vh !important;
   width: 100em !important;
   justify-items: center !important;
   border-radius: 15px 15px 0px 0px;
-  padding: 0 30px 0px 30px;
-}
-#matjakt-searchbar-content-container {
-  height: 20vh !important;
-  width: 100vw !important;
-  padding: 30px 30px 0px 30px;
-  opacity: 80%;
-  border-radius: 0 0 15px 15px;
-}
-#searchbar-header-title {
+  padding: 10px 30px 0px 30px;
   font-size: 25px;
   font-weight: 400;
-  margin: 0;
 }
 
-/*
-      <div id="matjakt-searchbar-header" class="matjaktDarkGreen"></div>
-      <div id="matjakt-searchbar-content-container" class="matjaktWhite"></div>
-*/
+#matjakt-searchbar-content-container {
+  min-height: 12.5vh !important;
+  padding: 10px 0 10px 0;
+  width: 100vw !important;
+  margin: 0%!important;
+  padding-top: 10px!important;
+  border-radius: 0 0 15px 15px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+input.matjakt-inputfield::placeholder {
+  color: #66c46c;
+  border-radius: 25px!important;
+  opacity: 1;
+  font-size: 20px!important;
+}
+input.matjakt-inputfield {
+  border-radius: 25px!important;
+  color: #66c46c;
+}
+input.matjakt-inputfield:focus {
+  color: #66c46c;
+  font-size: 20px!important;
+  font-weight: 400!important;
+}
+.matjakt-inputfield{
+  height: 5.5vh!important;
+  font-size: 20px!important;
+  font-weight: 400!important;
+  margin-top: 2px!important;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.matjakt-inputfield-select{
+  font-size: 20px!important;
+  color: #66c46c!important;
+  border-radius: 25px!important;
+  text-align-last: center!important;
+  height: 5.5vh!important;
+  margin: 0!important;
+  padding: auto 0!important;
+  font-size: 20px!important;
+}
