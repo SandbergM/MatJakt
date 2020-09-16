@@ -13,7 +13,6 @@ function App() {
     <div className="App">
       <Header />
       <ProductSearchBar />
-      <Button color="danger">Matjakt in the house!</Button>
       <Footer />
     </div>
   );

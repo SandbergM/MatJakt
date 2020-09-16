@@ -17,37 +17,37 @@
   //flex-direction: column !important;
 }
 .matjatkDarkGreen-bg {
-  background-color: #245a2f!important;
+  background-color: #245a2f !important;
 }
 .matjatkDarkGreen-text {
-  color: #245a2f!important;
+  color: #245a2f !important;
 }
 .matjaktRed-bg {
-  background-color: #e83f39!important;
+  background-color: #e83f39 !important;
 }
 .matJaktLightGreen-bg {
-  background-color: #66c46c!important;
+  background-color: #66c46c !important;
 }
 .matJaktLightGreen-text {
   color: #66c46c;
 }
 .matjaktLightPurple-bg {
-  background-color: #743ebb!important;
+  background-color: #743ebb !important;
 }
 .matjaktWhite-bg {
-  background-color: #ffffff!important;
+  background-color: #ffffff !important;
 }
 .matjaktWhite-text {
-  color: #ffffff!important;
+  color: #ffffff !important;
 }
-.matjakt-inputfield{
-  background-color: rgb(255, 255, 255)!important;
+.matjakt-inputfield {
+  background-color: rgb(255, 255, 255) !important;
 }
-.oblique{
+.oblique {
   font-style: oblique;
 }
 footer {
-    position: fixed;
+  position: fixed;
   display: flex;
   left: 0;
   bottom: 0;
@@ -55,12 +55,10 @@ footer {
   background-color: white;
   color: green;
   text-align: center;
- height: 30px;
- align-items: center;
+  height: 30px;
+  align-items: center;
   justify-content: center;
- font-family: rage;
-
- 
+  font-family: rage;
 }
 
 // .footertext{
@@ -68,32 +66,31 @@ footer {
 //         justify-content:center;
 // }
 
-.container2 {
+.header-container {
   background-color: white;
   display: flex;
   padding: 10px;
   justify-content: space-between;
   align-items: center;
-
+  margin-bottom: 2em;
 }
 
-Button{
-  background-color: #66C46C;
+Button {
+  background-color: #66c46c;
 }
 
-.logo{
-   font-family: rage;
-   font-size: 30px;
-   color:#66C46C;
-   padding-left: 30px;
+.logo {
+  font-family: rage;
+  font-size: 30px;
+  color: #66c46c;
+  padding-left: 30px;
 }
 
-.shoppingLista{
-  color: #245A2F;
+.shoppingLista {
+  color: #245a2f;
 }
 
-.omOss{
+.omOss {
   padding-right: 30px;
-  color:#66C46C;
-  
+  color: #66c46c;
 }

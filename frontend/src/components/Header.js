@@ -15,7 +15,7 @@ export default function Header(props) {
 
     return (
       <header>
-        <div className="container2">
+        <div className="header-container">
           <div className="logo">Matjakt.se</div>
 
           <div className="omOss">
