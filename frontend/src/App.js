@@ -2,13 +2,9 @@ import React from "react";
 //import { Button } from "reactstrap";
 
 // COMPONENTS
-//import Footer from "./components/Footer";
-//import Header from "./components/Header";
-import List from "./components/List";
-
-// COMPONENTS
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import List from "./components/List";
 import ProductSearchBar from "./components/ProductSearchBar";
 
 // CSS/SASS
