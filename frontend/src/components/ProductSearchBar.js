@@ -99,7 +99,7 @@ export default function ProductSearchBar(props) {
             </Input>
           </div>
 
-          <div className="small-inputfield col-9 col-xl-2 justify-content-between d-flex mb-3">
+          <div className="small-inputfield col-9 col-lg-4 col-xl-2 justify-content-between d-flex mb-3">
             <Button
               className="custom-searchbar-button matjaktWhite-bg"
               onClick={toggleEco}
@@ -128,7 +128,7 @@ export default function ProductSearchBar(props) {
           </div>
           <div
             id="single-product-search-container"
-            className="col-8 col-sm-6 col-md-6 col-lg-4 col-xl-3 offset-2 offset-md-6 offset-lg-8 offset-xl-7 d-flex justify-content-center"
+            className="col-8 offset-2 col-sm-6 offset-sm-3 col-lg-4 col-lg-3 offset-lg-7 offset-xl-7 offset-xl-6 d-flex justify-content-center"
           >
             <Button
               id="single-product-search-button"
