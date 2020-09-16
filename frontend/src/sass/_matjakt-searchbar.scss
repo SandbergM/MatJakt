@@ -1,8 +1,3 @@
-#matjakt-searchbar-main {
-  min-height: 10vh !important;
-  min-width: 100vw !important;
-  margin: 0!important;
-}
 #matjakt-searchbar-header {
   height: 50px !important;
   justify-items: center !important;
@@ -47,52 +42,30 @@ input.matjakt-inputfield:focus {
   width: 47.5%!important;
   font-weight: 500!important;
 }
-.matjakt-button-container{
-  display: flex;
-  align-items: center;
-}
 .custom-searchbar-button{
-  font-size: 50px!important;
+  display:flex!important;
+  align-items: center;
   height: 4.25vh!important;
-  width: 50px;
+  width: 60px;
   border-radius: 25px!important;
-  border: none!important;
-  display: inline-flex!important;
-  align-items: flex-start!important;
-  justify-content: center;
-  z-index: 2!important;
+  border: #66c46c solid 1px!important;
 }
 .custom-searchbar-button span{
-  line-height: 1.9vh!important;
+  font-size: 22.5px;
+  display:table;
+  margin-left: auto;
+  margin-right: auto;
 }
 .searchbar-label{
-  font-size: 17.5px!important;
+  font-size: 20.5px!important;
   margin: 0!important;
   margin: auto!important;
 }
 #single-product-search-button{
-  margin-bottom: -90px;
-  width: 80%;
   border-radius: 25px;
   font-weight: 500;
   font-size: 17px;
-  z-index: 1!important;
-}
-
-#single-product-search-container{
-  margin-top: -50px;
-  z-index: 1!important;
-}
-
-@media only screen and (max-width: 600px) {
-  .custom-searchbar-button span{
-    line-height: 0.75vh!important;
-  }
-  #single-product-search-button{
-    font-size: 5vw;
-    overflow: hidden!important;
-  }
-  #single-product-search-container{
-    margin-top: -40px;
-  }
+  position : absolute;
+  top: -7.5px!important;
+  width: 100%;
 }

@@ -33,8 +33,8 @@ export default function ProductSearchBar(props) {
   };
 
   return (
-    <div id="" className="col-12 justify-content-center">
-      <div id="matjakt-searchbar-header" className="matjatkDarkGreen-bg">
+    <div className="col-12 justify-content-center">
+      <div id="matjakt-searchbar-header" className="matjaktkDarkGreen-bg">
         <p
           id="searchbar-header-title"
           className="matjaktWhite-text align-self-center"
@@ -99,38 +99,40 @@ export default function ProductSearchBar(props) {
             </Input>
           </div>
 
-          <div className="small-inputfield col-12 col-xl-2 justify-content-between d-flex mb-2">
+          <div className="small-inputfield col-9 col-xl-2 justify-content-between d-flex mb-3">
             <Button
               className="custom-searchbar-button matjaktWhite-bg"
               onClick={toggleEco}
             >
               <span>
                 {isEcological ? (
-                  <span className="matJaktLightGreen-text">&#10003;</span>
+                  <span className="matJaktLightGreen-text button-icon">
+                    &#10003;
+                  </span>
                 ) : (
                   ""
                 )}
               </span>
             </Button>
-            <Label className="ml-3 searchbar-label matjatkDarkGreen-text oblique">
+            <Label className="ml-3 searchbar-label matjatkkDarkGreen-text oblique">
               Ekologisk
             </Label>
           </div>
-          <div className="matjakt-button-container small-inputfield col-12 col-xl-5 justify-content-end justify-content-xl-end mb-2">
+          <div className="matjakt-button-container small-inputfield col-3 col-xl-2 offset-xl-3 mb-3 d-flex justify-content-end">
             <Button
               className="custom-searchbar-button matJaktLightGreen-bg matjaktWhite-text"
               onClick={addProductToList}
             >
-              <span>+</span>
+              <span className="button-icon ">&#x2b;</span>
             </Button>
           </div>
           <div
             id="single-product-search-container"
-            className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 offset-md-6 offset-lg-8 offset-xl-8"
+            className="col-8 col-sm-6 col-md-6 col-lg-4 col-xl-3 offset-2 offset-md-6 offset-lg-8 offset-xl-7 d-flex justify-content-center"
           >
             <Button
               id="single-product-search-button"
-              className="matjatkDarkGreen-bg"
+              className="matjaktkDarkGreen-bg"
               onClick={submitProdctSearch}
             >
               Sök efter produkt
