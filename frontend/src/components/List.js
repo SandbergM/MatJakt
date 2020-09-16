@@ -3,7 +3,6 @@ import SearchResults from "../components/SearchResults";
 import ShoppingList from "../components/ShoppingList";
 
 export default function List() {
-
   let storeNames = [
     { name: "Ica", color: "#E83F39" },
     { name: "Coop", color: "#66C46C" },
@@ -14,7 +13,7 @@ export default function List() {
     const lists = () => {
       return storeNames.map((storeName, i) => {
         return (
-          <div className="store-list">
+          <div className="store-list col-lg-4 col-12">
             <h4
               className="store-name"
               align="center"
@@ -30,9 +29,8 @@ export default function List() {
             </div>
           </div>
         );
-      }
-      )
-    }
-        return <>{lists()}</>;
+      });
+    };
+    return <>{lists()}</>;
   }
 }

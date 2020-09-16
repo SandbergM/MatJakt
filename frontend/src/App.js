@@ -18,8 +18,12 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <ProductSearchBar />
-      <List />
+      <main className="container">
+        <div className="row">
+          <ProductSearchBar />
+          <List />
+        </div>
+      </main>
       <Footer />
     </div>
   );
