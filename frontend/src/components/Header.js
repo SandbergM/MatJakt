@@ -14,7 +14,7 @@ export default function Header(props) {
     const toggle = () => setModal(!modal);
 
     return (
-      <header>
+      <header >
         <div className="header-container">
           <div className="logo">Matjakt.se</div>
 
