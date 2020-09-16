@@ -1,0 +1,101 @@
+#matjakt-searchbar-main {
+  min-height: 10vh !important;
+  min-width: 100vw !important;
+  margin: 0!important;
+}
+#matjakt-searchbar-header {
+  height: 50px !important;
+  justify-items: center !important;
+  border-radius: 15px 15px 0px 0px;
+  padding: 10px 30px 0px 30px;
+  font-size: 22.5px;
+  font-weight: 600;
+}
+#matjakt-searchbar-content-container {
+  min-height: 12.5vh !important;
+  padding: 10px 0 10px 0;
+  width: 100vw !important;
+  padding-top: 10px!important;
+  border-radius: 0 0 15px 15px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+input.matjakt-inputfield::placeholder {
+  color: #66c46c!important;
+  border-radius: 25px!important;
+  font-size: 17.5px!important;
+}
+input.matjakt-inputfield:focus {
+  color: #66c46c!important;
+  font-size: 17.5px!important;
+  font-weight: 500!important;
+}
+.matjakt-inputfield{
+  height: 4.25vh!important;
+  border-radius: 25px!important;
+  font-size: 17.5px!important;
+  text-align: center;
+  font-weight: 500!important;
+  color: #66c46c!important;
+}
+.matjakt-inputfield-select{
+  font-size: 17.5px!important;
+  color: #66c46c!important;
+  border-radius: 25px!important;
+  text-align-last: center!important;
+  height: 4.25vh!important;
+  padding: 0px!important;
+  font-weight: 500!important;
+}
+.small-inputfield{
+  width: 47.5%!important;
+  font-weight: 500!important;
+}
+.matjakt-button-container{
+  display: flex;
+  align-items: center;
+}
+.custom-searchbar-button{
+  font-size: 50px!important;
+  height: 4.25vh!important;
+  width: 50px;
+  border-radius: 25px!important;
+  border: none!important;
+  display: inline-flex!important;
+  align-items: flex-start!important;
+  justify-content: center;
+  z-index: 2!important;
+}
+.custom-searchbar-button span{
+  line-height: 1.9vh!important;
+}
+.searchbar-label{
+  font-size: 17.5px!important;
+  margin: 0!important;
+  margin: auto!important;
+}
+#single-product-search-button{
+  margin-bottom: -90px;
+  width: 80%;
+  border-radius: 25px;
+  font-weight: 500;
+  font-size: 17px;
+  z-index: 1!important;
+}
+
+#single-product-search-container{
+  margin-top: -50px;
+  z-index: 1!important;
+}
+
+@media only screen and (max-width: 600px) {
+  .custom-searchbar-button span{
+    line-height: 0.75vh!important;
+  }
+  #single-product-search-button{
+    font-size: 5vw;
+    overflow: hidden!important;
+  }
+  #single-product-search-container{
+    margin-top: -40px;
+  }
+}
