@@ -28,7 +28,7 @@ export default function Header(props) {
             <ModalHeader toggle={toggle}>Om MatJakt.se</ModalHeader>
             <ModalBody>
               Hej!
-               Välkomna! Vi är en väldigt omtänktsam företag som vill hjälpa er att hitta bra mat med bra pris. 
+               Välkomna! Vi är ett väldigt omtänktsamt företag som vill hjälpa er att hitta bra mat med bra pris. 
             </ModalBody>
             <ModalFooter>
               
