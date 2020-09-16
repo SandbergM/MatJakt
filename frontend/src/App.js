@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Button color="danger">Danger!</Button>
+      <Button color="danger">Matjakt in the house!</Button>
       <Footer />
     </div>
   );
