@@ -7,20 +7,25 @@ import Header from "./components/Header";
 import List from "./components/List";
 import ProductSearchBar from "./components/ProductSearchBar";
 
+// CONTEXTPROVIDERS
+import ProductContextProvider from "./contextProdivers/ProductContextProvider";
+
 // CSS/SASS
 import "./sass/styles.scss";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <main className="container">
-        <div className="row">
-          <ProductSearchBar />
-          <List />
-        </div>
-      </main>
-      <Footer />
+      <ProductContextProvider>
+        <Header />
+        <main className="container">
+          <div className="row">
+            <ProductSearchBar />
+            <List />
+          </div>
+        </main>
+        <Footer />
+      </ProductContextProvider>
     </div>
   );
 }

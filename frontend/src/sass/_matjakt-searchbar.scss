@@ -12,60 +12,68 @@
   background-color: rgba(255, 255, 255, 0.8);
 }
 input.matjakt-inputfield::placeholder {
-  color: #66c46c!important;
-  border-radius: 25px!important;
-  font-size: 17.5px!important;
+  color: #66c46c !important;
+  border-radius: 25px !important;
+  font-size: 17.5px !important;
 }
 input.matjakt-inputfield:focus {
-  color: #66c46c!important;
-  font-size: 17.5px!important;
-  font-weight: 500!important;
+  color: #66c46c !important;
+  font-size: 17.5px !important;
+  font-weight: 500 !important;
 }
-.matjakt-inputfield{
-  height: 4.25vh!important;
-  border-radius: 25px!important;
-  font-size: 17.5px!important;
+.matjakt-inputfield {
+  height: 4.25vh !important;
+  border-radius: 25px !important;
+  font-size: 17.5px !important;
   text-align: center;
-  font-weight: 500!important;
-  color: #66c46c!important;
+  font-weight: 500 !important;
+  color: #66c46c !important;
 }
-.matjakt-inputfield-select{
-  font-size: 17.5px!important;
-  color: #66c46c!important;
-  border-radius: 25px!important;
-  text-align-last: center!important;
-  height: 4.25vh!important;
-  padding: 0px!important;
-  font-weight: 500!important;
+.matjakt-inputfield-select {
+  font-size: 17.5px !important;
+  color: #66c46c !important;
+  border-radius: 25px !important;
+  text-align-last: center !important;
+  height: 4.25vh !important;
+  padding: 0px !important;
+  font-weight: 500 !important;
 }
-.small-inputfield{
-  width: 47.5%!important;
-  font-weight: 500!important;
+.small-inputfield {
+  width: 47.5% !important;
+  font-weight: 500 !important;
 }
-.custom-searchbar-button{
-  display:flex!important;
+.custom-searchbar-button {
+  display: flex !important;
   align-items: center;
-  height: 4.25vh!important;
+  height: 4.25vh !important;
   width: 60px;
-  border-radius: 25px!important;
-  border: #66c46c solid 1px!important;
+  border-radius: 25px !important;
+  border: #66c46c solid 1px !important;
 }
-.custom-searchbar-button span{
+.custom-searchbar-button span {
   font-size: 22.5px;
-  display:table;
+  display: table;
   margin-left: auto;
   margin-right: auto;
 }
-.searchbar-label{
-  font-size: 20.5px!important;
-  margin: 0!important;
-  margin: auto!important;
+.searchbar-label {
+  font-size: 20.5px !important;
+  margin: 0 !important;
+  margin: auto !important;
 }
-#single-product-search-button{
+#single-product-search-button {
   border-radius: 25px;
   font-weight: 500;
   font-size: 17px;
-  position : absolute;
-  top: -7.5px!important;
+  position: absolute;
+  top: -7.5px !important;
   width: 100%;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
