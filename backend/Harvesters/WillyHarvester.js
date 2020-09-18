@@ -31,14 +31,6 @@ module.exports = class WillysHarvester {
   }
 
   static removeDuplicates(products) {
-    const productIds = [];
-    const uniqueProducts = [];
-    products.forEach(product => {
-      if(!productIds.includes(product.code)) {
-        uniqueProducts.push(product);
-        productIds.push(product.code);
-      }
-    });
-    return uniqueProducts;
+    return Object.values(products.reduce((a, c) => (a[c.code] = c) && a, {}));
   }
 }
