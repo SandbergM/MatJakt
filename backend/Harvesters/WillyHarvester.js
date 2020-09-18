@@ -26,6 +26,19 @@ module.exports = class WillysHarvester {
       let x = await this.getProducts(category);
       products = [...products, ...x]
     }
+    products = this.removeDuplicates(products);
     return products;
+  }
+
+  static removeDuplicates(products) {
+    const productIds = [];
+    const uniqueProducts = [];
+    products.forEach(product => {
+      if(!productIds.includes(product.code)) {
+        uniqueProducts.push(product);
+        productIds.push(product.code);
+      }
+    });
+    return uniqueProducts;
   }
 }
