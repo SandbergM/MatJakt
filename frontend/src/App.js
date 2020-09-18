@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import List from "./components/List";
 import ProductSearchBar from "./components/ProductSearchBar";
+import ListToBeGenerated from "./components/ListToBeGenerated";
 
 // CONTEXTPROVIDERS
 import ProductContextProvider from "./contextProdivers/ProductContextProvider";
@@ -21,6 +22,7 @@ function App() {
         <main className="container">
           <div className="row">
             <ProductSearchBar />
+            <ListToBeGenerated />
             <List />
           </div>
         </main>

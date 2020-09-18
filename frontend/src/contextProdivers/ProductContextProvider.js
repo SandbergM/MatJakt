@@ -2,15 +2,22 @@ import React, { createContext, useState } from "react";
 
 export const ProductContext = createContext();
 export default function ProductContextProvider(props) {
-  const [products, setProducts] = useState([]);
+  const [productsToBeSearched, setProductsToBeSearched] = useState([]);
 
-  const addProduct = (product) => {
-    setProducts([...products, product]);
+  const addProductToSearchList = (product) => {
+    setProductsToBeSearched([...productsToBeSearched, product]);
+  };
+
+  const removeProductToSearchFromList = (productToRemove) => {
+    setProductsToBeSearched(
+      productsToBeSearched.filter((product) => product != productToRemove)
+    );
   };
 
   const values = {
-    products,
-    addProduct,
+    productsToBeSearched,
+    addProductToSearchList,
+    removeProductToSearchFromList,
   };
 
   return (

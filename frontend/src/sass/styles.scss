@@ -1,8 +1,9 @@
 @import "./searchresults.scss";
 @import "./shoppinglist.scss";
-@import "./list.scss"; 
-@import "./product.scss"; 
-@import "./matjakt-searchbar.scss";
+@import "./list.scss";
+@import "./product.scss";
+@import "./matjaktSearchbar.scss";
+@import "./listToBeSearched.scss";
 
 * {
   box-sizing: border-box;
@@ -16,12 +17,10 @@
   background-size: cover;
   background-attachment: scroll;
   //display: flex !important;
-/*   min-height: 100vh !important;
+  /*   min-height: 100vh !important;
   min-width: 100vw !important; */
   //flex-direction: column !important;
 }
-
-
 
 .matjaktkDarkGreen-bg {
   background-color: #245a2f !important;
@@ -100,4 +99,7 @@ Button {
 .omOss {
   padding-right: 30px;
   color: #66c46c;
+}
+.pointer {
+  cursor: pointer;
 }

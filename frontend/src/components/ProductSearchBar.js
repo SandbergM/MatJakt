@@ -10,35 +10,43 @@ export default function ProductSearchBar(props) {
   const [countryOfOrigin, setCountryOfOrigin] = useState();
   const [isEcological, setIsEcological] = useState(false);
 
-  const { products, addProduct } = useContext(ProductContext);
+  const { addProductToSearchList, singleProductSearch } = useContext(
+    ProductContext
+  );
 
   const submitProdctSearch = async (e) => {
+    e.preventDefault();
     if (productName && productName.length >= 3) {
-      let product = {
+      singleProductSearch({
         name: productName,
         category: category,
         quantity: quantity,
         quantityType: quantityType,
         isEcological: isEcological,
         countryOfOrigin: countryOfOrigin,
-      };
-
-      addProduct(product);
-      console.log(products);
+      });
       clearFields();
     }
   };
 
-  const clearFields = () => {
+  const clearFields = (e) => {
     document.getElementById("product-search-form").reset();
     setIsEcological(false);
   };
 
-  const addProductToList = async (e) => {
-    console.log(`I added something to the list, yay`);
+  const addProductToList = (e) => {
+    addProductToSearchList({
+      name: productName,
+      category: category,
+      quantity: quantity,
+      quantityType: quantityType,
+      isEcological: isEcological,
+      countryOfOrigin: countryOfOrigin,
+    });
+    clearFields();
   };
 
-  const toggleEco = () => {
+  const toggleEco = (e) => {
     setIsEcological(isEcological ? false : true);
   };
 
