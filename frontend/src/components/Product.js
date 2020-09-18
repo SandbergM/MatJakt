@@ -44,32 +44,37 @@ function Product() {
               <div className="remove">
                 <MdRemoveCircle />
               </div>
-            </div>
-            <div className="product">
-              <div
-                className="product-image"
-                style={{ backgroundImage: `url(${product.imageUrl})` }}
-              >
-                {/* <img src={product.imageUrl} alt={product.name} /> */}
-              </div>
-              <div className="product-name">
-                {product.name}{" "}
-                <span className="product-brand">| {product.brand}</span>
-              </div>
               <div className="delete">
                 <MdDelete />
               </div>
-              <div className="product-price">
-                {" "}
-                {amountToBuy} package | {product.packagingSize}{" "}
-                {product.quantityType} for{" "}
-                <span className="price-text"> {product.price} SEK</span>
+            </div>
+
+            <div className="row product">
+              <div
+                class="col-3 product-image"
+                style={{ backgroundImage: `url(${product.imageUrl})` }}
+              ></div>
+
+              <div class="col-7">
+                <div class="row align-items-start">
+                  <div class="col product-name">{product.name}</div>
+                </div>
+                <div class="row align-items-center ">
+                  <div class="col product-price">
+                    <span className="product-brand">{product.brand}</span> |{" "}
+                    {amountToBuy} package | {product.packagingSize}{" "}
+                    {product.quantityType} for{" "}
+                    <span className="price-text"> {product.price} SEK</span>
+                  </div>
+                </div>
+                <div class="row align-items-end">
+                  <div class="col comparison-price">
+                    <span className="comparison-text">Jfp: </span>
+                    {product.pricePerUnit} SEK per {product.comparisonUnit}
+                  </div>
+                </div>
+                <div className="divider"></div>
               </div>
-              <div className="comparison-price">
-                <span className="comparison-text">Jämförelsepris: </span>
-                {product.pricePerUnit} SEK per {product.comparisonUnit}
-              </div>
-              <div className="divider"></div>
             </div>
           </div>
         );

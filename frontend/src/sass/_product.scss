@@ -1,4 +1,4 @@
-.product {
+/* .product {
   display: grid;
   width: 100%;
   grid-template-areas:
@@ -85,4 +85,88 @@
 .delete {
   font-size: 2.5em;
   grid-area: delete;
+}
+ */
+
+ .col, .row{
+   margin: 0 !important;
+   padding: 0 !important;
+ }
+
+.product {
+  color: #245a2f;
+  font-size: 0.8em;
+  width: 100%;
+}
+
+.divider {
+  border-bottom: 1px solid #245a2f4b;
+  width: calc(100%);
+}
+
+.icons {
+  position: relative;
+  display: inline-block;
+  font-size: 2.5em;
+}
+
+.add {
+  position: absolute;
+  top: 90px;
+  left: 40px;
+  color: #66c46c;
+  stroke: 5px solid white;
+  transform: translate(-50%, -50%);
+}
+
+.remove {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  color: #245a2f;
+  stroke: 5px solid white;
+}
+
+.delete {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  color: #245a2f;
+  stroke: 5px solid white;
+}
+
+.product-name {
+  margin-left: 10px;
+  font-weight: 500;
+  font-size: 1.5em;
+}
+
+.product-brand {
+  font-size: 0.8em;
+  font-weight: 400;
+}
+
+.product-image {
+  margin-left: 5%;
+  background-position: 0px -10px;
+  background-size: 80%;
+  background-repeat: no-repeat;
+}
+
+.product-price {
+  margin-left: 10px;
+}
+
+.price-text {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+.comparison-text {
+  font-weight: 500;
+}
+
+.comparison-price {
+  margin-left: 10px;
+  margin-bottom: 15px;
 }

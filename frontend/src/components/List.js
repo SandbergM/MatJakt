@@ -21,11 +21,9 @@ export default function List() {
             >
               {storeName.name}
             </h4>
-            <div className="">
-              <div>
-                <SearchResults />
-                <ShoppingList />
-              </div>
+            <div>
+              <SearchResults />
+              <ShoppingList />
             </div>
           </div>
         );
