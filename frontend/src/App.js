@@ -26,7 +26,7 @@ function App() {
         <div className="row">
           <List />
         </div>
-        <div className="row justify-content-center">
+        <div >
           <BottomButtons />
         </div>
       </main>
