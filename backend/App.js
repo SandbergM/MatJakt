@@ -19,6 +19,7 @@ const Category = require("./models/category");
 const Store = require("./models/store");
 const { Product, TempProduct } = require("./models/product");
 const CategoryTranslation = require("./models/categoryTranslation");
+const AutoCompleteSuggestion = require("./models/autoCompleteSuggestion");
 
 //Routes
 const productRoutes = require("./routes/ProductRoutes");
@@ -31,6 +32,8 @@ const storeRoutes = require("./routes/StoreRoutes");
 storeRoutes(app);
 const categorytranslationsRoutes = require("./routes/categoryTranslationRoutes");
 categorytranslationsRoutes(app);
+const AutoCompleteSuggestionRoutes = require("./routes/AutoCompleteSuggestionRoutes");
+AutoCompleteSuggestionRoutes(app);
 
 //connect to MongoDB with mongoose
 const dbURI =

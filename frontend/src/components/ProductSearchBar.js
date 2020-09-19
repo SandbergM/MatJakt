@@ -10,9 +10,12 @@ export default function ProductSearchBar(props) {
   const [countryOfOrigin, setCountryOfOrigin] = useState();
   const [isEcological, setIsEcological] = useState(false);
 
-  const { addProductToSearchList, singleProductSearch } = useContext(
-    ProductContext
-  );
+  const {
+    addProductToSearchList,
+    singleProductSearch,
+    productAutoCompleteSuggestions,
+    fetchProductAutoCompleteSuggestions,
+  } = useContext(ProductContext);
 
   const submitProdctSearch = async (e) => {
     e.preventDefault();
@@ -51,9 +54,10 @@ export default function ProductSearchBar(props) {
   };
 
   const autoCompleteHelper = async (e) => {
-    if (e.length >= 3) {
+    if (e.length > 2) {
       setProductName(e);
-      console.log(`Fetching top X number of products with ${e} in the name`); // TODO
+      await fetchProductAutoCompleteSuggestions(productName);
+      console.log(productAutoCompleteSuggestions);
     }
   };
 
