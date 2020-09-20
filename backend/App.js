@@ -41,61 +41,11 @@ const dbURI =
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) =>
-    app.listen(3000, () => {
-      console.log("Listening at port 3000...");
+    app.listen(3001, () => {
+      console.log("Listening at port 3001...");
     })
   )
   .catch((err) => console.log(err));
 
-async function updateDatabase() {
-  let products = [];
-
-  setTimeout(() => {
-    Translator.fetchCategories();
-  }, 3000);
-
-  let startTime = Date.now();
-  let coop = await CoopHarvester.getAllProducts();
-  let coopScrubbed = await CoopScrubber.scrubAll(coop);
-  console.log(
-    " Coopharvesting completed",
-    coopScrubbed.length,
-    Date.now() - startTime
-  );
-  products.push(...coopScrubbed);
-
-  startTime = Date.now();
-  let willys = await WillysHarvester.getAllProducts();
-  let willysScrubbed = await WillysScrubber.scrubAll(willys);
-  console.log(
-    " Willysharvesting completed",
-    willysScrubbed.length,
-    Date.now() - startTime
-  );
-  products.push(...willysScrubbed);
-
-  startTime = Date.now();
-
-  let ica = await IcaHarvester.getAllProducts();
-  let icaScrubbed = await IcaScrubber.scrubAll(ica);
-  console.log(icaScrubbed);
-  console.log(
-    " Icasharvesting completed",
-    icaScrubbed.length,
-    Date.now() - startTime
-  );
-  products.push(...icaScrubbed);
-
-  startTime = Date.now();
-
-  // let db = mongoose.connection.db;
-
-  // await TempProduct.collection.insertMany(products);
-
-  // console.log("Database write took : ", Date.now() - startTime);
-  // startTime = Date.now();
-  // Product.collection.drop();
-  // await db.collection("tempproducts").rename("products");
-  // console.log("Database down for : ", Date.now() - startTime);
-}
+async function updateDatabase() {}
 updateDatabase();
