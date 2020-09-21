@@ -13,7 +13,7 @@ export default function List() {
     const lists = () => {
       return storeNames.map((storeName, i) => {
         return (
-          <div className="store-list col-lg-4 col-12">
+          <div className="store-list col-lg-4 col-12" key={i}>
             <h4
               className="store-name"
               align="center"
