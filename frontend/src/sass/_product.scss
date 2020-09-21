@@ -1,93 +1,3 @@
-/* .product {
-  display: grid;
-  width: 100%;
-  grid-template-areas:
-    "image name delete"
-    "image itemprice delete"
-    "image comparison-price comparison-price";
-  grid-template-columns: auto 65% 8%;
-  grid-template-rows: auto auto auto;
-  padding: 0.3em;
-  color: #245a2f;
-  font-size: 0.8em;
-}
-
-.divider {
-  border-bottom: 1px solid #245a2f4b;
-  width: calc(250%);
-  margin: 0 55px;
-}
-
-.icons {
-  position: relative;
-  display: inline-block;
-  font-size: 2.5em;
-}
-
-.add {
-  position: absolute;
-  top: 90px;
-  left: 40px;
-  color: #66c46c;
-  stroke: 5px solid white;
-  transform: translate(-50%, -50%);
-}
-
-.remove {
-  position: absolute;
-  top: 60px;
-  left: 60px;
-  color: #245a2f;
-  stroke: 5px solid white;
-}
-
-.product-name {
-  margin-top: 15px;
-  grid-area: name;
-  margin-left: 10px;
-  font-weight: 500;
-  font-size: 1.5em;
-}
-
-.product-brand {
-  font-size: 0.8em;
-  font-weight: 400;
-}
-
-.product-image {
-  grid-area: image;
-  margin-left: 10px;
-  background-position: 0px -10px;
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
-.product-price {
-  grid-area: itemprice;
-  margin-left: 10px;
-}
-
-.price-text {
-  font-size: 1.5em;
-  font-weight: 500;
-}
-
-.comparison-text {
-  font-weight: 500;
-}
-
-.comparison-price {
-  grid-area: comparison-price;
-  margin-left: 10px;
-  margin-bottom: 15px;
-}
-
-.delete {
-  font-size: 2.5em;
-  grid-area: delete;
-}
- */
-
 .col,
 .col-7,
 .row {
@@ -167,5 +77,57 @@
   font-weight: 400;
   font-size: 1.2em;
   padding: 3px;
-  
+}
+
+// On screens that are 1200px or less
+@media screen and (max-width: 1200px) {
+  .icons {
+    font-size: 2.2em;
+    top: 48px;
+    left: 0px;
+  }
+  .product-image {
+    background-position: 0px 0px;
+    background-size: 85%;
+  }
+}
+
+// On screens that are 992px or less
+@media screen and (max-width: 992px) {
+  .product {
+    padding: 15px 0 0 0 !important;
+  }
+  .icons {
+    display: inline-block;
+    top: 0px;
+    left: -10px;
+  }
+  .product-image {
+    background-position: 40px -10px;
+    background-size: 65%;
+  }
+  .add {
+    display: block;
+    padding: 0;
+  }
+  .right-icons {
+    padding-left: 30px;
+  }
+}
+
+// On screens that are 767px or less
+@media screen and (max-width: 767px) {
+  .icons {
+    top: -5px;
+  }
+  .product-image {
+    background-position: 28px 0px;
+    background-size: 68%;
+  }
+  .comparison-price {
+    margin: 3px 0 0 0 !important;
+  }
+  .right-icons {
+    padding-left: 0px;
+  }
 }

@@ -44,10 +44,10 @@ function Product() {
               >
                 <div class="icons">
                   <div className="add">
-                    <MdAddCircle />
+                    <MdAddCircle className="white-icon" />
                   </div>
                   <div className="remove">
-                    <MdRemoveCircle />
+                    <MdRemoveCircle className="white-icon" />
                   </div>
                 </div>
               </div>
@@ -75,10 +75,8 @@ function Product() {
                 <div className="divider mt-3 mb-2"></div>
               </div>
 
-              <div className="delete align-items-center">
-                <div className="delete amount">
-                  {amountToBuy}
-                </div>
+              <div className="delete align-items-center right-icons">
+                <div className="delete amount">{amountToBuy}</div>
                 <MdDelete />
               </div>
             </div>

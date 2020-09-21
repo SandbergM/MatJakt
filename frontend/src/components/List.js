@@ -21,7 +21,7 @@ export default function List() {
             >
               {storeName.name}
             </h4>
-            <div>
+            <div className="list-contents">
               <SearchResults />
               <ShoppingList />
             </div>
