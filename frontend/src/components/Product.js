@@ -37,43 +37,49 @@ function Product() {
       return products.map((product, i) => {
         return (
           <div>
-            <div className="icons">
-              <div className="add">
-                <MdAddCircle />
-              </div>
-              <div className="remove">
-                <MdRemoveCircle />
-              </div>
-              <div className="delete">
-                <MdDelete />
-              </div>
-            </div>
-
             <div className="row product">
               <div
                 class="col-3 product-image"
                 style={{ backgroundImage: `url(${product.imageUrl})` }}
-              ></div>
+              >
+                <div class="icons">
+                  <div className="add">
+                    <MdAddCircle />
+                  </div>
+                  <div className="remove">
+                    <MdRemoveCircle />
+                  </div>
+                </div>
+              </div>
 
               <div class="col-7">
                 <div class="row align-items-start">
                   <div class="col product-name">{product.name}</div>
                 </div>
-                <div class="row align-items-center ">
+
+                <div class="row align-items-center mt-1">
+                  <div class="col comparison-price">
+                    <span className="product-brand">{product.brand} </span> |
+                    <span className="comparison-text"> Jfp: </span>
+                    {product.pricePerUnit} SEK / {product.comparisonUnit}
+                  </div>
+                </div>
+
+                <div class="row align-items-end">
                   <div class="col product-price">
-                    <span className="product-brand">{product.brand}</span> |{" "}
-                    {amountToBuy} package | {product.packagingSize}{" "}
-                    {product.quantityType} for{" "}
+                    {product.packagingSize} {product.quantityType} för{" "}
                     <span className="price-text"> {product.price} SEK</span>
                   </div>
                 </div>
-                <div class="row align-items-end">
-                  <div class="col comparison-price">
-                    <span className="comparison-text">Jfp: </span>
-                    {product.pricePerUnit} SEK per {product.comparisonUnit}
-                  </div>
+
+                <div className="divider mt-3 mb-2"></div>
+              </div>
+
+              <div className="delete align-items-center">
+                <div className="delete amount">
+                  {amountToBuy}
                 </div>
-                <div className="divider"></div>
+                <MdDelete />
               </div>
             </div>
           </div>

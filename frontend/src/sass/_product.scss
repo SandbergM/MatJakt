@@ -88,14 +88,17 @@
 }
  */
 
- .col, .row{
-   margin: 0 !important;
-   padding: 0 !important;
- }
+.col,
+.col-7,
+.row {
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
 .product {
   color: #245a2f;
   font-size: 0.8em;
+  padding: 10px 0 0 0 !important;
   width: 100%;
 }
 
@@ -105,56 +108,47 @@
 }
 
 .icons {
-  position: relative;
-  display: inline-block;
-  font-size: 2.5em;
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  font-size: 2em;
+  cursor: pointer;
 }
 
 .add {
-  position: absolute;
-  top: 90px;
-  left: 40px;
+  display: inline-block;
   color: #66c46c;
-  stroke: 5px solid white;
-  transform: translate(-50%, -50%);
+  padding-right: 5px;
 }
 
 .remove {
-  position: absolute;
-  top: 60px;
-  left: 60px;
+  display: inline-block;
+  position: relative;
   color: #245a2f;
-  stroke: 5px solid white;
 }
 
 .delete {
-  position: absolute;
-  top: 60px;
-  left: 60px;
+  font-size: 1.8em;
   color: #245a2f;
-  stroke: 5px solid white;
 }
 
 .product-name {
-  margin-left: 10px;
   font-weight: 500;
-  font-size: 1.5em;
+  font-size: 1.4em;
+  line-height: 1.1em;
 }
 
 .product-brand {
-  font-size: 0.8em;
+  font-size: 1em;
   font-weight: 400;
 }
 
 .product-image {
-  margin-left: 5%;
-  background-position: 0px -10px;
-  background-size: 80%;
+  margin: 0 0 0 4%;
+  background-position: 0px -5px;
+  background-size: 90%;
   background-repeat: no-repeat;
-}
-
-.product-price {
-  margin-left: 10px;
+  padding: 0 !important;
 }
 
 .price-text {
@@ -167,6 +161,11 @@
 }
 
 .comparison-price {
-  margin-left: 10px;
-  margin-bottom: 15px;
+  margin: 5px 0 2px 0 !important;
+}
+.amount {
+  font-weight: 400;
+  font-size: 1.2em;
+  padding: 3px;
+  
 }
