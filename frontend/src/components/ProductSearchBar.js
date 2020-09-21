@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Input, Label, Button } from "reactstrap";
-import { ProductContext } from "../contextProdivers/ProductContextProvider";
+import { ShoppingListContext } from "../contexts/ShoppingListContext";
+import { AutoCompleteContext } from "../contexts/AutoCompleteContext";
+import { CategoryContext } from "../contexts/CategoryContext";
 
 export default function ProductSearchBar(props) {
   const [productName, setProductName] = useState();
@@ -10,12 +12,15 @@ export default function ProductSearchBar(props) {
   const [countryOfOrigin, setCountryOfOrigin] = useState();
   const [isEcological, setIsEcological] = useState(false);
 
-  const {
-    addProductToSearchList,
-    singleProductSearch,
-    productAutoCompleteSuggestions,
-    fetchProductAutoCompleteSuggestions,
-  } = useContext(ProductContext);
+  const { addProductToShoppingList, singleProductSearch } = useContext(
+    ShoppingListContext
+  );
+  const { fetchAutoCompleteSuggestions, autoCompleteSuggestions } = useContext(
+    AutoCompleteContext
+  );
+  const { categories } = useContext(CategoryContext);
+
+  console.log(categories);
 
   const submitProdctSearch = async (e) => {
     e.preventDefault();
@@ -38,7 +43,7 @@ export default function ProductSearchBar(props) {
   };
 
   const addProductToList = (e) => {
-    addProductToSearchList({
+    addProductToShoppingList({
       name: productName,
       category: category,
       quantity: quantity,
@@ -56,8 +61,8 @@ export default function ProductSearchBar(props) {
   const autoCompleteHelper = async (e) => {
     if (e.length > 2) {
       setProductName(e);
-      await fetchProductAutoCompleteSuggestions(productName);
-      console.log(productAutoCompleteSuggestions);
+      await fetchAutoCompleteSuggestions(productName);
+      console.log(autoCompleteSuggestions);
     }
   };
 

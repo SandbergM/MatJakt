@@ -9,7 +9,9 @@ import ProductSearchBar from "./components/ProductSearchBar";
 import ListToBeGenerated from "./components/ListToBeGenerated";
 
 // CONTEXTPROVIDERS
-import ProductContextProvider from "./contextProdivers/ProductContextProvider";
+import ShoppingListContextProvider from "./contexts/ShoppingListContext";
+import CategoryContextProvider from "./contexts/CategoryContext";
+import AutoCompleteContextProvider from "./contexts/AutoCompleteContext";
 
 // CSS/SASS
 import "./sass/styles.scss";
@@ -17,17 +19,21 @@ import "./sass/styles.scss";
 function App() {
   return (
     <div className="App">
-      <ProductContextProvider>
-        <Header />
-        <main className="container">
-          <div className="row">
-            <ProductSearchBar />
-            <ListToBeGenerated />
-            <List />
-          </div>
-        </main>
-        <Footer />
-      </ProductContextProvider>
+      <ShoppingListContextProvider>
+        <CategoryContextProvider>
+          <AutoCompleteContextProvider>
+            <Header />
+            <main className="container">
+              <div className="row">
+                <ProductSearchBar />
+                <ListToBeGenerated />
+                <List />
+              </div>
+            </main>
+            <Footer />
+          </AutoCompleteContextProvider>
+        </CategoryContextProvider>
+      </ShoppingListContextProvider>
     </div>
   );
 }

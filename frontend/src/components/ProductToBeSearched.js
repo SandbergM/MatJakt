@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
-import { ProductContext } from "../contextProdivers/ProductContextProvider";
+import { ShoppingListContext } from "../contexts/ShoppingListContext";
+import { MdDelete, MdAddCircle, MdRemoveCircle } from "react-icons/md";
 
 export default function ProductToBeSearched(props) {
-  const { removeProductToSearchFromList } = useContext(ProductContext);
+  const { removeProductToShoppingList } = useContext(ShoppingListContext);
   return (
     <div className="col-12 mt-3 mb-3 product-to-be-searched-item matjaktDarkGreen-text">
       <div className="row">
@@ -14,9 +15,9 @@ export default function ProductToBeSearched(props) {
         </div>
         <div
           className="col-1 d-flex justify-content-around align-content-center pointer align-items-center"
-          onClick={() => removeProductToSearchFromList(props.product)}
+          onClick={() => removeProductToShoppingList(props.product)}
         >
-          X
+          <MdRemoveCircle />
         </div>
       </div>
     </div>

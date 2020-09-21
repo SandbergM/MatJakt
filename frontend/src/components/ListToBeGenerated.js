@@ -1,13 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import { ProductContext } from "../contextProdivers/ProductContextProvider";
+import { ShoppingListContext } from "../contexts/ShoppingListContext";
 import ProductsToBeSearched from "./ProductToBeSearched";
 
 export default function ListToBeGenerated() {
-  const { productsToBeSearched } = useContext(ProductContext);
-
-  useEffect(() => {
-    console.log(productsToBeSearched);
-  }, [productsToBeSearched]);
+  const { removeProductToShoppingList, productsToBeSearched } = useContext(
+    ShoppingListContext
+  );
 
   if (productsToBeSearched.length != 0) {
     const list = () => {
