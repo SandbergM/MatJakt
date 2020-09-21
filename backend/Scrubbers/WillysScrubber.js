@@ -1,8 +1,7 @@
 const fetch = require("node-fetch");
 const Scrubber = require("./Scrubber");
+const CategoryTranslator = require("../Shared/CategoryTranslator");
 const { getRandomNumber } = require("../Shared/Helpers");
-const { categoryTranslations } = require("../TempData/categoryTranslations");
-
 module.exports = class WillysScrubber extends Scrubber {
   detailedProduct;
 
@@ -52,8 +51,7 @@ module.exports = class WillysScrubber extends Scrubber {
 
   static async getCategoryIds(productCode) {
     const product = await this.getDetailedProduct(productCode);
-    // TODO: Add categoryTranslations from db
-    const translations = categoryTranslations;
+    const translations = CategoryTranslator.categories;
     let productCategories = [];
     if (product) {
       product.breadCrumbs.forEach((b) => {
