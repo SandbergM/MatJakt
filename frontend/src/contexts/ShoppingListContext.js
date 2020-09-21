@@ -4,6 +4,7 @@ export const ShoppingListContext = createContext();
 
 export default function ShoppingListContextProvider(props) {
   const [productsToBeSearched, setProductsToBeSearched] = useState([]);
+  const [generatedShoppingList, setGeneratedShoppingList] = useState([]);
 
   useEffect(() => {
     loadFromLocalStorage();
@@ -18,10 +19,11 @@ export default function ShoppingListContextProvider(props) {
 
   const loadFromLocalStorage = async () => {
     let data = localStorage.getItem('matjaktLocalSave')
-    data = await JSON.parse(data);
-    setProductsToBeSearched(data)
+    if (data) {
+      data = await JSON.parse(data);
+      setProductsToBeSearched(data)
+    }
   };
-
 
   const addProductToShoppingList = async (product) => {
     setProductsToBeSearched([...productsToBeSearched, product]);
@@ -35,11 +37,17 @@ export default function ShoppingListContextProvider(props) {
     console.log(product);
   };
 
+  const fetchGeneratedShoppingLists = async () => {
+    console.log(`Finding stuff`);
+  }
+
   const values = {
     productsToBeSearched,
     singleProductSearch,
     addProductToShoppingList,
     removeProductToShoppingList,
+    fetchGeneratedShoppingLists,
+    generatedShoppingList,
   };
 
   return (

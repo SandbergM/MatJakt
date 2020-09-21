@@ -1,12 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Input, Label, Button } from "reactstrap";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
 import { AutoCompleteContext } from "../contexts/AutoCompleteContext";
 import { CategoryContext } from "../contexts/CategoryContext";
 
 export default function ProductSearchBar(props) {
-  const [productName, setProductName] = useState();
-  const [quantity, setQuantity] = useState();
+  const [productName, setProductName] = useState("");
+  const [quantity, setQuantity] = useState(null);
   const [quantityType, setQuantityType] = useState("kg");
   const [category, setCategory] = useState();
   const [countryOfOrigin, setCountryOfOrigin] = useState();
@@ -16,7 +16,8 @@ export default function ProductSearchBar(props) {
   const { fetchAutoCompleteSuggestions, autoCompleteSuggestions } = useContext(AutoCompleteContext);
   const { categories } = useContext(CategoryContext);
 
-  const submitProdctSearch = async () => {
+
+  const submitProductSearch = async () => {
     if (productName && productName.length >= 3) {
       singleProductSearch({
         name: productName,
@@ -30,6 +31,11 @@ export default function ProductSearchBar(props) {
     }
   };
 
+  const handleProductNameChange = async (value) => {
+    /* TODO, Set up autocompletesuggestion */
+    setProductName(value)
+  }
+
   const clearFields = () => {
     document.getElementById("product-search-form").reset();
     setProductName("");
@@ -40,21 +46,15 @@ export default function ProductSearchBar(props) {
   };
 
   const addProductToList = async () => {
-    await addProductToShoppingList({
-      name: productName,
-      category: category,
-      quantity: quantity,
-      quantityType: quantityType,
-      isEcological: isEcological,
-      countryOfOrigin: countryOfOrigin,
-    }).then(clearFields())
-  };
-
-  const autoCompleteHelper = async (e) => {
-    if (e.length > 3) {
-      setProductName(e);
-      fetchAutoCompleteSuggestions(productName);
-      console.log(autoCompleteSuggestions)
+    if (productName.length > 1 && quantity != null) {
+      addProductToShoppingList({
+        name: productName,
+        category: category,
+        quantity: quantity,
+        quantityType: quantityType,
+        isEcological: isEcological,
+        countryOfOrigin: countryOfOrigin,
+      }).then(clearFields())
     }
   };
 
@@ -78,7 +78,7 @@ export default function ProductSearchBar(props) {
               <Input
                 placeholder="Sök efter produkt..."
                 className="matjaktWhite-bg matjakt-inputfield oblique matjakt-clearable"
-                onChange={(e) => autoCompleteHelper(e.target.value)}
+                onChange={(e) => { handleProductNameChange(e.target.value) }}
               />
             </div>
             <div className="col-xl-3 col-lg-6 col-md-12 d-flex justify-content-between mb-2">
