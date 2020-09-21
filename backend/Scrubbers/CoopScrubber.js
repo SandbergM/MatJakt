@@ -5,7 +5,7 @@ module.exports = class CoopScrubber extends Scrubber {
   static translateSchema = {
     name: (x) => x.name,
     storeId: (x) => "Coop", // TODO: Add real storeId
-    categoryId: (x) => this.getCategoryId(x),
+    categoryIds: (x) => this.getCategoryIds(x),
     brand: (x) => x.manufacturer,
     price: (x) => x.price.value,
     packagingSize: (x) => x.packageSize,
@@ -21,7 +21,8 @@ module.exports = class CoopScrubber extends Scrubber {
     imageUrl: (x) => x.images[0].url,
   };
 
-  static getCategoryId(product) {
+  static getCategoryIds(product) {
+    const ids = [];
     //TODO EXCHANGE THIS ARRAY WITH CATEGORIES FROM THE DB
     const matJaktCategories = [
       { categoryName: "Mejeri & Ägg", id: 0 },
@@ -50,10 +51,12 @@ module.exports = class CoopScrubber extends Scrubber {
       if (
         product.categories[0].name.includes(matJaktCategories[i].categoryName)
       ) {
-        return matJaktCategories[i].id;
+        ids.push(matJaktCategories[i].id);
+      } else {
+        //If nothing fits, return the category "Övrigt"
+        ids.push(matJaktCategories[matJaktCategories.length - 1]);
       }
-      //If nothing fits, return the category "Övrigt"
-      return matJaktCategories[matJaktCategories.length - 1];
+      return ids;
     }
   }
 
