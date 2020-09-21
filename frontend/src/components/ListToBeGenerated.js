@@ -9,8 +9,8 @@ export default function ListToBeGenerated() {
 
   if (productsToBeSearched.length != 0) {
     const list = () => {
-      return productsToBeSearched.map((product) => {
-        return <ProductsToBeSearched product={product} />;
+      return productsToBeSearched.map((product, index) => {
+        return <ProductsToBeSearched key={index} product={product} />;
       });
     };
     return (

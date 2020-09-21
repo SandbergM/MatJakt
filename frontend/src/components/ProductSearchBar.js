@@ -12,18 +12,11 @@ export default function ProductSearchBar(props) {
   const [countryOfOrigin, setCountryOfOrigin] = useState();
   const [isEcological, setIsEcological] = useState(false);
 
-  const { addProductToShoppingList, singleProductSearch } = useContext(
-    ShoppingListContext
-  );
-  const { fetchAutoCompleteSuggestions, autoCompleteSuggestions } = useContext(
-    AutoCompleteContext
-  );
+  const { addProductToShoppingList, singleProductSearch } = useContext(ShoppingListContext);
+  const { fetchAutoCompleteSuggestions, autoCompleteSuggestions } = useContext(AutoCompleteContext);
   const { categories } = useContext(CategoryContext);
 
-  console.log(categories);
-
-  const submitProdctSearch = async (e) => {
-    e.preventDefault();
+  const submitProdctSearch = async () => {
     if (productName && productName.length >= 3) {
       singleProductSearch({
         name: productName,
@@ -37,32 +30,31 @@ export default function ProductSearchBar(props) {
     }
   };
 
-  const clearFields = (e) => {
+  const clearFields = () => {
     document.getElementById("product-search-form").reset();
+    setProductName("");
+    setQuantityType("kg")
+    setCategory(null);
+    setCountryOfOrigin(null)
     setIsEcological(false);
   };
 
-  const addProductToList = (e) => {
-    addProductToShoppingList({
+  const addProductToList = async () => {
+    await addProductToShoppingList({
       name: productName,
       category: category,
       quantity: quantity,
       quantityType: quantityType,
       isEcological: isEcological,
       countryOfOrigin: countryOfOrigin,
-    });
-    clearFields();
-  };
-
-  const toggleEco = (e) => {
-    setIsEcological(isEcological ? false : true);
+    }).then(clearFields())
   };
 
   const autoCompleteHelper = async (e) => {
-    if (e.length > 2) {
+    if (e.length > 3) {
       setProductName(e);
-      await fetchAutoCompleteSuggestions(productName);
-      console.log(autoCompleteSuggestions);
+      fetchAutoCompleteSuggestions(productName);
+      console.log(autoCompleteSuggestions)
     }
   };
 
@@ -121,7 +113,9 @@ export default function ProductSearchBar(props) {
                 <option defaultValue value="">
                   Välj kategori
                 </option>
-                {/* TODO, Categories should come as props */}
+                {categories.map((x, index) => {
+                  return (<option key={index} value={x._id}> {x.categoryName} </option>)
+                })}
               </Input>
               <Input
                 type="select"
@@ -139,7 +133,7 @@ export default function ProductSearchBar(props) {
             <div className="small-inputfield col-9 col-lg-4 col-xl-2 justify-content-between d-flex mb-3">
               <Button
                 className="custom-searchbar-button matjaktWhite-bg"
-                onClick={toggleEco}
+                onClick={() => { setIsEcological(!isEcological) }}
               >
                 <span>
                   {isEcological ? (
@@ -147,8 +141,8 @@ export default function ProductSearchBar(props) {
                       &#10003;
                     </span>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                 </span>
               </Button>
               <Label className="ml-3 searchbar-label matjatkkDarkGreen-text oblique">
@@ -158,7 +152,7 @@ export default function ProductSearchBar(props) {
             <div className="matjakt-button-container small-inputfield col-3 col-xl-2 offset-xl-3 mb-3 d-flex justify-content-end">
               <Button
                 className="custom-searchbar-button matJaktLightGreen-bg matjaktWhite-text"
-                onClick={addProductToList}
+                onClick={() => { addProductToList() }}
               >
                 <span className="button-icon ">&#x2b;</span>
               </Button>
@@ -170,7 +164,6 @@ export default function ProductSearchBar(props) {
               <Button
                 id="single-product-search-button"
                 className="matjaktkDarkGreen-bg"
-                onClick={submitProdctSearch}
               >
                 Sök efter produkt
               </Button>
