@@ -117,6 +117,11 @@ class App {
   }
 
 
+  // console.log("Database write took : ", Date.now() - startTime);
+  // startTime = Date.now();
+  // Product.collection.drop();
+  // await db.collection("tempproducts").rename("products");
+  // console.log("Database down for : ", Date.now() - startTime);
 }
 
 new App();
