@@ -9,9 +9,22 @@ exports.getAllProducts = function (req, res) {
   });
 };
 
-exports.findProductById = function (req, res) {
-  Product.findById(req.params.taskId, function (err, task) {
-    if (err) res.send(err);
-    res.json(task);
-  });
+exports.findItemByName = async function (req, res) {
+  let products = req.body;
+  let list = [];
+
+  for (const x of products) {
+    await Product.findOne(
+      {
+        $query: { name: { $regex: x['name'], $options: "i" } }
+      }
+      , function (error, product) {
+        if (!error) {
+          list.push(product)
+        } else {
+          console.log(error);
+        }
+      })
+  }
+  res.send(list)
 };

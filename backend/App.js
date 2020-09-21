@@ -1,7 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const app = express();
 
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded());
 const Translator = require("./Shared/CategoryTranslator");
 
 //Harvesters
@@ -34,6 +36,7 @@ const categorytranslationsRoutes = require("./routes/categoryTranslationRoutes")
 categorytranslationsRoutes(app);
 const AutoCompleteSuggestionRoutes = require("./routes/AutoCompleteSuggestionRoutes");
 AutoCompleteSuggestionRoutes(app);
+
 
 //connect to MongoDB with mongoose
 const dbURI =

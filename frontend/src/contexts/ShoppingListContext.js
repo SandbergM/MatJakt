@@ -22,6 +22,7 @@ export default function ShoppingListContextProvider(props) {
     if (data) {
       data = await JSON.parse(data);
       setProductsToBeSearched(data)
+      console.log();
     }
   };
 
@@ -38,7 +39,15 @@ export default function ShoppingListContextProvider(props) {
   };
 
   const fetchGeneratedShoppingLists = async () => {
-    console.log(`Finding stuff`);
+    let data = await fetch(`http://localhost:3001/products/generateShoppingList`, {
+      method: "POST",
+      body: JSON.stringify(productsToBeSearched),
+      mode: "cors",
+      headers: { "Content-type": "application/json;charset=utf-8" }
+    })
+    data = await data.json();
+    setGeneratedShoppingList(data)
+    console.log(data);
   }
 
   const values = {

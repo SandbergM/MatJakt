@@ -5,5 +5,6 @@ module.exports = function (app) {
   //TODO: Routes
   app.route("/products").get(productRoutes.getAllProducts);
 
-  app.route("/products/:productId").get(productRoutes.findProductById);
+  app.route("/products/generateShoppingList").post(productRoutes.findItemByName);
+
 };
