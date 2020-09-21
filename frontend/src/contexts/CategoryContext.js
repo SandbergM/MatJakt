@@ -5,10 +5,9 @@ export default function CategoryContextProvider(props) {
   const [categories, setCategories] = useState([]);
 
   const fetchCategories = async () => {
-    let data = await fetch(`http://127.0.0.1:3001/categories`);
+    let data = await fetch(`http://127.0.0.1:3000/categories`);
     data = await data.json();
     setCategories(data);
-    console.log('fetched');
   };
 
   useEffect(() => {

@@ -1,5 +1,4 @@
 import React from "react";
-//import { Button } from "reactstrap";
 
 // COMPONENTS
 import Footer from "./components/Footer";

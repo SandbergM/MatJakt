@@ -1,57 +1,19 @@
-const express = require("express");
-const mongoose = require("mongoose");
+const Server = require("./Server");
+const HarvesterScheduler = require("./HarvestScheduler")
 
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded());
-const Translator = require("./Shared/CategoryTranslator");
+class App {
 
-//Harvesters
-const CoopHarvester = require("./harvesters/CoopHarvester");
-const IcaHarvester = require("./harvesters/IcaHarvester");
-const WillysHarvester = require("./harvesters/WillyHarvester");
-//Scrubbers
-const CoopScrubber = require("./scrubbers/CoopScrubber");
-const WillysScrubber = require("./scrubbers/WillysScrubber");
-const IcaScrubber = require("./scrubbers/IcaScrubber");
-
-//Mongoose models
-const Address = require("./models/address");
-const Category = require("./models/category");
-const Store = require("./models/store");
-const { Product, TempProduct } = require("./models/product");
-const CategoryTranslation = require("./models/categoryTranslation");
-const AutoCompleteSuggestion = require("./models/autoCompleteSuggestion");
-
-//Routes
-const productRoutes = require("./routes/ProductRoutes");
-productRoutes(app);
-const addressRoutes = require("./routes/AddressRoutes");
-addressRoutes(app);
-const categoryRoutes = require("./routes/CategoryRoutes");
-categoryRoutes(app);
-const storeRoutes = require("./routes/StoreRoutes");
-storeRoutes(app);
-const categorytranslationsRoutes = require("./routes/categoryTranslationRoutes");
-categorytranslationsRoutes(app);
-const AutoCompleteSuggestionRoutes = require("./routes/AutoCompleteSuggestionRoutes");
-AutoCompleteSuggestionRoutes(app);
-
-
-//connect to MongoDB with mongoose
-const dbURI =
-  "mongodb+srv://matjakt:FoodHunt123@mat-jakt.mpf5m.mongodb.net/mat-jakt?retryWrites=true&w=majority";
-mongoose
-  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((result) =>
-    app.listen(3001, () => {
-      console.log("Listening at port 3001...");
-    })
-  )
-  .catch((err) => console.log(err));
-
-async function updateDatabase() {
-  let products = [];
-  Translator.fetchCategories();
+  constructor(){
+    // Start the web server
+    new Server();
+    // Start the harvester scheduler
+    // write a HarvesterWatcher that checks time of last harvest
+    // (we need to save in the db)
+    // it might check once a minute and if now - last time > 24 hours
+    // start a new harvest
+    // do not start if harvestInProgrsss = true
+    new HarvesterScheduler();
+  }
 }
-updateDatabase();
+
+new App();
