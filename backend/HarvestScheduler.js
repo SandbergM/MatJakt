@@ -1,3 +1,3 @@
-class HarvestScheduler {
+module.exports = class HarvestScheduler {
   constructor() {}
-}
+};
