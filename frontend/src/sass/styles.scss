@@ -2,7 +2,7 @@
 @import "./shoppinglist.scss";
 @import "./list.scss"; 
 @import "./product.scss"; 
-@import "./matjakt-searchbar";
+@import "./matjakt-searchbar.scss";
 
 * {
   box-sizing: border-box;
@@ -23,10 +23,10 @@
 
 
 
-.matjatkDarkGreen-bg {
+.matjaktkDarkGreen-bg {
   background-color: #245a2f !important;
 }
-.matjatkDarkGreen-text {
+.matjaktDarkGreen-text {
   color: #245a2f !important;
 }
 .matjaktRed-bg {
