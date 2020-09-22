@@ -1,8 +1,9 @@
 @import "./searchresults.scss";
 @import "./shoppinglist.scss";
-@import "./list.scss"; 
-@import "./product.scss"; 
-@import "./matjakt-searchbar.scss";
+@import "./list.scss";
+@import "./product.scss";
+@import "./matjaktSearchbar.scss";
+@import "./listToBeSearched.scss";
 
 * {
   box-sizing: border-box;
@@ -113,4 +114,7 @@ Button {
 .omOss {
   padding-right: 30px;
   color: #66c46c;
+}
+.pointer {
+  cursor: pointer;
 }

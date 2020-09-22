@@ -1,36 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MdDelete, MdAddCircle, MdRemoveCircle } from "react-icons/md";
+import { ShoppingListContext } from "../contexts/ShoppingListContext";
 
 function Product() {
-  //const { products } = useContext(ProductContext);
+  const { generatedShoppingList } = useContext(ShoppingListContext);
   let amountToBuy = 1;
-
-  let products = [
-    {
-      name: "Kycklinglår Ica Basic",
-      storeId: 1,
-      brand: "Ica Basic",
-      packagingSize: 800,
-      pricePerUnit: 101.45,
-      comparisonUnit: "kg",
-      quantityType: "gr",
-      price: 91.45,
-      imageUrl:
-        "https://assets.icanet.se/t_product_large_v1,f_auto/7318690176138.jpg",
-    },
-    {
-      name: "Tonfisk i Olja",
-      storeId: 1,
-      brand: "Ica Basic",
-      packagingSize: 185,
-      pricePerUnit: 9.45,
-      comparisonUnit: "kg",
-      quantityType: "gr",
-      price: 45.82,
-      imageUrl:
-        "https://assets.icanet.se/t_product_large_v1,f_auto/7310751164023.jpg",
-    },
-  ];
+  let products = generatedShoppingList;
 
   if (products) {
     const list = () => {
