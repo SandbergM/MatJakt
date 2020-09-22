@@ -36,40 +36,47 @@ function Product() {
     const list = () => {
       return products.map((product, i) => {
         return (
-          <div>
-            <div className="icons">
-              <div className="add">
-                <MdAddCircle />
-              </div>
-              <div className="remove">
-                <MdRemoveCircle />
+          <div className="row product" key={i}>
+            <div
+              className="col-3 product-image"
+              style={{ backgroundImage: `url(${product.imageUrl})` }}
+            >
+              <div className="icons">
+                <div className="add">
+                  <MdAddCircle className="white-icon" />
+                </div>
+                <div className="remove">
+                  <MdRemoveCircle className="white-icon" />
+                </div>
               </div>
             </div>
-            <div className="product">
-              <div
-                className="product-image"
-                style={{ backgroundImage: `url(${product.imageUrl})` }}
-              >
-                {/* <img src={product.imageUrl} alt={product.name} /> */}
+
+            <div className="col-7">
+              <div className="row align-items-start">
+                <div className="col product-name">{product.name}</div>
               </div>
-              <div className="product-name">
-                {product.name}{" "}
-                <span className="product-brand">| {product.brand}</span>
+
+              <div className="row align-items-center mt-1">
+                <div className="col comparison-price">
+                  <span className="product-brand">{product.brand} </span> |
+                  <span className="comparison-text"> Jfp: </span>
+                  {product.pricePerUnit} SEK / {product.comparisonUnit}
+                </div>
               </div>
-              <div className="delete">
-                <MdDelete />
+
+              <div className="row align-items-end">
+                <div className="col product-price">
+                  {product.packagingSize} {product.quantityType} för{" "}
+                  <span className="price-text"> {product.price} SEK</span>
+                </div>
               </div>
-              <div className="product-price">
-                {" "}
-                {amountToBuy} package | {product.packagingSize}{" "}
-                {product.quantityType} for{" "}
-                <span className="price-text"> {product.price} SEK</span>
-              </div>
-              <div className="comparison-price">
-                <span className="comparison-text">Jämförelsepris: </span>
-                {product.pricePerUnit} SEK per {product.comparisonUnit}
-              </div>
-              <div className="divider"></div>
+
+              <div className="divider mt-3 mb-2"></div>
+            </div>
+
+            <div className="delete align-items-center right-icons">
+              <div className="delete amount">{amountToBuy}</div>
+              <MdDelete />
             </div>
           </div>
         );
