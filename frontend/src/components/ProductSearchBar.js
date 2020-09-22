@@ -12,15 +12,11 @@ export default function ProductSearchBar(props) {
   const [countryOfOrigin, setCountryOfOrigin] = useState();
   const [isEcological, setIsEcological] = useState(false);
 
-  const { addProductToShoppingList, singleProductSearch } = useContext(
-    ShoppingListContext
-  );
-  const { fetchAutoCompleteSuggestions, autoCompleteSuggestions } = useContext(
-    AutoCompleteContext
-  );
+  const { addProductToShoppingList, singleProductSearch } = useContext(ShoppingListContext);
+  const { fetchAutoCompleteSuggestions, autoCompleteSuggestions } = useContext(AutoCompleteContext);
   const { categories } = useContext(CategoryContext);
 
-  const submitProductSearch = async () => {
+  const submitProductSearch = () => {
     if (productName && productName.length >= 3) {
       singleProductSearch({
         name: productName,
@@ -34,9 +30,9 @@ export default function ProductSearchBar(props) {
     }
   };
 
-  const handleProductNameChange = async (value) => {
-    /* TODO, Set up autocompletesuggestion */
+  const handleProductNameChange = (value) => {
     setProductName(value);
+    console.log(productName);
   };
 
   const clearFields = () => {
@@ -48,8 +44,8 @@ export default function ProductSearchBar(props) {
     setIsEcological(false);
   };
 
-  const addProductToList = async () => {
-    if (productName.length > 1 && quantity != null) {
+  const addProductToList = () => {
+    if (productName.length > 1) {
       addProductToShoppingList({
         name: productName,
         category: category,
@@ -81,9 +77,7 @@ export default function ProductSearchBar(props) {
               <Input
                 placeholder="Sök efter produkt..."
                 className="matjaktWhite-bg matjakt-inputfield oblique matjakt-clearable"
-                onChange={(e) => {
-                  handleProductNameChange(e.target.value);
-                }}
+                onChange={(e) => { handleProductNameChange(e.target.value); }}
               />
             </div>
             <div className="col-xl-3 col-lg-6 col-md-12 d-flex justify-content-between mb-2">
@@ -113,7 +107,7 @@ export default function ProductSearchBar(props) {
                 type="select"
                 placeholder="Volym"
                 className="matjakt-inputfield-select oblique small-inputfield matjakt-clearable"
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => setCategory(category => e.target.value)}
               >
                 <option defaultValue value="">
                   Välj kategori
@@ -153,8 +147,8 @@ export default function ProductSearchBar(props) {
                       &#10003;
                     </span>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                 </span>
               </Button>
               <Label className="ml-3 searchbar-label matjatkkDarkGreen-text oblique">

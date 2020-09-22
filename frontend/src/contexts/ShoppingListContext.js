@@ -20,14 +20,13 @@ export default function ShoppingListContextProvider(props) {
   const loadFromLocalStorage = async () => {
     let data = localStorage.getItem('matjaktLocalSave')
     if (data) {
-      data = await JSON.parse(data);
+      data = await JSON.parse(data)
       setProductsToBeSearched(data)
-      console.log();
     }
   };
 
   const addProductToShoppingList = async (product) => {
-    setProductsToBeSearched([...productsToBeSearched, product]);
+    setProductsToBeSearched(productsToBeSearched => ([...productsToBeSearched, product]));
   };
 
   const removeProductToShoppingList = async (productToRemove) => {
@@ -39,15 +38,12 @@ export default function ShoppingListContextProvider(props) {
   };
 
   const fetchGeneratedShoppingLists = async () => {
-    let data = await fetch(`http://127.0.0.1:3000/products/generateList`, {
+    fetch(`http://127.0.0.1:3000/products/generateList`, {
       method: "POST",
       body: JSON.stringify(productsToBeSearched),
       mode: "cors",
       headers: { "Content-type": "application/json;charset=utf-8" }
-    })
-    data = await data.json();
-    setGeneratedShoppingList(data)
-    console.log(data);
+    }).then(async (data) => { setGeneratedShoppingList(await data.json()) })
   }
 
   const values = {
