@@ -45,4 +45,20 @@ module.exports = class Harvester {
       `${capitalizedKey} harvesting completed in ${Date.now() - startTime} ms.`
     );
   }
+
+  async scrub(key) {
+    const capitalizedKey = capitalizeFirstLetter(key);
+    let startTime = Date.now();
+
+    console.log(`${capitalizedKey} scrubbing commenced...`);
+
+    const scrubbedProducts = await this.stores[key].scrubber.scrubAll(
+      this.stores[key].products
+    );
+    this.scrubbedProducts.push(...scrubbedProducts);
+
+    console.log(
+      `${capitalizedKey} scrubbing completed in ${Date.now() - startTime} ms.`
+    );
+  }
 };
