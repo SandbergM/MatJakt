@@ -31,7 +31,7 @@ export default function ShoppingListContextProvider(props) {
   };
 
   const removeProductToShoppingList = async (productToRemove) => {
-    setProductsToBeSearched(productsToBeSearched.filter((product) => product != productToRemove))
+    setProductsToBeSearched(productsToBeSearched.filter((product) => product !== productToRemove))
   };
 
   const singleProductSearch = async (product) => {

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Input, Label, Button } from "reactstrap";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
 import { AutoCompleteContext } from "../contexts/AutoCompleteContext";
