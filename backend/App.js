@@ -1,18 +1,18 @@
 const Server = require("./Server");
-const HarvesterScheduler = require("./HarvestScheduler")
+const HarvesterScheduler = require("./HarvestScheduler");
 
 class App {
-
   constructor(){
-    // Start the web server
-    new Server();
-    // Start the harvester scheduler
-    // write a HarvesterWatcher that checks time of last harvest
-    // (we need to save in the db)
-    // it might check once a minute and if now - last time > 24 hours
-    // start a new harvest
-    // do not start if harvestInProgrsss = true
-    new HarvesterScheduler();
+    this.server = new Server();
+    this.harvesterScheduler = new HarvesterScheduler();
+    this.run();
+  }
+
+  async run() {
+    console.log("Running server...")
+    await this.server.run();
+    console.log("Running harvester...")
+    this.harvesterScheduler.run();
   }
 }
 
