@@ -9,6 +9,7 @@ import ProductSearchBar from "./components/ProductSearchBar";
 
 // CSS/SASS
 import "./sass/styles.scss";
+import BottomButtons from "./components/BottomButtons";
 
 function App() {
   return (
@@ -17,7 +18,12 @@ function App() {
       <main className="container">
         <div className="row">
           <ProductSearchBar />
+        </div>
+        <div className="row">
           <List />
+        </div>
+        <div >
+          <BottomButtons />
         </div>
       </main>
       <Footer />
