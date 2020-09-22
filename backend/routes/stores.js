@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   Store.find({}, (err, data) => {
-    console.log(data);
     if (err) console.log(err)
     res.send(data)
   })

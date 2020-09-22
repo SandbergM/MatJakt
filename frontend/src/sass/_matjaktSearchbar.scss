@@ -19,28 +19,26 @@ input.matjakt-inputfield::placeholder {
 input.matjakt-inputfield:focus {
   color: #66c46c !important;
   font-size: 17.5px !important;
-  font-weight: 500 !important;
+  font-weight: 400 !important;
 }
 .matjakt-inputfield {
   height: 4.25vh !important;
   border-radius: 25px !important;
   font-size: 17.5px !important;
-  text-align: center;
-  font-weight: 500 !important;
+  font-weight: 400 !important;
   color: #66c46c !important;
 }
 .matjakt-inputfield-select {
   font-size: 17.5px !important;
   color: #66c46c !important;
   border-radius: 25px !important;
-  text-align-last: center !important;
   height: 4.25vh !important;
-  padding: 0px !important;
-  font-weight: 500 !important;
+  padding: 10 0px !important;
+  font-weight: 400 !important;
 }
 .small-inputfield {
   width: 47.5% !important;
-  font-weight: 500 !important;
+  font-weight: 400 !important;
 }
 .custom-searchbar-button {
   display: flex !important;
@@ -76,4 +74,8 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 input[type="number"] {
   -moz-appearance: textfield;
+}
+.plus-sign{
+  margin-top: -7px;
+  font-size: 40px !important;
 }

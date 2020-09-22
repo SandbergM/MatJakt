@@ -4,17 +4,17 @@ import ShoppingList from "../components/ShoppingList";
 import { StoreContext } from "../contexts/StoreContext";
 
 export default function List() {
-
   const { stores } = useContext(StoreContext);
+  const colors = ["#E83F39","#66C46C", "#743EBB"];
 
-/*   let storeNames = [
+  /*   let storeNames = [
     { name: "Ica", color: "#E83F39" },
     { name: "Coop", color: "#66C46C" },
     { name: "Willy's", color: "#743EBB" },
   ]; */
 
+
   if (stores) {
-    console.log(stores);
     const lists = () => {
       return stores.map((store, i) => {
         return (
@@ -22,7 +22,7 @@ export default function List() {
             <h4
               className="store-name"
               align="center"
-           /*    style={{ backgroundColor: `${storeName.color}` }} */
+                 style={{ backgroundColor: `${colors[i]}` }}
             >
               {store.name}
             </h4>

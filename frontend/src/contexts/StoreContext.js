@@ -7,11 +7,7 @@ export default function StoreContextProvider(props) {
 
   const fetchStores = async () => {
     let data = await fetch(`http://localhost:3000/stores`);
-
-    console.log(data);
     data = await data.json();
-    
-    console.log(data);
     setStores(data);
   };
 

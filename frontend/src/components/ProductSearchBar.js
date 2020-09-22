@@ -77,7 +77,9 @@ export default function ProductSearchBar(props) {
               <Input
                 placeholder="Sök efter produkt..."
                 className="matjaktWhite-bg matjakt-inputfield oblique matjakt-clearable"
-                onChange={(e) => { handleProductNameChange(e.target.value); }}
+                onChange={(e) => {
+                  handleProductNameChange(e.target.value);
+                }}
               />
             </div>
             <div className="col-xl-3 col-lg-6 col-md-12 d-flex justify-content-between mb-2">
@@ -107,7 +109,7 @@ export default function ProductSearchBar(props) {
                 type="select"
                 placeholder="Volym"
                 className="matjakt-inputfield-select oblique small-inputfield matjakt-clearable"
-                onChange={(e) => setCategory(category => e.target.value)}
+                onChange={(e) => setCategory((category) => e.target.value)}
               >
                 <option defaultValue value="">
                   Välj kategori
@@ -128,7 +130,7 @@ export default function ProductSearchBar(props) {
                 onChange={(e) => setCountryOfOrigin(e.target.value)}
               >
                 <option defaultValue value="">
-                  Välj ursprungsland
+                  Ursprungsland
                 </option>
                 {/* TODO, countries should come as props */}
               </Input>
@@ -147,11 +149,11 @@ export default function ProductSearchBar(props) {
                       &#10003;
                     </span>
                   ) : (
-                      ""
-                    )}
+                    ""
+                  )}
                 </span>
               </Button>
-              <Label className="ml-3 searchbar-label matjatkkDarkGreen-text oblique">
+              <Label className="ml-2 searchbar-label matjaktDarkGreen-text oblique">
                 Ekologisk
               </Label>
             </div>
@@ -162,7 +164,7 @@ export default function ProductSearchBar(props) {
                   addProductToList();
                 }}
               >
-                <span className="button-icon ">&#x2b;</span>
+                <span className="button-icon plus-sign">&#x2b;</span>
               </Button>
             </div>
             <div
