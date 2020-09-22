@@ -16,6 +16,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: scroll;
+  min-height: 100vh !important;
   //display: flex !important;
   /*   min-height: 100vh !important;
   min-width: 100vw !important; */
@@ -49,7 +50,7 @@
 .matjakt-inputfield {
   background-color: rgb(255, 255, 255) !important;
 }
-.white-icon{
+.white-icon {
   background-color: white;
   border-radius: 50%;
 }
