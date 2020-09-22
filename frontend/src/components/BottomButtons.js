@@ -4,11 +4,10 @@ import ReactDOM from "react-dom";
 import ReactToPdf from "react-to-pdf";
 
 export default function BottomButtons() {
-
   function print() {
-    window.print()
+    window.print();
   }
-  
+
   const ref = React.createRef();
 
   return (
@@ -27,6 +26,4 @@ export default function BottomButtons() {
       </Col>
     </div>
   );
-
-  
 }
