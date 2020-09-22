@@ -26,6 +26,11 @@ module.exports = class WillysHarvester {
       let x = await this.getProducts(category);
       products = [...products, ...x]
     }
+    products = this.removeDuplicates(products);
     return products;
+  }
+
+  static removeDuplicates(products) {
+    return Object.values(products.reduce((a, c) => (a[c.code] = c) && a, {}));
   }
 }

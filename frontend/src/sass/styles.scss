@@ -1,8 +1,8 @@
 @import "./searchresults.scss";
 @import "./shoppinglist.scss";
-@import "./list.scss";
-@import "./product.scss";
-@import "./matjakt-searchbar";
+@import "./list.scss"; 
+@import "./product.scss"; 
+@import "./matjakt-searchbar.scss";
 
 * {
   box-sizing: border-box;
@@ -35,7 +35,7 @@
 .matjatkDarkGreen-bg {
   background-color: #245a2f !important;
 }
-.matjatkDarkGreen-text {
+.matjaktDarkGreen-text {
   color: #245a2f !important;
 }
 .matjaktRed-bg {
@@ -58,6 +58,10 @@
 }
 .matjakt-inputfield {
   background-color: rgb(255, 255, 255) !important;
+}
+.white-icon{
+  background-color: white;
+  border-radius: 50%;
 }
 .oblique {
   font-style: oblique;
