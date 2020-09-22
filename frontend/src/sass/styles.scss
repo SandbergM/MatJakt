@@ -2,8 +2,8 @@
 @import "./shoppinglist.scss";
 @import "./list.scss";
 @import "./product.scss";
-@import "./matjaktSearchbar.scss";
 @import "./listToBeSearched.scss";
+@import "./matjaktSearchbar.scss";
 
 * {
   box-sizing: border-box;
@@ -14,10 +14,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: scroll;
-  //display: flex !important;
-  /*   min-height: 100vh !important;
-  min-width: 100vw !important; */
-  //flex-direction: column !important;
+  min-height: 199vh !important;
 }
 
 // since we have fixed footer we need margin-bottom on App
@@ -33,7 +30,7 @@
   margin-bottom: 20px;
 }
 
-.matjatkDarkGreen-bg {
+.matjaktDarkGreen-bg {
   background-color: #245a2f !important;
 }
 .matjaktDarkGreen-text {
@@ -60,7 +57,7 @@
 .matjakt-inputfield {
   background-color: rgb(255, 255, 255) !important;
 }
-.white-icon{
+.white-icon {
   background-color: white;
   border-radius: 50%;
 }

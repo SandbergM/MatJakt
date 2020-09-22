@@ -11,10 +11,9 @@ export default function BottomButtons() {
   const ref = React.createRef();
 
   return (
-    <div className="row" ref={ref}>
+    <div className="col-12" ref={ref}>
       <Col className="text-center">
-        
-        <Button className="b1 ml-5" onClick={print}>
+        <Button className="b1 ml-5 matjaktDarkGreen-bg" onClick={print}>
           PRINT/SAVE
         </Button>
       </Col>
