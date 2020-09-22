@@ -4,7 +4,7 @@ const Scrubber = require("./Scrubber");
 module.exports = class CoopScrubber extends Scrubber {
   static translateSchema = {
     name: (x) => x.name,
-    storeId: (x) => "Coop", // TODO: Add real storeId
+    storeId: (x) => "5f59e826f158c91676980f44",
     categoryIds: (x) => this.getCategoryIds(x),
     brand: (x) => x.manufacturer,
     price: (x) => x.price.value,
@@ -77,7 +77,7 @@ module.exports = class CoopScrubber extends Scrubber {
   static getEcological(product) {
     if (product.name.includes("Eko")) {
       return true;
-    } 
+    }
     return false;
   }
 };

@@ -5,7 +5,7 @@ let categoryTranslations = Translator.categories;
 module.exports = class IcaScrubber extends Scrubber {
   static translateSchema = {
     name: (x) => x.name,
-    store_id: (x) => "ica-supermarket-linero-torg",
+    storeId: (x) => "5f59e688f158c91676980f43",
     categoryIds: (x) => filterCategories(x.inCategories),
     brand: (x) => x.brand,
     price: (x) => (x.price === undefined ? "N/A" : x.price),
