@@ -13,15 +13,9 @@ export default function BottomButtons() {
   return (
     <div className="row" ref={ref}>
       <Col className="text-center">
-        <ReactToPdf targetRef={ref} filename="div-blue.pdf">
-          {({ toPdf }) => (
-            <Button className="b1 mr-5" onClick={toPdf}>
-              SAVE TO DESKTOP
-            </Button>
-          )}
-        </ReactToPdf>
+        
         <Button className="b1 ml-5" onClick={print}>
-          PRINT
+          PRINT/SAVE
         </Button>
       </Col>
     </div>
