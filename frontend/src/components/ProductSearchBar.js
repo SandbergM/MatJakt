@@ -12,10 +12,13 @@ export default function ProductSearchBar(props) {
   const [countryOfOrigin, setCountryOfOrigin] = useState();
   const [isEcological, setIsEcological] = useState(false);
 
-  const { addProductToShoppingList, singleProductSearch } = useContext(ShoppingListContext);
-  const { fetchAutoCompleteSuggestions, autoCompleteSuggestions } = useContext(AutoCompleteContext);
+  const { addProductToShoppingList, singleProductSearch } = useContext(
+    ShoppingListContext
+  );
+  const { fetchAutoCompleteSuggestions, autoCompleteSuggestions } = useContext(
+    AutoCompleteContext
+  );
   const { categories } = useContext(CategoryContext);
-
 
   const submitProductSearch = async () => {
     if (productName && productName.length >= 3) {
@@ -33,15 +36,15 @@ export default function ProductSearchBar(props) {
 
   const handleProductNameChange = async (value) => {
     /* TODO, Set up autocompletesuggestion */
-    setProductName(value)
-  }
+    setProductName(value);
+  };
 
   const clearFields = () => {
     document.getElementById("product-search-form").reset();
     setProductName("");
-    setQuantityType("kg")
+    setQuantityType("kg");
     setCategory(null);
-    setCountryOfOrigin(null)
+    setCountryOfOrigin(null);
     setIsEcological(false);
   };
 
@@ -54,13 +57,13 @@ export default function ProductSearchBar(props) {
         quantityType: quantityType,
         isEcological: isEcological,
         countryOfOrigin: countryOfOrigin,
-      }).then(clearFields())
+      }).then(clearFields());
     }
   };
 
   return (
     <div className="col-12 justify-content-center">
-      <div id="matjakt-searchbar-header" className="matjaktkDarkGreen-bg">
+      <div id="matjakt-searchbar-header" className="matjaktDarkGreen-bg">
         <p
           id="searchbar-header-title"
           className="matjaktWhite-text align-self-center"
@@ -78,7 +81,9 @@ export default function ProductSearchBar(props) {
               <Input
                 placeholder="Sök efter produkt..."
                 className="matjaktWhite-bg matjakt-inputfield oblique matjakt-clearable"
-                onChange={(e) => { handleProductNameChange(e.target.value) }}
+                onChange={(e) => {
+                  handleProductNameChange(e.target.value);
+                }}
               />
             </div>
             <div className="col-xl-3 col-lg-6 col-md-12 d-flex justify-content-between mb-2">
@@ -114,7 +119,12 @@ export default function ProductSearchBar(props) {
                   Välj kategori
                 </option>
                 {categories.map((x, index) => {
-                  return (<option key={index} value={x._id}> {x.categoryName} </option>)
+                  return (
+                    <option key={index} value={x._id}>
+                      {" "}
+                      {x.categoryName}{" "}
+                    </option>
+                  );
                 })}
               </Input>
               <Input
@@ -133,7 +143,9 @@ export default function ProductSearchBar(props) {
             <div className="small-inputfield col-9 col-lg-4 col-xl-2 justify-content-between d-flex mb-3">
               <Button
                 className="custom-searchbar-button matjaktWhite-bg"
-                onClick={() => { setIsEcological(!isEcological) }}
+                onClick={() => {
+                  setIsEcological(!isEcological);
+                }}
               >
                 <span>
                   {isEcological ? (
@@ -141,8 +153,8 @@ export default function ProductSearchBar(props) {
                       &#10003;
                     </span>
                   ) : (
-                      ""
-                    )}
+                    ""
+                  )}
                 </span>
               </Button>
               <Label className="ml-3 searchbar-label matjatkkDarkGreen-text oblique">
@@ -152,7 +164,9 @@ export default function ProductSearchBar(props) {
             <div className="matjakt-button-container small-inputfield col-3 col-xl-2 offset-xl-3 mb-3 d-flex justify-content-end">
               <Button
                 className="custom-searchbar-button matJaktLightGreen-bg matjaktWhite-text"
-                onClick={() => { addProductToList() }}
+                onClick={() => {
+                  addProductToList();
+                }}
               >
                 <span className="button-icon ">&#x2b;</span>
               </Button>
@@ -163,7 +177,7 @@ export default function ProductSearchBar(props) {
             >
               <Button
                 id="single-product-search-button"
-                className="matjaktkDarkGreen-bg"
+                className="matjaktDarkGreen-bg"
               >
                 Sök efter produkt
               </Button>

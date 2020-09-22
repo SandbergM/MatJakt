@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import List from "./components/List";
 import ProductSearchBar from "./components/ProductSearchBar";
 import ProductsToBeSearchedList from "./components/ProductsToBeSearchedList";
+import BottomButtons from "./components/BottomButtons";
 
 // CONTEXTPROVIDERS
 import ShoppingListContextProvider from "./contexts/ShoppingListContext";
@@ -27,6 +28,7 @@ function App() {
                 <ProductSearchBar />
                 <ProductsToBeSearchedList />
                 <List />
+                <BottomButtons />
               </div>
             </main>
             <Footer />
