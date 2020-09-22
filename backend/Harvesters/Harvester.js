@@ -31,6 +31,14 @@ module.exports = class Harvester {
     this.db = mongoose.connection.db;
   }
 
+  async run() {
+    for (let key of Object.keys(this.stores)) {
+      await this.harvest(key);
+      await this.scrub(key);
+    }
+    await this.writeProductsToDatabase();
+  }
+
   async harvest(key) {
     const capitalizedKey = capitalizeFirstLetter(key);
     const startTime = Date.now();
