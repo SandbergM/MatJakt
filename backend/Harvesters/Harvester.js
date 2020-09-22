@@ -61,4 +61,15 @@ module.exports = class Harvester {
       `${capitalizedKey} scrubbing completed in ${Date.now() - startTime} ms.`
     );
   }
+
+  async writeProductsToDatabase() {
+    console.log(`Commencing database write operation...`);
+    let startTime = Date.now();
+    await TempProduct.collection.insertMany(this.scrubbedProducts);
+    Product.collection.drop();
+    await this.db.collection("tempproducts").rename("products");
+    console.log(
+      `Database write operation completed in ${Date.now() - startTime} ms.`
+    );
+  }
 };
