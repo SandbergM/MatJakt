@@ -5,55 +5,46 @@ import { AutoCompleteContext } from "../contexts/AutoCompleteContext";
 import { CategoryContext } from "../contexts/CategoryContext";
 
 export default function ProductSearchBar(props) {
-  const [productName, setProductName] = useState("");
-  const [quantity, setQuantity] = useState(null);
-  const [quantityType, setQuantityType] = useState("kg");
-  const [category, setCategory] = useState();
-  const [countryOfOrigin, setCountryOfOrigin] = useState();
-  const [isEcological, setIsEcological] = useState(false);
-
   const { addProductToShoppingList, singleProductSearch } = useContext(ShoppingListContext);
   const { fetchAutoCompleteSuggestions, autoCompleteSuggestions } = useContext(AutoCompleteContext);
   const { categories } = useContext(CategoryContext);
+  const [product, setProduct] = useState(initialState());
+
+  function initialState() {
+    return {
+      name: "", quantity: null, quantityType: 'st',
+      category: null, countryOfOrigin: "", isEcological: false,
+    }
+  }
 
   const submitProductSearch = () => {
-    if (productName && productName.length >= 3) {
-      singleProductSearch({
-        name: productName,
-        category: category,
-        quantity: quantity,
-        quantityType: quantityType,
-        isEcological: isEcological,
-        countryOfOrigin: countryOfOrigin,
-      });
-      clearFields();
+    if (product['name'].length >= 3) {
+      singleProductSearch(product);
+      setProduct(initialState())
     }
   };
 
-  const handleProductNameChange = (value) => {
-    setProductName(value);
-    console.log(productName);
+  useEffect(() => {
+    fetchAutoCompleteSuggestions(product['name']).then()
+  }, [product['name']])
+
+  useEffect(() => {
+    // TODO, just experimenting with async problems
+    console.log(autoCompleteSuggestions);
+  }, [autoCompleteSuggestions])
+
+  const handleChange = (field, value) => {
+    setProduct({ ...product, [field]: value })
   };
 
   const clearFields = () => {
     document.getElementById("product-search-form").reset();
-    setProductName("");
-    setQuantityType("kg");
-    setCategory(null);
-    setCountryOfOrigin(null);
-    setIsEcological(false);
+    setProduct(initialState());
   };
 
   const addProductToList = () => {
-    if (productName.length > 1) {
-      addProductToShoppingList({
-        name: productName,
-        category: category,
-        quantity: quantity,
-        quantityType: quantityType,
-        isEcological: isEcological,
-        countryOfOrigin: countryOfOrigin,
-      }).then(clearFields());
+    if (product['name'].length > 1) {
+      addProductToShoppingList(product).then(clearFields());
     }
   };
 
@@ -77,7 +68,7 @@ export default function ProductSearchBar(props) {
               <Input
                 placeholder="Sök efter produkt..."
                 className="matjaktWhite-bg matjakt-inputfield oblique matjakt-clearable"
-                onChange={(e) => { handleProductNameChange(e.target.value); }}
+                onChange={(e) => { handleChange('name', e.target.value); }}
               />
             </div>
             <div className="col-xl-3 col-lg-6 col-md-12 d-flex justify-content-between mb-2">
@@ -86,14 +77,14 @@ export default function ProductSearchBar(props) {
                 step="0.01"
                 placeholder="Volym"
                 className="matjakt-inputfield oblique small-inputfield matjakt-clearable"
-                onChange={(e) => setQuantity(e.target.value)}
+                onChange={(e) => { handleChange('quantity', e.target.value); }}
               />
               <Input
                 type="select"
                 defaultValue
                 placeholder="Volym"
                 className="matjakt-inputfield-select oblique small-inputfield matjakt-clearable"
-                onChange={(e) => setQuantityType(e.target.value)}
+                onChange={(e) => { handleChange('quantityType', e.target.value); }}
               >
                 <option value={"kg"}> Kilogram </option>
                 <option value={"gr"}> Gram </option>
@@ -107,7 +98,7 @@ export default function ProductSearchBar(props) {
                 type="select"
                 placeholder="Volym"
                 className="matjakt-inputfield-select oblique small-inputfield matjakt-clearable"
-                onChange={(e) => setCategory(category => e.target.value)}
+                onChange={(e) => { handleChange('category', e.target.value); }}
               >
                 <option defaultValue value="">
                   Välj kategori
@@ -125,7 +116,7 @@ export default function ProductSearchBar(props) {
                 type="select"
                 placeholder="Volym"
                 className="matjakt-inputfield-select oblique small-inputfield matjakt-clearable"
-                onChange={(e) => setCountryOfOrigin(e.target.value)}
+                onChange={(e) => { handleChange('countryOfOrigin', e.target.value); }}
               >
                 <option defaultValue value="">
                   Välj ursprungsland
@@ -137,12 +128,10 @@ export default function ProductSearchBar(props) {
             <div className="small-inputfield col-9 col-lg-4 col-xl-2 justify-content-between d-flex mb-3">
               <Button
                 className="custom-searchbar-button matjaktWhite-bg"
-                onClick={() => {
-                  setIsEcological(!isEcological);
-                }}
+                onClick={() => { handleChange('isEcological', !product['isEcological']); }}
               >
                 <span>
-                  {isEcological ? (
+                  {product['isEcological'] ? (
                     <span className="matJaktLightGreen-text button-icon">
                       &#10003;
                     </span>
