@@ -8,5 +8,4 @@ const storeSchema = new Schema({
     openingHours: { type: Array },
 });
 
-const Store = mongoose.model('store', storeSchema);
-module.exports = Store;
+module.exports = mongoose.model('store', storeSchema);

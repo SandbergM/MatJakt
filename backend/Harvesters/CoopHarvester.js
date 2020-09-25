@@ -44,7 +44,11 @@ module.exports = class CoopHarvester {
     let categories = await this.getCategories();
     for (let category of categories) {
       let categoryProducts = await this.getProducts(category.code);
-      products.push(...categoryProducts);
+      try {
+        products.push(...categoryProducts);
+      } catch {
+        console.log(`Failed to insert: ${category.code}`);
+      }
     }
     return products;
   }

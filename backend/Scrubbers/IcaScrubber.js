@@ -1,16 +1,16 @@
 const Scrubber = require("./Scrubber");
-const Translator = require("../Shared/Translator");
-let categoryTranslations = Translator.categories();
+const Translator = require("../Shared/CategoryTranslator");
+let categoryTranslations = Translator.categories;
 
 module.exports = class IcaScrubber extends Scrubber {
   static translateSchema = {
     name: (x) => x.name,
-    store_id: (x) => "ica-supermarket-linero-torg",
-    categoryId: (x) => filterCategories(x.inCategories),
+    storeId: (x) => "5f59e688f158c91676980f43",
+    categoryIds: (x) => filterCategories(x.inCategories),
     brand: (x) => x.brand,
     price: (x) => (x.price === undefined ? "N/A" : x.price),
     packagingSize: (x) => getpackagingSize(x.name), // TODO
-    pricePerUnit: (x) => x.compare === undefined ? "N/A" : x.compare.price,
+    pricePerUnit: (x) => (x.compare === undefined ? "N/A" : x.compare.price),
     quantityType: (x) => getQuantityType(x.name),
     discount: (x) => x.promotions, // TODO
     labels: (x) => "N/A", // TODO
@@ -34,8 +34,8 @@ async function filterCategories(categories) {
       category.path.forEach((subCategory) => {
         categoryTranslations.has(subCategory.slug)
           ? productCategoryArray.push(
-            categoryTranslations.get(subCategory.slug)
-          )
+              categoryTranslations.get(subCategory.slug)
+            )
           : "";
       });
     }
@@ -57,25 +57,27 @@ function getQuantityType(productName) {
     if (productName[i] === "_") {
       switch (productName[i + 1].toUpperCase()) {
         case "G":
-          return 'GRM'
+          return "GRM";
         case "M":
-          return "MLT"
+          return "MLT";
         case "D":
-          return "DL"
+          return "DL";
         case "K":
           return "KG";
         case "L":
-          return "LTR"
+          return "LTR";
       }
     }
   }
-  return "ST"
+  return "ST";
 }
 function getpackagingSize(productName) {
   productName = productName.replace(/[%]/g, "").split(" ");
-  let measurements = ["g", "ml", "dl", "kg", "cl", "l"]
+  let measurements = ["g", "ml", "dl", "kg", "cl", "l"];
   for (let i = 0; i < productName.length; i++) {
-    if (measurements.includes(productName[i].replace(/[0-9]/g, ""))) { return productName[i].replace(/[^0-9]/g, "") }
+    if (measurements.includes(productName[i].replace(/[0-9]/g, ""))) {
+      return productName[i].replace(/[^0-9]/g, "");
+    }
   }
-  return "N/A"
+  return "N/A";
 }
