@@ -3,9 +3,9 @@ const Harvester = require("./Harvesters/Harvester");
 
 module.exports = class HarvestScheduler {
   harvesterMetaData;
-  
+
   constructor() { }
-  
+
   run() {
     this.harvester = new Harvester();
     setInterval(async () => {

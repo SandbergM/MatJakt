@@ -9,14 +9,14 @@ app.use(require('./Router'));
 module.exports = class Server {
   dbURI =
     "mongodb+srv://matjakt:FoodHunt123@mat-jakt.mpf5m.mongodb.net/mat-jakt?retryWrites=true&w=majority";
-  constructor() {  }
+  constructor() { }
 
   // Connects to db and starts express server
   async run() {
     await this.connectToDb();
     this.startServer();
   }
-  
+
   async connectToDb() {
     console.log("Connecting to db...");
     await mongoose.connect(this.dbURI, {
