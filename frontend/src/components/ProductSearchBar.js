@@ -145,7 +145,7 @@ export default function ProductSearchBar(props) {
               >
                 <span>
                   {isEcological ? (
-                    <span className="matJaktLightGreen-text button-icon">
+                    <span className="matJaktLightGreen-text">
                       &#10003;
                     </span>
                   ) : (
@@ -157,6 +157,7 @@ export default function ProductSearchBar(props) {
                 Ekologisk
               </Label>
             </div>
+
             <div className="matjakt-button-container small-inputfield col-3 col-xl-2 offset-xl-3 mb-3 d-flex justify-content-end">
               <Button
                 className="custom-searchbar-button matJaktLightGreen-bg matjaktWhite-text"
