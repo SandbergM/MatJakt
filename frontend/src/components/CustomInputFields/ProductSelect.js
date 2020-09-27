@@ -8,7 +8,7 @@ export default function ProductSearchBar(props) {
     return (
         <Input
             className="col-12 justify-content-center matjakt-inputfield oblique small-inputfield"
-            type={props.type}
+            type="select"
             placeholder={props.placeholder}
             onChange={(e) => { setValue(e.target.value) }} >
             <option defaultValue selected> {props.defaultOption}  </option>
