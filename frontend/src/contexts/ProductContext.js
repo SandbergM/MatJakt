@@ -19,6 +19,10 @@ export default function ProductContextProvider(props) {
         clearProduct()
     }, []);
 
+    useEffect(() => {
+        console.log(newProduct);
+    }, [newProduct]);
+
     const handleChangeNewProduct = (product, attribute, value) => {
         setNewProduct({ ...product, [attribute]: value });
     };
