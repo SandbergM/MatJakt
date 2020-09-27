@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "reactstrap";
 
-export default function ProductSearchBar(props) {
+export default function ProductInputField(props) {
     return (
         <Input
             placeholder={props.placeholder}
