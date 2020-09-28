@@ -6,13 +6,18 @@ function Product() {
   const { generatedShoppingList } = useContext(ShoppingListContext);
   let [amountToBuy, setAmountToBuy] = useState(1)
   let products = generatedShoppingList;
-  const add = e => {
-    //e.preventDefault();
+  const add = () => {
     
     setAmountToBuy(amountToBuy => amountToBuy + 1)
-    console.log(amountToBuy);
     
   }
+  const subtract = () => {
+    
+    if (amountToBuy > 0) {
+      setAmountToBuy((amountToBuy) => amountToBuy - 1);
+      // console.log(amountToBuy);
+    }
+  };
 
   if (products) {
     const list = () => {
@@ -27,7 +32,7 @@ function Product() {
                 <div className="add" onClick={add}>
                   <MdAddCircle className="white-icon" />
                 </div>
-                <div className="remove">
+                <div className="remove" onClick={subtract}>
                   <MdRemoveCircle className="white-icon" />
                 </div>
               </div>
