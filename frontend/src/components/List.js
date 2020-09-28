@@ -1,34 +1,21 @@
-import React from "react";
-import SearchResults from "../components/SearchResults";
-import ShoppingList from "../components/ShoppingList";
+import React, { useContext, useState } from "react";
+import Store from './Store';
+import { ShoppingListContext } from '../contexts/ShoppingListContext';
 
 export default function List() {
-  let storeNames = [
+  const { generatedShoppingList } = useContext(ShoppingListContext)
+
+  let stores = [
     { name: "Ica", color: "#E83F39" },
     { name: "Coop", color: "#66C46C" },
     { name: "Willy's", color: "#743EBB" },
   ];
 
-  if (storeNames) {
-    const lists = () => {
-      return storeNames.map((storeName, i) => {
-        return (
-          <div className="store-list col-lg-4 col-12" key={i}>
-            <h4
-              className="store-name"
-              align="center"
-              style={{ backgroundColor: `${storeName.color}` }}
-            >
-              {storeName.name}
-            </h4>
-            <div className="list-contents">
-              <SearchResults />
-              <ShoppingList />
-            </div>
-          </div>
-        );
-      });
-    };
-    return <>{lists()}</>;
-  }
+  return (
+    <div className="col-12 d-flex">
+      {stores.map(store => {
+        return (<Store store={store} products={generatedShoppingList} />)
+      })}
+    </div>
+  )
 }
