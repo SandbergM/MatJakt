@@ -1,11 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { MdDelete, MdAddCircle, MdRemoveCircle } from "react-icons/md";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
 
 function Product() {
   const { generatedShoppingList } = useContext(ShoppingListContext);
-  let amountToBuy = 1;
+  let [amountToBuy, setAmountToBuy] = useState(1)
   let products = generatedShoppingList;
+  const add = e => {
+    //e.preventDefault();
+    
+    setAmountToBuy(amountToBuy => amountToBuy + 1)
+    console.log(amountToBuy);
+    
+  }
 
   if (products) {
     const list = () => {
@@ -17,7 +24,7 @@ function Product() {
               style={{ backgroundImage: `url(${product.imageUrl})` }}
             >
               <div className="icons">
-                <div className="add">
+                <div className="add" onClick={add}>
                   <MdAddCircle className="white-icon" />
                 </div>
                 <div className="remove">

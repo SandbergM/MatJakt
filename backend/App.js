@@ -1,5 +1,6 @@
 const Server = require("./Server");
 const HarvesterScheduler = require("./HarvestScheduler");
+// const cors = require("cors");
 
 class App {
   constructor(){

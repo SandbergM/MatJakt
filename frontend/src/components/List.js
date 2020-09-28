@@ -23,7 +23,7 @@ export default function List() {
             </h4>
             <div className="list-contents">
               <SearchResults />
-              <ShoppingList />
+              <ShoppingList name={"hej"}/>
             </div>
           </div>
         );
