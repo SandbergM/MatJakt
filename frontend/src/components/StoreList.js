@@ -11,10 +11,14 @@ export default function List() {
     { name: "Willy's", color: "#743EBB" },
   ];
 
+  let singleProductSearchResults = []
+
+  //stores[] will be replaced with an array, [{Store: Ica, generatedShoppingList[], singleProductSearchResult[] }] ?
+
   return (
     <div className="col-12 d-flex">
       {stores.map(store => {
-        return (<Store store={store} products={generatedShoppingList} />)
+        return (<Store store={store} singleProductSearchResults={singleProductSearchResults} generatedShoppingList={generatedShoppingList} />)
       })}
     </div>
   )

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import SearchResults from "../components/SearchResults";
-import ShoppingList from "../components/ShoppingList";
+import ProductsList from "../components/ProductsList";
 import { Collapse, Card, CardBody } from 'reactstrap';
 
 export default function Store(props) {
+
     const [isOpen, setIsOpen] = useState(true);
+
     return (
         <div className=" col-lg-4 col-12 mb-5">
             <h4
@@ -16,17 +17,10 @@ export default function Store(props) {
             </h4>
             <Collapse isOpen={isOpen}>
                 <Card>
-                    <SearchResults mb-3 products={props.products} />
-                    <ShoppingList products={props.products} />
+                    <ProductsList mb-3 products={props.singleProductSearchResults} />
+                    <ProductsList products={props.generatedShoppingList} />
                 </Card>
             </Collapse>
         </div>
     )
 }
-
-
-
-
-
-{/* <SearchResults products={props.products} />
-<ShoppingList products={props.products} /> */}
