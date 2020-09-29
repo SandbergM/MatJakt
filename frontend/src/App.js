@@ -32,7 +32,7 @@ function App() {
                     <ProductSearchBar />
                     <ProductsToBeSearchedList />
                     <StoreList />
-                    <List />
+              
                     <BottomButtons />
                   </div>
                 </main>
