@@ -13,6 +13,7 @@ import ShoppingListContextProvider from "./contexts/ShoppingListContext";
 import CategoryContextProvider from "./contexts/CategoryContext";
 import AutoCompleteContextProvider from "./contexts/AutoCompleteContext";
 import ProductContextProvider from "./contexts/ProductContext";
+import StoreContextProvider from "./contexts/StoreContext";
 
 // CSS/SASS
 import "./sass/styles.scss";
@@ -20,24 +21,27 @@ import "./sass/styles.scss";
 function App() {
   return (
     <div className="App">
-      <ShoppingListContextProvider>
-        <CategoryContextProvider>
-          <AutoCompleteContextProvider>
-            <ProductContextProvider>
-              <Header />
-              <main className="container">
-                <div className="row">
-                  <ProductSearchBar />
-                  <ProductsToBeSearchedList />
-                  <StoreList />
-                  <BottomButtons />
-                </div>
-              </main>
-              <Footer />
-            </ProductContextProvider>
-          </AutoCompleteContextProvider>
-        </CategoryContextProvider>
-      </ShoppingListContextProvider>
+      <ProductContextProvider>
+        <StoreContextProvider>
+          <ShoppingListContextProvider>
+            <CategoryContextProvider>
+              <AutoCompleteContextProvider>
+                <Header />
+                <main className="container">
+                  <div className="row">
+                    <ProductSearchBar />
+                    <ProductsToBeSearchedList />
+                    <StoreList />
+                    <List />
+                    <BottomButtons />
+                  </div>
+                </main>
+                <Footer />
+              </AutoCompleteContextProvider>
+            </CategoryContextProvider>
+          </ShoppingListContextProvider>
+        </StoreContextProvider>
+      </ProductContextProvider>
     </div>
   );
 }

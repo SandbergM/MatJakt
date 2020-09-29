@@ -3,10 +3,12 @@
 @import "./list.scss";
 @import "./product.scss";
 @import "./listToBeSearched.scss";
+@import "./productToBeSearched.scss";
 @import "./matjaktSearchbar.scss";
 
 * {
   box-sizing: border-box;
+  border: 0 !important;
 }
 
 .App {
@@ -22,8 +24,10 @@
   padding-bottom: 60px !important;
 }
 
-.BottomButtons {
-  margin-bottom: 20px;
+.bottombutton {
+  font-weight: 500 !important;
+  padding: 10px 20px !important;
+  border-radius: 25px !important;
 }
 
 .bigDiv {
