@@ -1,7 +1,8 @@
 const Scrubber = require("./Scrubber");
 const Translator = require("../Shared/CategoryTranslator");
+const { removePrimitiveDuplicates } = require("../Shared/Helpers");
 const categoryTranslations = Translator.categories;
-const fs = require('fs');
+const labelTranslations = Translator.labels;
 
 module.exports = class IcaScrubber extends Scrubber {
   static translateSchema = {
@@ -41,7 +42,7 @@ async function filterCategories(categories) {
       });
     }
   });
-  return [...new Set(productCategoryArray)];
+  return removePrimitiveDuplicates(productCategoryArray);
 }
 
 function ecologicalCheck(markings) {
@@ -83,32 +84,16 @@ function getpackagingSize(productName) {
   return "N/A";
 }
 
-const labelMaker = (productCategories, productName) => {
+const labelMaker = (productCategories) => {
   let labels = [];
-  let unwanted = ["ica", "online", "catalog"]
-
-  productName.toLowerCase().split(" ").forEach((x) => {
-    if (
-      x.length > 1
-      && (x.length === x.replace(/[-&]/g, "").length)
-      && !unwanted.includes(x.replace)) {
-      labels.push(x.replace(/[,]/g, ""));
-    }
-  });
-
   productCategories.forEach((category) => {
-    category.path.forEach((subCategory) => {
-      if (subCategory.level > 2) {
-        let tempArr = subCategory.name.toLowerCase().split(" ")
-        tempArr.forEach((x) => {
-          if (
-            x.length > 1
-            && !unwanted.includes(x)) {
-            labels.push(x)
-          }
+    category['path'].forEach((subCategory) => {
+      if (labelTranslations.get(subCategory.slug)) {
+        labelTranslations.get(subCategory.slug).split(",").forEach((x) => {
+          labels.push(x);
         })
       }
     });
   });
-  return [... new Set(labels)]
+  return removePrimitiveDuplicates(labels);
 }
