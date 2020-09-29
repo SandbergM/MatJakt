@@ -8,6 +8,7 @@ import ProductSelect from './CustomInputFields/ProductSelect.js';
 import SearchBarHeader from './SearchBarHearder.js'
 import EcologicalToggleButton from './CustomInputFields/EcologicalToggleButton.js'
 import AddToListButton from './AddToListButton.js'
+import SearchButton from './SearchButton.js'
 
 export default function ProductSearchBar(props) {
 
@@ -78,6 +79,7 @@ export default function ProductSearchBar(props) {
                 handleChange={handleChangeNewProduct}
               />
             </div>
+             <SearchButton/>
             <div className="col-3 col-md-2 col-xl-1 d-flex mb-2">
               <AddToListButton
                 product={newProduct}
