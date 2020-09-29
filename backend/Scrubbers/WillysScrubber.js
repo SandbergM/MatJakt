@@ -1,7 +1,8 @@
 const fetch = require("node-fetch");
 const Scrubber = require("./Scrubber");
 const CategoryTranslator = require("../Shared/CategoryTranslator");
-const { getRandomNumber } = require("../Shared/Helpers");
+const { getRandomNumber, removePrimitiveDuplicates } = require("../Shared/Helpers");
+
 module.exports = class WillysScrubber extends Scrubber {
   detailedProduct;
 
@@ -56,19 +57,33 @@ module.exports = class WillysScrubber extends Scrubber {
     if (product) {
       product.breadCrumbs.forEach((b) => {
         translations.forEach((t) => {
-          if (t._id == b.categoryCode) {
+          if (t.hasOwnProperty("categoryTranslation") && t._id == b.categoryCode) {
             productCategories.push(t.categoryTranslation);
           }
         });
       });
     }
-    productCategories = Array.from(new Set(productCategories));
+    productCategories = removePrimitiveDuplicates(productCategories);
     return productCategories;
   }
 
-  // TODO: Add logic
   static async getLabels(productCode) {
-    return ["N/A"];
+    const product = await this.getDetailedProduct(productCode);
+    const translations = CategoryTranslator.categories;
+    let labels = []
+    const nameLabels = product.name.split(" ");
+    labels.push(...nameLabels);
+    if (product) {
+      product.breadCrumbs.forEach((b) => {
+        translations.forEach((t) => {
+          if (b.categoryCode === t._id) {
+            labels.push(t.label);
+          }
+        })
+      })
+    }
+    labels = removePrimitiveDuplicates(labels);
+    return labels;
   }
 
   static async getCountryOfOrigin(productCode) {

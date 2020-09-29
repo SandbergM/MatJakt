@@ -6,10 +6,9 @@ export default function AutoCompleteProvider(props) {
 
   const fetchAutoCompleteSuggestions = async (productSearched) => {
     let data = await fetch(
-      `http://127.0.0.1:3001/autoCompleteSuggestion/${productSearched}`
+      `http://127.0.0.1:3000/autoCompleteSuggestions/word=${productSearched}`
     );
     setAutoCompleteSuggestions(await data.json())
-    console.log(autoCompleteSuggestions);
   };
 
   const values = {

@@ -1,6 +1,7 @@
 const Scrubber = require("./Scrubber");
 const Translator = require("../Shared/CategoryTranslator");
-let categoryTranslations = Translator.categories;
+const categoryTranslations = Translator.categories;
+const fs = require('fs');
 
 module.exports = class IcaScrubber extends Scrubber {
   static translateSchema = {
@@ -9,11 +10,11 @@ module.exports = class IcaScrubber extends Scrubber {
     categoryIds: (x) => filterCategories(x.inCategories),
     brand: (x) => x.brand,
     price: (x) => (x.price === undefined ? "N/A" : x.price),
-    packagingSize: (x) => getpackagingSize(x.name), // TODO
+    packagingSize: (x) => getpackagingSize(x.name),
     pricePerUnit: (x) => (x.compare === undefined ? "N/A" : x.compare.price),
     quantityType: (x) => getQuantityType(x.name),
     discount: (x) => x.promotions, // TODO
-    labels: (x) => "N/A", // TODO
+    labels: (x) => labelMaker(x.inCategories, x.name),
     isEcological: (x) =>
       x.markings.environmental === undefined
         ? false
@@ -34,8 +35,8 @@ async function filterCategories(categories) {
       category.path.forEach((subCategory) => {
         categoryTranslations.has(subCategory.slug)
           ? productCategoryArray.push(
-              categoryTranslations.get(subCategory.slug)
-            )
+            categoryTranslations.get(subCategory.slug)
+          )
           : "";
       });
     }
@@ -80,4 +81,34 @@ function getpackagingSize(productName) {
     }
   }
   return "N/A";
+}
+
+const labelMaker = (productCategories, productName) => {
+  let labels = [];
+  let unwanted = ["ica", "online", "catalog"]
+
+  productName.toLowerCase().split(" ").forEach((x) => {
+    if (
+      x.length > 1
+      && (x.length === x.replace(/[-&]/g, "").length)
+      && !unwanted.includes(x.replace)) {
+      labels.push(x.replace(/[,]/g, ""));
+    }
+  });
+
+  productCategories.forEach((category) => {
+    category.path.forEach((subCategory) => {
+      if (subCategory.level > 2) {
+        let tempArr = subCategory.name.toLowerCase().split(" ")
+        tempArr.forEach((x) => {
+          if (
+            x.length > 1
+            && !unwanted.includes(x)) {
+            labels.push(x)
+          }
+        })
+      }
+    });
+  });
+  return [... new Set(labels)]
 }
