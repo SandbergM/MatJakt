@@ -3,7 +3,7 @@ import React from "react";
 // COMPONENTS
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import List from "./components/List";
+import StoreList from "./components/StoreList";
 import ProductSearchBar from "./components/ProductSearchBar";
 import ProductsToBeSearchedList from "./components/ProductsToBeSearchedList";
 import BottomButtons from "./components/BottomButtons";
@@ -29,7 +29,7 @@ function App() {
                 <div className="row">
                   <ProductSearchBar />
                   <ProductsToBeSearchedList />
-                  <List />
+                  <StoreList />
                   <BottomButtons />
                 </div>
               </main>
