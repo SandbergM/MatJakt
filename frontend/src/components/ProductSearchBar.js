@@ -38,7 +38,6 @@ export default function ProductSearchBar(props) {
                 field={"quantity"}
                 placeholder={'Volym'}
                 type={'number'}
-                options={categories}
                 product={newProduct}
                 handleChange={handleChangeNewProduct}
               />

@@ -58,13 +58,13 @@ module.exports = class WillysScrubber extends Scrubber {
   static async getCategoryIds(productCode) {
     let categoryIds = [];
     const product = await this.getDetailedProduct(productCode);
-    product.breadCrumbs.forEach((x) => {
-      if (translations.has(x.categoryCode)) {
-        translations.get(x.categoryCode).category !== undefined
-          ? categoryIds.push(translations.get(x.categoryCode).category)
-          : "";
-      }
-    });
+    if (product) {
+      product.breadCrumbs.forEach((x) => {
+        if (translations.has(x.categoryCode) && translations.get(x.categoryCode).category) {
+          categoryIds.push(translations.get(x.categoryCode).category)
+        }
+      });
+    }
     return removePrimitiveDuplicates(categoryIds);
   }
 
@@ -81,11 +81,12 @@ module.exports = class WillysScrubber extends Scrubber {
         translations
           .get(x.categoryCode)
           .label.toLowerCase()
-          .replace(/[\s\s+&]/g, " ")
+          .replace(/[\s\s]/g, "")
+          .replace(/&/g, " ")
           .split(" ")
-          .forEach((x) => {
-            if (x !== "") {
-              labels.push(x);
+          .forEach((y) => {
+            if (y !== "") {
+              labels.push(y);
             }
           });
       }
