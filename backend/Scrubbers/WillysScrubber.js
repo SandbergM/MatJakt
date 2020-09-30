@@ -9,7 +9,7 @@ module.exports = class WillysScrubber extends Scrubber {
   static translateSchema = {
     name: (x) => x.name,
     categoryIds: async (x) => await this.getCategoryIds(x.code),
-    storeId: (x) => "5f59e877f158c91676980f45",
+    storeId: (x) => this.stringToObjectId("5f59e877f158c91676980f45"),
     brand: (x) => x.manufacturer,
     price: (x) => x.priceValue,
     packagingSize: (x) =>
@@ -57,7 +57,10 @@ module.exports = class WillysScrubber extends Scrubber {
     if (product) {
       product.breadCrumbs.forEach((b) => {
         translations.forEach((t) => {
-          if (t.hasOwnProperty("categoryTranslation") && t._id == b.categoryCode) {
+          if (
+            t.hasOwnProperty("categoryTranslation") &&
+            t._id == b.categoryCode
+          ) {
             productCategories.push(t.categoryTranslation);
           }
         });
@@ -70,7 +73,7 @@ module.exports = class WillysScrubber extends Scrubber {
   static async getLabels(productCode) {
     const product = await this.getDetailedProduct(productCode);
     const translations = CategoryTranslator.categories;
-    let labels = []
+    let labels = [];
     const nameLabels = product.name.split(" ");
     labels.push(...nameLabels);
     if (product) {
@@ -79,8 +82,8 @@ module.exports = class WillysScrubber extends Scrubber {
           if (b.categoryCode === t._id) {
             labels.push(t.label);
           }
-        })
-      })
+        });
+      });
     }
     labels = removePrimitiveDuplicates(labels);
     return labels;
