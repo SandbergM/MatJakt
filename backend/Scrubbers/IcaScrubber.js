@@ -1,21 +1,20 @@
 const Scrubber = require("./Scrubber");
-const Translator = require("../Shared/CategoryTranslator");
+const Translator = require("../Shared/Translator");
 const { removePrimitiveDuplicates } = require("../Shared/Helpers");
-const categoryTranslations = Translator.categories;
-const labelTranslations = Translator.labels;
+const translations = Translator.translations;
 
 module.exports = class IcaScrubber extends Scrubber {
   static translateSchema = {
     name: (x) => x.name,
     storeId: (x) => "5f59e688f158c91676980f43",
-    categoryIds: (x) => filterCategories(x.inCategories),
+    categoryIds: (x) => translate(x.inCategories, "category"),
     brand: (x) => x.brand,
     price: (x) => (x.price === undefined ? "N/A" : x.price),
     packagingSize: (x) => getpackagingSize(x.name),
     pricePerUnit: (x) => (x.compare === undefined ? "N/A" : x.compare.price),
     quantityType: (x) => getQuantityType(x.name),
     discount: (x) => x.promotions, // TODO
-    labels: (x) => labelMaker(x.inCategories, x.name),
+    labels: (x) => translate(x.inCategories, "label"),
     isEcological: (x) =>
       x.markings.environmental === undefined
         ? false
@@ -26,24 +25,6 @@ module.exports = class IcaScrubber extends Scrubber {
       `https://assets.icanet.se/t_product_large_v1,f_auto/${x.sku}.jpg`,
   };
 };
-async function filterCategories(categories) {
-  let productCategoryArray = [];
-  categories.forEach((category) => {
-    categoryTranslations.has(category.slug)
-      ? productCategoryArray.push(categoryTranslations.get(category.slug))
-      : "";
-    if (category.path) {
-      category.path.forEach((subCategory) => {
-        categoryTranslations.has(subCategory.slug)
-          ? productCategoryArray.push(
-            categoryTranslations.get(subCategory.slug)
-          )
-          : "";
-      });
-    }
-  });
-  return removePrimitiveDuplicates(productCategoryArray);
-}
 
 function ecologicalCheck(markings) {
   for (let i = 0; i < markings.length; i++) {
@@ -81,19 +62,29 @@ function getpackagingSize(productName) {
       return productName[i].replace(/[^0-9]/g, "");
     }
   }
-  return "N/A";
+  return "st";
 }
 
-const labelMaker = (productCategories) => {
-  let labels = [];
-  productCategories.forEach((category) => {
-    category['path'].forEach((subCategory) => {
-      if (labelTranslations.get(subCategory.slug)) {
-        labelTranslations.get(subCategory.slug).split(",").forEach((x) => {
-          labels.push(x);
-        })
-      }
-    });
+const translate = (categories, type) => {
+  let arr = [];
+
+  categories.forEach((category) => {
+    if (translations.has(category.slug)) {
+      let x = translations.get(category.slug)[type].split(",");
+      x.forEach((label) => {
+        arr.push(label);
+      });
+    }
+    if (category.path) {
+      category.path.forEach((subCategory) => {
+        if (translations.has(subCategory.slug)) {
+          let x = translations.get(subCategory.slug)[type].split(",");
+          x.forEach((label) => {
+            arr.push(label);
+          });
+        }
+      });
+    }
   });
-  return removePrimitiveDuplicates(labels);
-}
+  return removePrimitiveDuplicates(arr);
+};
