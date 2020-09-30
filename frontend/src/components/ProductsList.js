@@ -1,11 +1,13 @@
 import React from "react";
 import Product from "../components/Product";
 
-export default function SearchResults() {
+export default function ProductsList(props) {
   return (
     <div className="search-results">
       <div className="results">
-        <Product />
+        {props.products.map((product, i) => {
+          return <Product product={product} key={i} />
+        })}
       </div>
     </div>
   );

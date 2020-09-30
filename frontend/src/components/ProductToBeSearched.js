@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Input, Label, Button } from "reactstrap";
+import { Input, Button } from "reactstrap";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
 import { MdDelete, MdEdit, MdSave } from "react-icons/md";
 

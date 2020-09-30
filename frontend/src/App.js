@@ -3,7 +3,7 @@ import React from "react";
 // COMPONENTS
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import List from "./components/List";
+import StoreList from "./components/StoreList";
 import ProductSearchBar from "./components/ProductSearchBar";
 import ProductsToBeSearchedList from "./components/ProductsToBeSearchedList";
 import BottomButtons from "./components/BottomButtons";
@@ -13,6 +13,7 @@ import ShoppingListContextProvider from "./contexts/ShoppingListContext";
 import CategoryContextProvider from "./contexts/CategoryContext";
 import AutoCompleteContextProvider from "./contexts/AutoCompleteContext";
 import StoreContextProvider from "./contexts/StoreContext";
+import ProductContextProvider from "./contexts/ProductContext";
 
 // CSS/SASS
 import "./sass/styles.scss";
@@ -24,19 +25,21 @@ function App() {
         <ShoppingListContextProvider>
           <CategoryContextProvider>
             <AutoCompleteContextProvider>
+            <ProductContextProvider>
               <Header />
               <main className="container">
                 <div className="row">
                   <ProductSearchBar />
                   <ProductsToBeSearchedList />
-                  <List />
+                  <StoreList />
                   <BottomButtons />
                 </div>
               </main>
               <Footer />
-            </AutoCompleteContextProvider>
-          </CategoryContextProvider>
-        </ShoppingListContextProvider>
+            </ProductContextProvider>
+          </AutoCompleteContextProvider>
+        </CategoryContextProvider>
+      </ShoppingListContextProvider>
       </StoreContextProvider>
     </div>
   );

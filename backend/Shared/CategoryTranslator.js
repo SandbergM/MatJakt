@@ -2,6 +2,8 @@ const CategoryTranslation = require("../models/categoryTranslation");
 
 module.exports = class Translator {
   static categories = new Map();
+  static labels = new Map();
+
 
   static async fetchCategories() {
     let data = await CategoryTranslation.find();
@@ -10,6 +12,7 @@ module.exports = class Translator {
       data.forEach((x) => {
         if (x.categoryTranslation) {
           this.categories.set(x._id, x.categoryTranslation);
+          this.labels.set(x._id, x.label);
         }
       });
     } catch (error) {

@@ -1,8 +1,9 @@
 const Server = require("./Server");
 const HarvesterScheduler = require("./HarvestScheduler");
 
+
 class App {
-  constructor(){
+  constructor() {
     this.server = new Server();
     this.harvesterScheduler = new HarvesterScheduler();
     this.run();
@@ -12,7 +13,7 @@ class App {
     console.log("Running server...")
     await this.server.run();
     console.log("Running harvester...")
-    this.harvesterScheduler.run();
+    //this.harvesterScheduler.run();
   }
 }
 

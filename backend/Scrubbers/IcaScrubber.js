@@ -1,6 +1,8 @@
 const Scrubber = require("./Scrubber");
 const Translator = require("../Shared/CategoryTranslator");
-let categoryTranslations = Translator.categories;
+const { removePrimitiveDuplicates } = require("../Shared/Helpers");
+const categoryTranslations = Translator.categories;
+const labelTranslations = Translator.labels;
 
 module.exports = class IcaScrubber extends Scrubber {
   static translateSchema = {
@@ -9,11 +11,11 @@ module.exports = class IcaScrubber extends Scrubber {
     categoryIds: (x) => filterCategories(x.inCategories),
     brand: (x) => x.brand,
     price: (x) => (x.price === undefined ? "N/A" : x.price),
-    packagingSize: (x) => getpackagingSize(x.name), // TODO
+    packagingSize: (x) => getpackagingSize(x.name),
     pricePerUnit: (x) => (x.compare === undefined ? "N/A" : x.compare.price),
     quantityType: (x) => getQuantityType(x.name),
     discount: (x) => x.promotions, // TODO
-    labels: (x) => "N/A", // TODO
+    labels: (x) => labelMaker(x.inCategories, x.name),
     isEcological: (x) =>
       x.markings.environmental === undefined
         ? false
@@ -34,13 +36,13 @@ async function filterCategories(categories) {
       category.path.forEach((subCategory) => {
         categoryTranslations.has(subCategory.slug)
           ? productCategoryArray.push(
-              categoryTranslations.get(subCategory.slug)
-            )
+            categoryTranslations.get(subCategory.slug)
+          )
           : "";
       });
     }
   });
-  return [...new Set(productCategoryArray)];
+  return removePrimitiveDuplicates(productCategoryArray);
 }
 
 function ecologicalCheck(markings) {
@@ -80,4 +82,18 @@ function getpackagingSize(productName) {
     }
   }
   return "N/A";
+}
+
+const labelMaker = (productCategories) => {
+  let labels = [];
+  productCategories.forEach((category) => {
+    category['path'].forEach((subCategory) => {
+      if (labelTranslations.get(subCategory.slug)) {
+        labelTranslations.get(subCategory.slug).split(",").forEach((x) => {
+          labels.push(x);
+        })
+      }
+    });
+  });
+  return removePrimitiveDuplicates(labels);
 }
