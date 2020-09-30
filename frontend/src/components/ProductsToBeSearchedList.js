@@ -15,7 +15,7 @@ export default function ProductsToBeSearchedList() {
   };
   
   return (
-    <div className="col-12 mb-4 mt-4">
+    <div className="col-12 mb-5 mt-4">
       <div className="col-12" id="product-to-be-searched-list">
         {list()}
       </div>

@@ -71,9 +71,9 @@ module.exports = class WillysScrubber extends Scrubber {
     const product = await this.getDetailedProduct(productCode);
     const translations = CategoryTranslator.categories;
     let labels = []
-    const nameLabels = product.name.split(" ");
-    labels.push(...nameLabels);
     if (product) {
+      const nameLabels = product.name.split(" ");
+      labels.push(...nameLabels);
       product.breadCrumbs.forEach((b) => {
         translations.forEach((t) => {
           if (b.categoryCode === t._id) {
