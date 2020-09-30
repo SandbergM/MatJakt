@@ -16,10 +16,11 @@ export default function List() {
   //stores[] will be replaced with an array, [{Store: Ica, generatedShoppingList[], singleProductSearchResult[] }] ?
 
   return (
-    <div className="store-list col-lg-4 col-12">
+    <div className="col-12 storelist">
       {stores.map((store, i) => {
         return (
           <Store
+            className="store-list"
             key={i}
             store={store}
             singleProductSearchResults={singleProductSearchResults}

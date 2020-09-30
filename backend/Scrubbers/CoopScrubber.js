@@ -48,7 +48,7 @@ module.exports = class CoopScrubber extends Scrubber {
 
   static getCategoryIds(product) {
     const ids = [];
-    for (let i = 0; i < this.matJaktCategories.length - 1; i++) {
+    for (let i = 0; i < matJaktCategories.length - 1; i++) {
       if (
         product.categories[0].name.includes(matJaktCategories[i].categoryName)
       ) {

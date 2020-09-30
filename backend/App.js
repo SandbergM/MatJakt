@@ -13,7 +13,7 @@ class App {
     console.log("Running server...")
     await this.server.run();
     console.log("Running harvester...")
-    //this.harvesterScheduler.run();
+    this.harvesterScheduler.run();
   }
 }
 
