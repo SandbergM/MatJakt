@@ -8,6 +8,7 @@ import ProductSelect from './CustomInputFields/ProductSelect.js';
 import SearchBarHeader from './SearchBarHearder.js'
 import EcologicalToggleButton from './CustomInputFields/EcologicalToggleButton.js'
 import AddToListButton from './AddToListButton.js'
+import Questionmark from "./Questionmark";
 
 export default function ProductSearchBar(props) {
 
@@ -20,7 +21,14 @@ export default function ProductSearchBar(props) {
 
   return (
     <div className="col-12 justify-content-center">
-      <SearchBarHeader />
+      <div className="row">
+      <div className="col-10">
+        <SearchBarHeader />
+      </div>
+      <div className="col-2">
+        <Questionmark />
+        </div>
+        </div>
       <div id="matjakt-searchbar-content-container" className="d-flex justify-content-around mb-4">
         <form id="products-search-form">
           <div className="row">
