@@ -3,7 +3,7 @@ import React from "react";
 // COMPONENTS
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import List from "./components/List";
+import StoreList from "./components/StoreList";
 import ProductSearchBar from "./components/ProductSearchBar";
 import ProductsToBeSearchedList from "./components/ProductsToBeSearchedList";
 import BottomButtons from "./components/BottomButtons";
@@ -12,6 +12,7 @@ import BottomButtons from "./components/BottomButtons";
 import ShoppingListContextProvider from "./contexts/ShoppingListContext";
 import CategoryContextProvider from "./contexts/CategoryContext";
 import AutoCompleteContextProvider from "./contexts/AutoCompleteContext";
+import ProductContextProvider from "./contexts/ProductContext";
 
 // CSS/SASS
 import "./sass/styles.scss";
@@ -22,16 +23,18 @@ function App() {
       <ShoppingListContextProvider>
         <CategoryContextProvider>
           <AutoCompleteContextProvider>
-            <Header />
-            <main className="container">
-              <div className="row">
-                <ProductSearchBar />
-                <ProductsToBeSearchedList />
-                <List />
-                <BottomButtons />
-              </div>
-            </main>
-            <Footer />
+            <ProductContextProvider>
+              <Header />
+              <main className="container">
+                <div className="row">
+                  <ProductSearchBar />
+                  <ProductsToBeSearchedList />
+                  <StoreList />
+                  <BottomButtons />
+                </div>
+              </main>
+              <Footer />
+            </ProductContextProvider>
           </AutoCompleteContextProvider>
         </CategoryContextProvider>
       </ShoppingListContextProvider>
