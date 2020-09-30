@@ -3,3 +3,5 @@ exports.getRandomNumber = () => {
 }
 
 exports.capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+
+exports.removePrimitiveDuplicates = (array) => Array.from(new Set(array));
