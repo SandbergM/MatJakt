@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductsList from "../components/ProductsList";
 import { Collapse, Card } from "reactstrap";
 
 export default function Store(props) {
   const [isOpen, setIsOpen] = useState(true);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    let sum = 0;
+    props.generatedShoppingList.map(product => {
+      sum += product.price
+    });
+    setTotalPrice(sum);
+  },[props.generatedShoppingList])
+
 
   return (
     <div className=" col-lg-4 col-12 mb-5">
@@ -26,7 +36,7 @@ export default function Store(props) {
         </Card>
       </Collapse>
       <div className="text-center total-price matjaktDarkGreen-text">
-        123,45 <span className="sek">SEK</span>
+        {totalPrice} <span className="sek">SEK</span>
       </div>
     </div>
   );

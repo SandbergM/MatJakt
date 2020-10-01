@@ -6,7 +6,7 @@ export default function ProductsList(props) {
     <div className="search-results">
       <div className="results">
         {props.products.map((product, i) => {
-          return <Product product={product} key={i} />
+          return <Product product={product} key={i}  />
         })}
       </div>
     </div>
