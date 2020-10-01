@@ -95,7 +95,7 @@ export default function ProductSearchBar(props) {
             >
               <Button
                 id="single-product-search-button"
-                className="matjaktDarkGreen-bg"
+                className="matjaktDarkGreen-bg drop-shadow"
               >
                 Sök efter produkt
               </Button>

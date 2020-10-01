@@ -25,6 +25,9 @@ export default function Store(props) {
           <ProductsList products={props.generatedShoppingList} />
         </Card>
       </Collapse>
+      <div className="text-center total-price matjaktDarkGreen-text">
+        123,45 <span className="sek">SEK</span>
+      </div>
     </div>
   );
 }

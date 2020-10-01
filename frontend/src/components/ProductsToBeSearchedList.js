@@ -22,6 +22,7 @@ export default function ProductsToBeSearchedList() {
       <div className="col-8 offset-2 col-sm-6 offset-sm-3 col-lg-4 col-lg-3 offset-lg-7 offset-xl-7 offset-xl-6 d-flex justify-content-center">
         <Button
           id="generate-list-button"
+          className="drop-shadow"
           onClick={() => {
             fetchGeneratedShoppingLists();
           }}

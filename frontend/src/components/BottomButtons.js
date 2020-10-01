@@ -13,8 +13,8 @@ export default function BottomButtons() {
   return (
     <div className="col-12" ref={ref}>
       <Col className="text-center">
-        <Button className="b1 matjaktDarkGreen-bg bottombutton" onClick={print}>
-          Print or Save as PDF
+        <Button className="b1 matjaktDarkGreen-bg bottombutton drop-shadow" onClick={print}>
+          Skriv ut din inköpslista
         </Button>
       </Col>
     </div>

@@ -98,7 +98,7 @@ export default function ProductToBeSearched(props) {
             />
           )}
           <MdDelete
-            className="ml-1"
+            className="ml-1 matJaktLightGreen-text"
             onClick={() => removeProductToShoppingList(props.product)}
           />
         </div>
