@@ -1,7 +1,12 @@
 const fetch = require("node-fetch");
 const Scrubber = require("./Scrubber");
-const CategoryTranslator = require("../Shared/CategoryTranslator");
-const { getRandomNumber, removePrimitiveDuplicates } = require("../Shared/Helpers");
+const Translator = require("../Shared/Translator");
+const translations = Translator.translations;
+
+const {
+  getRandomNumber,
+  removePrimitiveDuplicates,
+} = require("../Shared/Helpers");
 
 module.exports = class WillysScrubber extends Scrubber {
   detailedProduct;
@@ -51,39 +56,44 @@ module.exports = class WillysScrubber extends Scrubber {
   }
 
   static async getCategoryIds(productCode) {
+    let categoryIds = [];
     const product = await this.getDetailedProduct(productCode);
-    const translations = CategoryTranslator.categories;
-    let productCategories = [];
     if (product) {
-      product.breadCrumbs.forEach((b) => {
-        translations.forEach((t) => {
-          if (t.hasOwnProperty("categoryTranslation") && t._id == b.categoryCode) {
-            productCategories.push(t.categoryTranslation);
-          }
-        });
+      product.breadCrumbs.forEach((x) => {
+        if (translations.has(x.categoryCode) && translations.get(x.categoryCode).category) {
+          categoryIds.push(translations.get(x.categoryCode).category)
+        }
       });
     }
-    productCategories = removePrimitiveDuplicates(productCategories);
-    return productCategories;
+    return removePrimitiveDuplicates(categoryIds);
   }
 
   static async getLabels(productCode) {
     const product = await this.getDetailedProduct(productCode);
-    const translations = CategoryTranslator.categories;
-    let labels = []
-    if (product) {
-      const nameLabels = product.name.split(" ");
-      labels.push(...nameLabels);
-      product.breadCrumbs.forEach((b) => {
-        translations.forEach((t) => {
-          if (b.categoryCode === t._id) {
-            labels.push(t.label);
-          }
-        })
-      })
-    }
-    labels = removePrimitiveDuplicates(labels);
-    return labels;
+    //const translations = CategoryTranslator.categories;
+    let labels = [];
+    const nameLabels = product.name
+      .toLowerCase()
+      .replace(/[\s\s+&]/g, " ")
+      .split(" ");
+    labels.push(...nameLabels);
+    product.breadCrumbs.forEach((x) => {
+      if (translations.has(x.categoryCode)) {
+        translations
+          .get(x.categoryCode)
+          .label.toLowerCase()
+          .replace(/[\s\s]/g, "")
+          .replace(/&/g, " ")
+          .split(" ")
+          .forEach((y) => {
+            if (y !== "") {
+              labels.push(y);
+            }
+          });
+      }
+    });
+
+    return removePrimitiveDuplicates(labels);
   }
 
   static async getCountryOfOrigin(productCode) {
