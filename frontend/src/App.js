@@ -12,7 +12,6 @@ import BottomButtons from "./components/BottomButtons";
 import ShoppingListContextProvider from "./contexts/ShoppingListContext";
 import CategoryContextProvider from "./contexts/CategoryContext";
 import AutoCompleteContextProvider from "./contexts/AutoCompleteContext";
-import ProductContextProvider from "./contexts/ProductContext";
 
 // CSS/SASS
 import "./sass/styles.scss";
@@ -23,18 +22,16 @@ function App() {
       <ShoppingListContextProvider>
         <CategoryContextProvider>
           <AutoCompleteContextProvider>
-            <ProductContextProvider>
-              <Header />
-              <main className="container">
-                <div className="row">
-                  <ProductSearchBar />
-                  <ProductsToBeSearchedList />
-                  <StoreList />
-                  <BottomButtons />
-                </div>
-              </main>
-              <Footer />
-            </ProductContextProvider>
+            <Header />
+            <main className="container">
+              <div className="row">
+                <ProductSearchBar />
+                <ProductsToBeSearchedList />
+                <StoreList />
+                <BottomButtons />
+              </div>
+            </main>
+            <Footer />
           </AutoCompleteContextProvider>
         </CategoryContextProvider>
       </ShoppingListContextProvider>
