@@ -1,22 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { Button } from "reactstrap";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
-import { ProductContext } from "../contexts/ProductContext";
 import { CategoryContext } from "../contexts/CategoryContext";
 
 import ProductInputField from './CustomInputFields/ProductInputField.js';
 import ProductSelect from './CustomInputFields/ProductSelect.js';
 import SearchBarHeader from './SearchBarHearder.js'
 import EcologicalToggleButton from './CustomInputFields/EcologicalToggleButton.js'
-import AddToListButton from './AddToListButton.js'
 
 export default function ProductSearchBar(props) {
-
-  const { newProduct, handleChangeNewProduct, clearProduct } = useContext(ProductContext);
+  const { addProductToShoppingList, singleProductSearch } = useContext(ShoppingListContext);
   const { categories } = useContext(CategoryContext);
-  const { addProductToShoppingList } = useContext(ShoppingListContext);
-
   const temporaryCountriesOfOrigin = [{ _id: 'Sverige', value: 'Sverige' }, { _id: 'Annat', value: 'Annat' }]
   const temporaryMeasurements = [{ _id: 'st', value: 'Styck' }, { _id: 'kg', value: 'Kilogram' }, { _id: 'l', value: 'Liter' }, { _id: 'Sverige', value: 'Sverige' }]
+
+  const [product, setProduct] = useState(
+    {
+      name: "",
+      quantity: 0,
+      quantityType: "st",
+      categoryId: 0,
+      isEcological: false
+    }
+  )
 
   return (
     <div className="col-12 justify-content-center">
@@ -29,8 +35,8 @@ export default function ProductSearchBar(props) {
                 field={"name"}
                 placeholder={'Sök efter produkt...'}
                 type={'text'}
-                product={newProduct}
-                handleChange={handleChangeNewProduct}
+                product={product}
+                handleChange={setProduct}
               />
             </div>
             <div className="col-12 col-md-12 col-xl-2 d-flex mb-2">
@@ -38,8 +44,8 @@ export default function ProductSearchBar(props) {
                 field={"quantity"}
                 placeholder={'Volym'}
                 type={'number'}
-                product={newProduct}
-                handleChange={handleChangeNewProduct}
+                product={product}
+                handleChange={setProduct}
               />
             </div>
             <div className="col-12 col-md-12 col-xl-2 d-flex mb-2">
@@ -47,8 +53,8 @@ export default function ProductSearchBar(props) {
                 field={"quantityType"}
                 placeholder={'Typ'}
                 options={temporaryMeasurements}
-                product={newProduct}
-                handleChange={handleChangeNewProduct}
+                product={product}
+                handleChange={setProduct}
               />
             </div>
             <div className="col-12 col-md-6 col-xl-3 d-flex mb-2">
@@ -56,8 +62,8 @@ export default function ProductSearchBar(props) {
                 field={"categoryId"}
                 defaultOption={'Kategorier'}
                 options={categories}
-                product={newProduct}
-                handleChange={handleChangeNewProduct}
+                product={product}
+                handleChange={setProduct}
               />
             </div>
             <div className="col-12 col-md-6 col-xl-3 d-flex mb-2">
@@ -65,24 +71,26 @@ export default function ProductSearchBar(props) {
                 field={"countryOfOrigin"}
                 defaultOption={'Välj ursprungsland'}
                 options={temporaryCountriesOfOrigin}
-                product={newProduct}
-                handleChange={handleChangeNewProduct}
+                product={product}
+                handleChange={setProduct}
               />
             </div>
             <div className="col-9 col-md-10 col-xl-5 d-flex mb-2">
               <EcologicalToggleButton
                 field={"isEcological"}
                 label={"Ekologisk"}
-                product={newProduct}
-                handleChange={handleChangeNewProduct}
+                product={product}
+                handleChange={setProduct}
               />
             </div>
             <div className="col-3 col-md-2 col-xl-1 d-flex mb-2">
-              <AddToListButton
-                product={newProduct}
-                clearProduct={clearProduct}
-                addProductToShoppingList={addProductToShoppingList}
-              />
+              <Button className="col-12 custom-searchbar-button matJaktLightGreen-bg matjaktWhite-text"
+                onClick={() => { addProductToShoppingList(product).then(document.getElementById('products-search-form').reset()) }}>
+                <span className="button-icon ">&#x2b;</span>
+              </Button>
+            </div>
+            <div className="col-8 offset-2 col-sm-6 offset-sm-3 col-lg-4 col-lg-3 offset-lg-7 offset-xl-7 offset-xl-6 d-flex justify-content-center">
+              <Button id="generate-list-button" onClick={() => { singleProductSearch(product) }}>Hämta prisförslag</Button>
             </div>
           </div>
         </form>
