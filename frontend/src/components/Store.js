@@ -4,8 +4,12 @@ import { Collapse, Card } from "reactstrap";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
 
 export default function Store(props) {
-  const { generatedShoppingList } = useContext(ShoppingListContext);
-  const { singleProductSearchResult } = useContext(ShoppingListContext);
+  const {
+    generatedShoppingList,
+    addSelectedProductToGeneratedShoppingList,
+    singleProductSearchResult,
+  } = useContext(ShoppingListContext);
+
   const [isOpen, setIsOpen] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -34,18 +38,23 @@ export default function Store(props) {
         {props.store.name}
       </h4>
       <Collapse isOpen={isOpen}>
-        <Card>
-          <ProductsList
-            mb-3
-            products={singleProductSearchResult[props.store._id] || []}
-          />
-          <ProductsList
-            products={generatedShoppingList[props.store._id] || []}
-          />
+        <Card style={{ backgroundColor: "rgba(255, 255, 255, 0.74" }}>
+          <div className="mb-5">
+            <ProductsList
+              products={singleProductSearchResult[props.store._id] || []}
+              handleChange={addSelectedProductToGeneratedShoppingList}
+            />
+          </div>
+          <div>
+            <ProductsList
+              products={generatedShoppingList[props.store._id] || []}
+              handleChange={addSelectedProductToGeneratedShoppingList}
+            />
+          </div>
         </Card>
       </Collapse>
       <div className="text-center total-price matjaktDarkGreen-text">
-        {totalPrice} <span className="sek">SEK</span>
+        {Math.round(totalPrice)} <span className="sek">SEK</span>
       </div>
     </div>
   );

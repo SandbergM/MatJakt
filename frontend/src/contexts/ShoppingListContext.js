@@ -28,6 +28,20 @@ export default function ShoppingListContextProvider(props) {
     }
   };
 
+  const addSelectedProductToGeneratedShoppingList = (storeId, product) => {
+    if (!generatedShoppingList[storeId]) {
+      setGeneratedShoppingList({
+        ...generatedShoppingList,
+        [storeId]: [product],
+      });
+    } else {
+      setGeneratedShoppingList({
+        ...generatedShoppingList,
+        [storeId]: [...generatedShoppingList[storeId], product],
+      });
+    }
+  };
+
   const addProductToShoppingList = async (product) => {
     setProductsToBeSearched((productsToBeSearched) => [
       ...productsToBeSearched,
@@ -53,7 +67,6 @@ export default function ShoppingListContextProvider(props) {
       }
     );
     data = await data.json();
-    console.log(data);
     setSingleProductSearchResult(data);
   };
 
@@ -76,6 +89,7 @@ export default function ShoppingListContextProvider(props) {
     fetchGeneratedShoppingLists,
     generatedShoppingList,
     singleProductSearchResult,
+    addSelectedProductToGeneratedShoppingList,
   };
 
   return (
