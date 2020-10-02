@@ -4,7 +4,9 @@ export const ShoppingListContext = createContext();
 
 export default function ShoppingListContextProvider(props) {
   const [productsToBeSearched, setProductsToBeSearched] = useState([]);
-  const [singleProductSearchResult, setSingleProductSearchResult] = useState({});
+  const [singleProductSearchResult, setSingleProductSearchResult] = useState(
+    {}
+  );
   const [generatedShoppingList, setGeneratedShoppingList] = useState({});
 
   useEffect(() => {
@@ -41,12 +43,15 @@ export default function ShoppingListContextProvider(props) {
 
   const singleProductSearch = async (product) => {
     setSingleProductSearchResult({});
-    let data = await fetch(`http://127.0.0.1:3000/products/singleProductSearch`, {
-      method: "POST",
-      body: JSON.stringify(product),
-      mode: "cors",
-      headers: { "Content-type": "application/json;charset=utf-8" }
-    });
+    let data = await fetch(
+      `http://127.0.0.1:3000/products/singleProductSearch`,
+      {
+        method: "POST",
+        body: JSON.stringify(product),
+        mode: "cors",
+        headers: { "Content-type": "application/json;charset=utf-8" },
+      }
+    );
     data = await data.json();
     console.log(data);
     setSingleProductSearchResult(data);
