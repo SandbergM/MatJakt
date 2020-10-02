@@ -9,7 +9,7 @@ function Questionmark() {
     //e.target.style.background = 'green';
   }
   return (
-    <div className="info">
+    <div >
       <Button
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}>
