@@ -1,9 +1,10 @@
 const { Product } = require("../models/product");
 
 module.exports = class ProductService {
-  static async findProductsByName(name) {
-    const regex = new RegExp(name, "i");
-    const products = await Product.find({name: regex});
+  static async findProductsByQuery(query) {
+    const products = await Product.find(query).sort({
+      pricePerUnit: "asc",
+    });
     return products;
   }
-}
+};
