@@ -17,9 +17,6 @@ class App {
     console.log("Running harvester...");
     // this.harvesterScheduler.run();
     await t.fetchTranslations();
-    let x = await wH.getAllProducts();
-    let y = await wS.scrubAll(x);
-    console.log(y);
   }
 }
 

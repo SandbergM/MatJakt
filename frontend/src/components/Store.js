@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProductsList from "../components/ProductsList";
-import { Collapse, Card, CardBody } from 'reactstrap';
+import { Collapse, Card } from 'reactstrap';
+import { ShoppingListContext } from '../contexts/ShoppingListContext';
 
 export default function Store(props) {
+
+    const { singleProductSearchResult } = useContext(ShoppingListContext);
 
     const [isOpen, setIsOpen] = useState(true);
 
@@ -17,8 +20,8 @@ export default function Store(props) {
             </h4>
             <Collapse isOpen={isOpen}>
                 <Card>
-                    <ProductsList mb-3 products={props.singleProductSearchResults} />
-                    <ProductsList products={props.generatedShoppingList} />
+                    <ProductsList mb-3 products={singleProductSearchResult[props.store._id] ? singleProductSearchResult[props.store._id] : []} />
+                    <ProductsList products={[]} />
                 </Card>
             </Collapse>
         </div>

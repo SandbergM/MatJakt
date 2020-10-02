@@ -3,22 +3,17 @@ import Store from './Store';
 import { ShoppingListContext } from '../contexts/ShoppingListContext';
 
 export default function List() {
-  const { generatedShoppingList } = useContext(ShoppingListContext)
 
   let stores = [
-    { name: "Ica", color: "#E83F39" },
-    { name: "Coop", color: "#66C46C" },
-    { name: "Willy's", color: "#743EBB" },
+    { name: "Ica", color: "#E83F39", _id: "5f59e688f158c91676980f43" },
+    { name: "Coop", color: "#66C46C", _id: "5f59e826f158c91676980f44" },
+    { name: "Willy's", color: "#743EBB", _id: "5f59e877f158c91676980f45" },
   ];
-
-  let singleProductSearchResults = []
-
-  //stores[] will be replaced with an array, [{Store: Ica, generatedShoppingList[], singleProductSearchResult[] }] ?
 
   return (
     <div className="col-12 d-flex">
       {stores.map(store => {
-        return (<Store store={store} singleProductSearchResults={singleProductSearchResults} generatedShoppingList={generatedShoppingList} />)
+        return (<Store store={store} />)
       })}
     </div>
   )

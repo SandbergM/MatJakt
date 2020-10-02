@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
 import { MdDelete } from "react-icons/md";
 
 export default function ProductToBeSearched(props) {
-  const { removeProductToShoppingList } = useContext(ShoppingListContext);
+  const { removeProductFromShoppingList } = useContext(ShoppingListContext);
   return (
     <div className="col-12 mt-2 mb-2 product-to-be-searched-item matjaktDarkGreen-text">
       <div className="row">
@@ -13,7 +13,7 @@ export default function ProductToBeSearched(props) {
         </div>
         <div
           className="col-1 d-flex justify-content-around align-content-center pointer align-items-center"
-          onClick={() => removeProductToShoppingList(props.product)}>
+          onClick={() => removeProductFromShoppingList(props.product)}>
           <MdDelete />
         </div>
       </div>

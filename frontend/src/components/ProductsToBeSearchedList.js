@@ -13,12 +13,10 @@ export default function ProductsToBeSearchedList() {
   };
   return (
     <div className="col-12 mb-4 mt-4">
-
       <div className="col-12" id="product-to-be-searched-list">{list()}</div>
       <div className="col-8 offset-2 col-sm-6 offset-sm-3 col-lg-4 col-lg-3 offset-lg-7 offset-xl-7 offset-xl-6 d-flex justify-content-center">
         <Button id="generate-list-button" onClick={() => { fetchGeneratedShoppingLists() }}>Hämta prisförslag</Button>
       </div>
-
     </div>
   );
 }
