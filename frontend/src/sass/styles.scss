@@ -3,10 +3,12 @@
 @import "./list.scss";
 @import "./product.scss";
 @import "./listToBeSearched.scss";
+@import "./productToBeSearched.scss";
 @import "./matjaktSearchbar.scss";
 
 * {
   box-sizing: border-box;
+  border: 0 !important;
 }
 
 .App {
@@ -22,8 +24,15 @@
   padding-bottom: 60px !important;
 }
 
-.BottomButtons {
-  margin-bottom: 20px;
+.drop-shadow {
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.13);
+}
+
+.bottombutton {
+  font-weight: 500 !important;
+  font-size: 17px !important;
+  padding: 10px 30px !important;
+  border-radius: 25px !important;
 }
 
 .bigDiv {
@@ -114,4 +123,16 @@ Button {
 }
 .pointer {
   cursor: pointer;
+}
+
+/* Located in store.js */
+.total-price {
+  background-color: rgba(255, 255, 255, 0.74);
+  border-radius: 0px 0px 10px 10px;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.sek {
+  font-size: 16px;
 }

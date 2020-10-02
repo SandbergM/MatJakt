@@ -1,20 +1,23 @@
-import React, { useContext, useState } from "react";
-import Store from './Store';
-import { ShoppingListContext } from '../contexts/ShoppingListContext';
+import React, { useContext } from "react";
+import Store from "./Store";
+import { ShoppingListContext } from "../contexts/ShoppingListContext";
+import { StoreContext } from "../contexts/StoreContext";
 
 export default function List() {
+  const { stores } = useContext(StoreContext);
+  const colors = ["#E83F39", "#66C46C", "#743EBB"];
 
-  let stores = [
-    { name: "Ica", color: "#E83F39", _id: "5f59e688f158c91676980f43" },
-    { name: "Coop", color: "#66C46C", _id: "5f59e826f158c91676980f44" },
-    { name: "Willy's", color: "#743EBB", _id: "5f59e877f158c91676980f45" },
-  ];
+  stores.forEach((store, i) => {
+    store.color = colors[i];
+  });
+
+  //stores[] will be replaced with an array, [{Store: Ica, generatedShoppingList[], singleProductSearchResult[] }] ?
 
   return (
-    <div className="col-12 d-flex">
-      {stores.map(store => {
-        return (<Store store={store} />)
+    <div className="col-12 storelist">
+      {stores.map((store, i) => {
+        return <Store className="store-list" key={i} store={store} x />;
       })}
     </div>
-  )
+  );
 }

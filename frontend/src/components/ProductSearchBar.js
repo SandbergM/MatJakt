@@ -27,14 +27,17 @@ export default function ProductSearchBar(props) {
   return (
     <div className="col-12 justify-content-center">
       <SearchBarHeader />
-      <div id="matjakt-searchbar-content-container" className="d-flex justify-content-around mb-4">
+      <div
+        id="matjakt-searchbar-content-container"
+        className="d-flex justify-content-around mb-4"
+      >
         <form id="products-search-form">
           <div className="row">
             <div className="col-12 col-md-12 col-xl-8 d-flex mb-2">
               <ProductInputField
                 field={"name"}
-                placeholder={'Sök efter produkt...'}
-                type={'text'}
+                placeholder={"Sök efter produkt..."}
+                type={"text"}
                 product={product}
                 handleChange={setProduct}
               />
@@ -42,8 +45,8 @@ export default function ProductSearchBar(props) {
             <div className="col-12 col-md-12 col-xl-2 d-flex mb-2">
               <ProductInputField
                 field={"quantity"}
-                placeholder={'Volym'}
-                type={'number'}
+                placeholder={"Volym"}
+                type={"number"}
                 product={product}
                 handleChange={setProduct}
               />
@@ -51,7 +54,7 @@ export default function ProductSearchBar(props) {
             <div className="col-12 col-md-12 col-xl-2 d-flex mb-2">
               <ProductSelect
                 field={"quantityType"}
-                placeholder={'Typ'}
+                placeholder={"Typ"}
                 options={temporaryMeasurements}
                 product={product}
                 handleChange={setProduct}
@@ -60,7 +63,7 @@ export default function ProductSearchBar(props) {
             <div className="col-12 col-md-6 col-xl-3 d-flex mb-2">
               <ProductSelect
                 field={"categoryId"}
-                defaultOption={'Kategorier'}
+                defaultOption={"Kategorier"}
                 options={categories}
                 product={product}
                 handleChange={setProduct}
@@ -69,7 +72,7 @@ export default function ProductSearchBar(props) {
             <div className="col-12 col-md-6 col-xl-3 d-flex mb-2">
               <ProductSelect
                 field={"countryOfOrigin"}
-                defaultOption={'Välj ursprungsland'}
+                defaultOption={"Välj ursprungsland"}
                 options={temporaryCountriesOfOrigin}
                 product={product}
                 handleChange={setProduct}
@@ -84,13 +87,34 @@ export default function ProductSearchBar(props) {
               />
             </div>
             <div className="col-3 col-md-2 col-xl-1 d-flex mb-2">
-              <Button className="col-12 custom-searchbar-button matJaktLightGreen-bg matjaktWhite-text"
-                onClick={() => { addProductToShoppingList(product).then(document.getElementById('products-search-form').reset()) }}>
+              <Button
+                className="col-12 custom-searchbar-button matJaktLightGreen-bg matjaktWhite-text"
+                onClick={() => {
+                  addProductToShoppingList(product).then(
+                    document.getElementById("products-search-form").reset()
+                  );
+                }}
+              >
                 <span className="button-icon ">&#x2b;</span>
               </Button>
             </div>
-            <div className="col-8 offset-2 col-sm-6 offset-sm-3 col-lg-4 col-lg-3 offset-lg-7 offset-xl-7 offset-xl-6 d-flex justify-content-center">
+            {/*   <div className="col-8 offset-2 col-sm-6 offset-sm-3 col-lg-4 col-lg-3 offset-lg-7 offset-xl-7 offset-xl-6 d-flex justify-content-center">
               <Button id="generate-list-button" onClick={() => { singleProductSearch(product) }}>Hämta prisförslag</Button>
+            </div> */}
+            <div
+              id="single-product-search-container"
+              className="col-8 offset-2 col-sm-6 offset-sm-3 col-lg-4 col-lg-3 offset-lg-7 offset-xl-7 offset-xl-6 d-flex mt-2 justify-content-center"
+            >
+              <Button
+                id="single-product-search-button"
+              
+                onClick={() => {
+                  singleProductSearch(product);
+                }}
+                className="matjaktDarkGreen-bg drop-shadow"
+              >
+                Sök efter produkt
+              </Button>
             </div>
           </div>
         </form>

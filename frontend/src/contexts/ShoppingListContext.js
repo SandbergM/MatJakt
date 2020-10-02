@@ -19,19 +19,24 @@ export default function ShoppingListContextProvider(props) {
   }, [productsToBeSearched]);
 
   const loadFromLocalStorage = async () => {
-    let data = localStorage.getItem('matjaktLocalSave')
+    let data = localStorage.getItem("matjaktLocalSave");
     if (data) {
-      data = await JSON.parse(data)
-      setProductsToBeSearched(data)
+      data = await JSON.parse(data);
+      setProductsToBeSearched(data);
     }
   };
 
   const addProductToShoppingList = async (product) => {
-    setProductsToBeSearched(productsToBeSearched => ([...productsToBeSearched, product]));
+    setProductsToBeSearched((productsToBeSearched) => [
+      ...productsToBeSearched,
+      product,
+    ]);
   };
 
   const removeProductFromShoppingList = async (productToRemove) => {
-    setProductsToBeSearched(productsToBeSearched.filter((product) => product != productToRemove))
+    setProductsToBeSearched(
+      productsToBeSearched.filter((product) => product !== productToRemove)
+    );
   };
 
   const singleProductSearch = async (product) => {
@@ -52,12 +57,11 @@ export default function ShoppingListContextProvider(props) {
       method: "POST",
       body: JSON.stringify(productsToBeSearched),
       mode: "cors",
-      headers: { "Content-type": "application/json;charset=utf-8" }
+      headers: { "Content-type": "application/json;charset=utf-8" },
+    }).then(async (data) => {
+      setGeneratedShoppingList(await data.json());
     });
-    data = await data.json()
-    console.log(data);
-    setGeneratedShoppingList(data);
-  }
+  };
 
   const values = {
     productsToBeSearched,

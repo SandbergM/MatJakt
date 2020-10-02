@@ -5,8 +5,8 @@ export default function ProductsList(props) {
   return (
     <div className="search-results">
       <div className="results">
-        {props.products.map((product) => {
-          return <Product product={product} />
+        {props.products.map((product, i) => {
+          return <Product product={product} key={i}  />
         })}
       </div>
     </div>
