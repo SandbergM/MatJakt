@@ -67,7 +67,7 @@ export default function ShoppingListContextProvider(props) {
     productsToBeSearched,
     singleProductSearch,
     addProductToShoppingList,
-    removeProductFromShoppingList,
+    removeProductToShoppingList,
     fetchGeneratedShoppingLists,
     generatedShoppingList,
     singleProductSearchResult,
