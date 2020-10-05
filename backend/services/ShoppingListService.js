@@ -14,17 +14,15 @@ module.exports = class ShoppingListService {
     this.storeIds.forEach((id) => {
       list[id] = [];
     });
-
-    criteriaList.forEach((c) => {
-      this.storeIds.forEach(async (id) => {
+    for(let c of criteriaList) {
+      for(let id of this.storeIds) {
         let query = this.#queryBuilder({ ...c, storeId: id });
         let products = await ProductService.findProductsByQuery(query);
         products = this.#weightProducts(products, c.name);
         list[id].push(products[0]);
-        console.log(list);
         list[id].push(products[1]);
-      });
-    });
+      }
+    }
     return list;
   }
 
