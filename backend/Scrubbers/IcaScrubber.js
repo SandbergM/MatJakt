@@ -7,7 +7,7 @@ const translations = Translator.translations;
 module.exports = class IcaScrubber extends Scrubber {
   static translateSchema = {
     name: (x) => x.name,
-    storeId: (x) => "5f59e688f158c91676980f43",
+    storeId: (x) => this.stringToObjectId("5f59e688f158c91676980f43"),
     categoryIds: (x) => translator(x.inCategories, "category"),
     brand: (x) => x.brand,
     price: (x) => (x.price === undefined ? "N/A" : x.price),

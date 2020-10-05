@@ -83,11 +83,9 @@ module.exports = class WillysScrubber extends Scrubber {
       labels.push(...nameLabels);
       product.breadCrumbs.forEach((x) => {
         if (translations.has(x.categoryCode)) {
-          console.log(translations.get(x.categoryCode).label);
           translations.get(x.categoryCode).label.forEach((l) => {
             labels.push(l)
           })
-
         }
       });
     }
