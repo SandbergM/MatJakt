@@ -95,29 +95,11 @@ export default function ProductToBeSearched(props) {
               <EcologicalToggleButton
                 field={"isEcological"}
                 label={"Ekologisk"}
-                product={product.isEcological}
+                product={product}
                 value={product.isEcological}
                 handleChange={setProduct}
               />
             </div>
-
-            /* <div className="small-inputfield d-flex">
-              <Button
-                className="ecological-button matjaktWhite-bg"
-                onClick={() => {
-                  setIsEcological(!isEcological);
-                }}
-              >
-                {isEcological ? (
-                  <span className="matJaktLightGreen-text eco-span">
-                    &#10003;
-                  </span>
-                ) : (
-                  ""
-                )}
-              </Button>
-              <div className="ml-2 ecological-text">Ekologisk</div>
-            </div> */
           )}
         </div>
 
