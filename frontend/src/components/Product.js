@@ -1,14 +1,18 @@
 import React from "react";
 import { MdDelete, MdAddCircle, MdRemoveCircle } from "react-icons/md";
 
-
 export default function Product(props) {
-
   return (
-    <div className="row product">
+    <div
+      className="row product"
+      onClick={() => {
+        props.handleChange(props.product.storeId, props.product);
+      }}
+    >
       <div
         className="col-3 product-image"
-        style={{ backgroundImage: `url(${props.product.imageUrl})` }}>
+        style={{ backgroundImage: `url(${props.product.imageUrl})` }}
+      >
         <div className="icons">
           <div className="add">
             <MdAddCircle className="white-icon" />
@@ -25,7 +29,7 @@ export default function Product(props) {
         <div className="row align-items-center mt-1">
           <div className="col comparison-price">
             <span className="product-brand">{props.product.brand} </span> |
-              <span className="comparison-text"> Jfp: </span>
+            <span className="comparison-text"> Jfp: </span>
             {props.product.pricePerUnit} SEK / {props.product.comparisonUnit}
           </div>
         </div>
@@ -41,5 +45,6 @@ export default function Product(props) {
         <div className="delete amount">{}</div>
         <MdDelete />
       </div>
-    </div>)
+    </div>
+  );
 }

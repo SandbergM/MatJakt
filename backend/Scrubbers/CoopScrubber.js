@@ -1,7 +1,7 @@
-const fetch = require("node-fetch");
 const Scrubber = require("./Scrubber");
 
 module.exports = class CoopScrubber extends Scrubber {
+
   static translateSchema = {
     name: (x) => x.name,
     storeId: (x) => this.stringToObjectId("5f59e826f158c91676980f44"),
@@ -17,12 +17,11 @@ module.exports = class CoopScrubber extends Scrubber {
     discount: (x) => x.potentialPromotions,
     labels: (x) => this.getLabels(x),
     isEcological: (x) => this.getEcological(x),
-    countryOfOrigin: (x) => x.fromSweden ? "Sweden" : "Other", //TODO: Can't find the specific country on Coop if not from Sweden - it seems to be in some of the product titles though
+    countryOfOrigin: (x) => (x.fromSweden ? "Sweden" : "Other"), //TODO: Can't find the specific country on Coop if not from Sweden - it seems to be in some of the product titles though
     imageUrl: (x) => x.images[0].url,
   };
 
   static getCategoryIds(product) {
-    const ids = [];
     //TODO EXCHANGE THIS ARRAY WITH CATEGORIES FROM THE DB
     const matJaktCategories = [
       { categoryName: "Mejeri & Ägg", id: 0 },
@@ -47,6 +46,7 @@ module.exports = class CoopScrubber extends Scrubber {
       { categoryName: "Världens Mat", id: 19 },
       { categoryName: "Övrigt", id: 20 },
     ];
+    const ids = [];
     for (let i = 0; i < matJaktCategories.length - 1; i++) {
       if (
         product.categories[0].name.includes(matJaktCategories[i].categoryName)
@@ -69,9 +69,40 @@ module.exports = class CoopScrubber extends Scrubber {
     return productPrice;
   }
 
-  // TODO: Add logic
   static getLabels(product) {
-    return ["This", "is", "a", "label"];
+    let labels = [];
+    let unwanted = ["övriga", "eko", "att", "med"]; //ignore these words
+    let undercategories = product.categories.slice(-2); //only take the last two undercategories in the array of categories
+
+    for (let category of undercategories) {
+      category.name
+        .toLowerCase()
+        .split(" ")
+        .forEach((x) => {
+          if (
+            x.length > 1 &&
+            x.length === x.replace(/[-&]/g, "").length &&
+            !unwanted.includes(x)
+          ) {
+            labels.push(x.replace(/[,]/g, ""));
+          }
+        });
+    }
+
+    //add product name to the labels as well
+    product.name
+      .toLowerCase()
+      .split(" ")
+      .forEach((x) => {
+        if (
+          x.length > 1 &&
+          x.length === x.replace(/[-&]/g, "").length &&
+          !unwanted.includes(x)
+        ) {
+          labels.push(x.replace(/[,]/g, ""));
+        }
+      });
+    return [...new Set(labels)];
   }
 
   static getEcological(product) {
