@@ -4,9 +4,10 @@ import { ShoppingListContext } from "../contexts/ShoppingListContext";
 import { MdDelete, MdEdit, MdSave } from "react-icons/md";
 
 export default function ProductToBeSearched(props) {
-  const { addProductToShoppingList, removeProductToShoppingList } = useContext(
-    ShoppingListContext
-  );
+  const {
+    addProductFromShoppingList,
+    removeProductFromShoppingList,
+  } = useContext(ShoppingListContext);
 
   const [isBeingEdited, setIsBeingEdited] = useState(false);
   const toggleEdit = () => setIsBeingEdited(!isBeingEdited);
@@ -15,7 +16,7 @@ export default function ProductToBeSearched(props) {
 
   const editProductInList = () => {
     console.log(props);
-/*     if (props.product.name.length > 1) {
+    /*     if (props.product.name.length > 1) {
       addProductToShoppingList({
         //add the new product to the shopping list
         name: props.product.name,
@@ -99,7 +100,7 @@ export default function ProductToBeSearched(props) {
           )}
           <MdDelete
             className="ml-1 matJaktLightGreen-text"
-            onClick={() => removeProductToShoppingList(props.product)}
+            onClick={() => removeProductFromShoppingList(props.product)}
           />
         </div>
       </div>
