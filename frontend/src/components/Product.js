@@ -6,15 +6,15 @@ import Shoppinglist from './ShoppingList'
 
 
 export default function Product(props) {
-  const [toadd, setToadd] = useState(['hej', 'hallå'])
+  const [todos, setToadd] = useState(['hej'])
 
-  function add() {
-    console.log('add to shoppinglist');
+  function add(e) {
     
+
   }
   return (
     <div className="row product">
-      <Shoppinglist toadd={toadd}/>
+      <Shoppinglist todos={todos}/>
       <div
         className="col-3 product-image"
         style={{ backgroundImage: `url(${props.product.imageUrl})` }}

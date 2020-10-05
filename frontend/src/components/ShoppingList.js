@@ -1,11 +1,8 @@
-import React from 'react'
+import React from "react";
+import Todo from "./Todo";
 
-export default function ShoppingList({toadd}){
-  return (
-    <div>
-      {toadd.length}
-    </div>
-  )
+export default function ShoppingList({ todos }) {
+  return todos.map((todo) => {
+    return <Todo key={todo.id} todo={todo} />;
+  });
 }
-
-
