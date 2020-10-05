@@ -9,8 +9,8 @@ export default function ProductsToBeSearchedList() {
   );
   
   const list = () => {
-    console.log(typeof productsToBeSearched)
     return productsToBeSearched.map((product, index) => {
+      console.log(product)
       return <ProductsToBeSearched key={index} index={index} product={product} />;
     });
   };

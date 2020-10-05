@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Label } from "reactstrap";
 
 export default function EcologicalToggleButton(props) {
-  const [isEcological, setIsEcological] = useState(false);
+  const [isEcological, setIsEcological] = useState(
+    props.product.isEcological || false
+  );
+
+  useEffect(() => {
+    changesomething();
+  }, [isEcological]);
+
+  const changesomething = () => {
+    props.handleChange({ ...props.product, [props.field]: isEcological });
+  };
 
   return (
     <div className="row">
@@ -14,9 +24,7 @@ export default function EcologicalToggleButton(props) {
       >
         <span>
           {isEcological ? (
-            <span className="matJaktLightGreen-text">
-              &#10003;
-            </span>
+            <span className="matJaktLightGreen-text">&#10003;</span>
           ) : (
             " "
           )}

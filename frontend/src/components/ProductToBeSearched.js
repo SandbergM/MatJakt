@@ -45,6 +45,7 @@ export default function ProductToBeSearched(props) {
               <ProductInputField
                 field={"name"}
                 placeholder={product.name}
+                value={product.name}
                 type={"text"}
                 product={product}
                 handleChange={setProduct}
@@ -59,6 +60,7 @@ export default function ProductToBeSearched(props) {
               <ProductInputField
                 field={"quantity"}
                 placeholder={product.quantity}
+                value={product.quantity}
                 type={"number"}
                 product={product}
                 handleChange={setProduct}
@@ -78,6 +80,7 @@ export default function ProductToBeSearched(props) {
               <ProductSelect
                 field={"quantityType"}
                 placeholder={product.quantityType}
+                value={product.quantityType}
                 options={temporaryMeasurements}
                 product={product}
                 handleChange={setProduct}
@@ -93,6 +96,7 @@ export default function ProductToBeSearched(props) {
                 field={"isEcological"}
                 label={"Ekologisk"}
                 product={product.isEcological}
+                value={product.isEcological}
                 handleChange={setProduct}
               />
             </div>
