@@ -37,12 +37,19 @@ export default function ShoppingListContextProvider(props) {
     oldProduct,
     productToEdit
   ) => {
-    console.log(index, oldProduct, productToEdit);
+ /*    let newArray = productsToBeSearched;
+    for (let i = 0; i < newArray.length; i++){
+      if (oldProduct === newArray[i]) {
+        newArray[i] = productToEdit;
+        console.log(newArray);
+        setProductsToBeSearched(newArray)
+        console.log('products to be searched ', productsToBeSearched);
+      }
+    } */
     let editedProduct = productsToBeSearched;
     editedProduct.splice(index, 1, productToEdit);
-    console.log(editedProduct);
-    console.log(productsToBeSearched);
-    setProductsToBeSearched(editedProduct.splice(index, 1, productToEdit));
+    setProductsToBeSearched([...editedProduct]);
+    console.log(productsToBeSearched)
   };
 
   const removeProductToShoppingList = async (productToRemove) => {
