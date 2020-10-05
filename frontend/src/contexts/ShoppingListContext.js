@@ -32,6 +32,19 @@ export default function ShoppingListContextProvider(props) {
     ]);
   };
 
+  const editProductInShoppingList = async (
+    index,
+    oldProduct,
+    productToEdit
+  ) => {
+    console.log(index, oldProduct, productToEdit);
+    let editedProduct = productsToBeSearched;
+    editedProduct.splice(index, 1, productToEdit);
+    console.log(editedProduct);
+    console.log(productsToBeSearched);
+    setProductsToBeSearched(editedProduct.splice(index, 1, productToEdit));
+  };
+
   const removeProductToShoppingList = async (productToRemove) => {
     setProductsToBeSearched(
       productsToBeSearched.filter((product) => product !== productToRemove)
@@ -57,6 +70,7 @@ export default function ShoppingListContextProvider(props) {
     productsToBeSearched,
     singleProductSearch,
     addProductToShoppingList,
+    editProductInShoppingList,
     removeProductToShoppingList,
     fetchGeneratedShoppingLists,
     generatedShoppingList,

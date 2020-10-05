@@ -107,7 +107,6 @@ export default function ProductSearchBar(props) {
             >
               <Button
                 id="single-product-search-button"
-              
                 onClick={() => {
                   singleProductSearch(product);
                 }}
