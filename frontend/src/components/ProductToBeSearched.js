@@ -7,7 +7,7 @@ import ProductSelect from "./CustomInputFields/ProductSelect.js";
 import EcologicalToggleButton from "./CustomInputFields/EcologicalToggleButton.js";
 
 export default function ProductToBeSearched(props) {
-  const { editProductInShoppingList, removeProductToShoppingList } = useContext(
+  const { editProductInShoppingList, removeProductFromShoppingList } = useContext(
     ShoppingListContext
   );
 
@@ -25,11 +25,9 @@ export default function ProductToBeSearched(props) {
     setIsBeingEdited(!isBeingEdited);
   };
 
-  const editProductInList = (index, oldProduct, editedProduct) => {
-    console.log(oldProduct);
-    console.log(editedProduct);
+  const editProductInList = (index, editedProduct) => {
     if (editedProduct.name.length > 1) {
-      editProductInShoppingList(index, oldProduct, editedProduct);
+      editProductInShoppingList(index, editedProduct);
       toggleEdit();
     }
   };
@@ -113,13 +111,13 @@ export default function ProductToBeSearched(props) {
           ) : (
             <MdSave
               onClick={() =>
-                editProductInList(props.index, props.product, product)
+                editProductInList(props.index, product)
               }
             />
           )}
           <MdDelete
             className="ml-1 matJaktLightGreen-text"
-            onClick={() => removeProductToShoppingList(props.product)}
+            onClick={() => removeProductFromShoppingList(props.product)}
           />
         </div>
       </div>
