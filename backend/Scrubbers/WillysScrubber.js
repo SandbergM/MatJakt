@@ -60,8 +60,11 @@ module.exports = class WillysScrubber extends Scrubber {
     const product = await this.getDetailedProduct(productCode);
     if (product) {
       product.breadCrumbs.forEach((x) => {
-        if (translations.has(x.categoryCode) && translations.get(x.categoryCode).category) {
-          categoryIds.push(translations.get(x.categoryCode).category)
+        if (
+          translations.has(x.categoryCode) &&
+          translations.get(x.categoryCode).category
+        ) {
+          categoryIds.push(translations.get(x.categoryCode).category);
         }
       });
     }
@@ -70,29 +73,30 @@ module.exports = class WillysScrubber extends Scrubber {
 
   static async getLabels(productCode) {
     const product = await this.getDetailedProduct(productCode);
-    //const translations = CategoryTranslator.categories;
     let labels = [];
-    const nameLabels = product.name
-      .toLowerCase()
-      .replace(/[\s\s+&]/g, " ")
-      .split(" ");
-    labels.push(...nameLabels);
-    product.breadCrumbs.forEach((x) => {
-      if (translations.has(x.categoryCode)) {
-        translations
-          .get(x.categoryCode)
-          .label.toLowerCase()
-          .replace(/[\s\s]/g, "")
-          .replace(/&/g, " ")
-          .split(" ")
-          .forEach((y) => {
-            if (y !== "") {
-              labels.push(y);
-            }
-          });
-      }
-    });
-
+    //const translations = CategoryTranslator.categories;
+    if (product) {
+      const nameLabels = product.name
+        .toLowerCase()
+        .replace(/[\s\s+&]/g, " ")
+        .split(" ");
+      labels.push(...nameLabels);
+      product.breadCrumbs.forEach((x) => {
+        if (translations.has(x.categoryCode)) {
+          translations
+            .get(x.categoryCode)
+            .label.toLowerCase()
+            .replace(/[\s\s]/g, "")
+            .replace(/&/g, " ")
+            .split(" ")
+            .forEach((y) => {
+              if (y !== "") {
+                labels.push(y);
+              }
+            });
+        }
+      });
+    }
     return removePrimitiveDuplicates(labels);
   }
 
