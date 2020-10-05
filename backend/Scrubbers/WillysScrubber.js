@@ -70,6 +70,7 @@ module.exports = class WillysScrubber extends Scrubber {
 
   static async getLabels(productCode) {
     const product = await this.getDetailedProduct(productCode);
+    //const translations = CategoryTranslator.categories;
     let labels = [];
     const nameLabels = product.name
       .toLowerCase()
