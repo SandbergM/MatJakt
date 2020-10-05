@@ -1,6 +1,7 @@
 const Scrubber = require("./Scrubber");
 const Translator = require("../Shared/Translator");
 const { removePrimitiveDuplicates } = require("../Shared/Helpers");
+const { stringToObjectId } = require("./Scrubber");
 const translations = Translator.translations;
 
 module.exports = class IcaScrubber extends Scrubber {

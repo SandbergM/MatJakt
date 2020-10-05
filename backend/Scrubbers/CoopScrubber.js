@@ -1,34 +1,10 @@
 const Scrubber = require("./Scrubber");
 
 module.exports = class CoopScrubber extends Scrubber {
-  //TODO EXCHANGE THIS ARRAY WITH CATEGORIES FROM THE DB
-  matJaktCategories = [
-    { categoryName: "Mejeri & Ägg", id: 0 },
-    { categoryName: "Ost", id: 1 },
-    { categoryName: "Frukt & Grönsaker", id: 2 },
-    { categoryName: "Skafferi", id: 3 },
-    { categoryName: "Kött & Fågel", id: 4 },
-    { categoryName: "Chark & Pålägg", id: 5 },
-    { categoryName: "Vegetariskt", id: 6 },
-    { categoryName: "Fisk & Skaldjur", id: 7 },
-    { categoryName: "Dryck", id: 8 },
-    { categoryName: "Bröd & Bageri", id: 9 },
-    { categoryName: "Smaksättare", id: 10 },
-    { categoryName: "Färdigmat", id: 11 },
-    { categoryName: "Hem & Hushåll", id: 12 },
-    { categoryName: "Frys", id: 13 },
-    { categoryName: "Barn", id: 14 },
-    { categoryName: "Skönhet & Hygien", id: 15 },
-    { categoryName: "Hälsa & Tillskott", id: 16 },
-    { categoryName: "Tobak", id: 17 },
-    { categoryName: "Husdjur", id: 18 },
-    { categoryName: "Världens Mat", id: 19 },
-    { categoryName: "Övrigt", id: 20 },
-  ];
 
   static translateSchema = {
     name: (x) => x.name,
-    storeId: (x) => "5f59e826f158c91676980f44",
+    storeId: (x) => this.stringToObjectId("5f59e826f158c91676980f44"),
     categoryIds: (x) => this.getCategoryIds(x),
     brand: (x) => x.manufacturer,
     price: (x) => x.price.value,
@@ -46,6 +22,30 @@ module.exports = class CoopScrubber extends Scrubber {
   };
 
   static getCategoryIds(product) {
+    //TODO EXCHANGE THIS ARRAY WITH CATEGORIES FROM THE DB
+    const matJaktCategories = [
+      { categoryName: "Mejeri & Ägg", id: 0 },
+      { categoryName: "Ost", id: 1 },
+      { categoryName: "Frukt & Grönsaker", id: 2 },
+      { categoryName: "Skafferi", id: 3 },
+      { categoryName: "Kött & Fågel", id: 4 },
+      { categoryName: "Chark & Pålägg", id: 5 },
+      { categoryName: "Vegetariskt", id: 6 },
+      { categoryName: "Fisk & Skaldjur", id: 7 },
+      { categoryName: "Dryck", id: 8 },
+      { categoryName: "Bröd & Bageri", id: 9 },
+      { categoryName: "Smaksättare", id: 10 },
+      { categoryName: "Färdigmat", id: 11 },
+      { categoryName: "Hem & Hushåll", id: 12 },
+      { categoryName: "Frys", id: 13 },
+      { categoryName: "Barn", id: 14 },
+      { categoryName: "Skönhet & Hygien", id: 15 },
+      { categoryName: "Hälsa & Tillskott", id: 16 },
+      { categoryName: "Tobak", id: 17 },
+      { categoryName: "Husdjur", id: 18 },
+      { categoryName: "Världens Mat", id: 19 },
+      { categoryName: "Övrigt", id: 20 },
+    ];
     const ids = [];
     for (let i = 0; i < matJaktCategories.length - 1; i++) {
       if (
@@ -74,7 +74,7 @@ module.exports = class CoopScrubber extends Scrubber {
     let unwanted = ["övriga", "eko", "att", "med"]; //ignore these words
     let undercategories = product.categories.slice(-2); //only take the last two undercategories in the array of categories
 
-    for (category of undercategories) {
+    for (let category of undercategories) {
       category.name
         .toLowerCase()
         .split(" ")

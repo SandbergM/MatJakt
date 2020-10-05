@@ -14,7 +14,7 @@ module.exports = class WillysScrubber extends Scrubber {
   static translateSchema = {
     name: (x) => x.name,
     categoryIds: async (x) => await this.getCategoryIds(x.code),
-    storeId: (x) => "5f59e877f158c91676980f45",
+    storeId: (x) => this.stringToObjectId("5f59e877f158c91676980f45"),
     brand: (x) => x.manufacturer,
     price: (x) => x.priceValue,
     packagingSize: (x) =>
@@ -60,8 +60,11 @@ module.exports = class WillysScrubber extends Scrubber {
     const product = await this.getDetailedProduct(productCode);
     if (product) {
       product.breadCrumbs.forEach((x) => {
-        if (translations.has(x.categoryCode) && translations.get(x.categoryCode).category) {
-          categoryIds.push(translations.get(x.categoryCode).category)
+        if (
+          translations.has(x.categoryCode) &&
+          translations.get(x.categoryCode).category
+        ) {
+          categoryIds.push(translations.get(x.categoryCode).category);
         }
       });
     }
@@ -71,27 +74,23 @@ module.exports = class WillysScrubber extends Scrubber {
   static async getLabels(productCode) {
     const product = await this.getDetailedProduct(productCode);
     let labels = [];
-    const nameLabels = product.name
-      .toLowerCase()
-      .replace(/[\s\s+&]/g, " ")
-      .split(" ");
-    labels.push(...nameLabels);
-    product.breadCrumbs.forEach((x) => {
-      if (translations.has(x.categoryCode)) {
-        translations
-          .get(x.categoryCode)
-          .label.toLowerCase()
-          .replace(/[\s\s]/g, "")
-          .replace(/&/g, " ")
-          .split(" ")
-          .forEach((y) => {
-            if (y !== "") {
-              labels.push(y);
-            }
-          });
-      }
-    });
+    //const translations = CategoryTranslator.categories;
+    if (product) {
+      const nameLabels = product.name
+        .toLowerCase()
+        .replace(/[\s\s+&]/g, " ")
+        .split(" ");
+      labels.push(...nameLabels);
+      product.breadCrumbs.forEach((x) => {
+        if (translations.has(x.categoryCode)) {
+          console.log(translations.get(x.categoryCode).label);
+          translations.get(x.categoryCode).label.forEach((l) => {
+            labels.push(l)
+          })
 
+        }
+      });
+    }
     return removePrimitiveDuplicates(labels);
   }
 
