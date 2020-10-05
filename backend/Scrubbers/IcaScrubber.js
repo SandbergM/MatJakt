@@ -7,14 +7,14 @@ module.exports = class IcaScrubber extends Scrubber {
   static translateSchema = {
     name: (x) => x.name,
     storeId: (x) => "5f59e688f158c91676980f43",
-    categoryIds: (x) => translate(x.inCategories, "category"),
+    categoryIds: (x) => translator(x.inCategories, "category"),
     brand: (x) => x.brand,
     price: (x) => (x.price === undefined ? "N/A" : x.price),
     packagingSize: (x) => getpackagingSize(x.name),
     pricePerUnit: (x) => (x.compare === undefined ? "N/A" : x.compare.price),
     quantityType: (x) => getQuantityType(x.name),
     discount: (x) => x.promotions, // TODO
-    labels: (x) => translate(x.inCategories, "label"),
+    labels: (x) => translator(x.inCategories, "label", x.name),
     isEcological: (x) =>
       x.markings.environmental === undefined
         ? false
@@ -65,25 +65,25 @@ function getpackagingSize(productName) {
   return "st";
 }
 
-const translate = (categories, type) => {
+const translator = (categories, type, productName) => {
   let arr = [];
 
+  if (type === "label") { arr.push(...productName.toLowerCase().replace(/&/g, " ").split(" ")) }
+
   categories.forEach((category) => {
-    if (translations.has(category.slug)) {
-      let x = translations.get(category.slug)[type].split(",");
-      x.forEach((label) => {
-        arr.push(label);
-      });
+    if (translations.get(category.slug)) {
+      if (translations.get(category.slug)[type] !== undefined) {
+        arr.push(...translations.get(category.slug)[type])
+      }
     }
     if (category.path) {
       category.path.forEach((subCategory) => {
-        if (translations.has(subCategory.slug)) {
-          let x = translations.get(subCategory.slug)[type].split(",");
-          x.forEach((label) => {
-            arr.push(label);
-          });
+        if (translations.get(subCategory.slug)) {
+          if (translations.get(subCategory.slug)[type] !== undefined) {
+            arr.push(...translations.get(subCategory.slug)[type])
+          }
         }
-      });
+      })
     }
   });
   return removePrimitiveDuplicates(arr);
