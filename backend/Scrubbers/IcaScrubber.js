@@ -1,12 +1,13 @@
 const Scrubber = require("./Scrubber");
 const Translator = require("../Shared/Translator");
 const { removePrimitiveDuplicates } = require("../Shared/Helpers");
+const { stringToObjectId } = require("./Scrubber");
 const translations = Translator.translations;
 
 module.exports = class IcaScrubber extends Scrubber {
   static translateSchema = {
     name: (x) => x.name,
-    storeId: (x) => "5f59e688f158c91676980f43",
+    storeId: (x) => this.stringToObjectId("5f59e688f158c91676980f43"),
     categoryIds: (x) => translate(x.inCategories, "category"),
     brand: (x) => x.brand,
     price: (x) => (x.price === undefined ? "N/A" : x.price),

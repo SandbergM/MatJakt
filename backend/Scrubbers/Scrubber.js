@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 module.exports = class Scrubber {
   // Method that scrubs a product
   // based on the translateSchema in our subClass
@@ -37,5 +39,9 @@ module.exports = class Scrubber {
         return size;
       }
     }
+  }
+
+  static stringToObjectId(string) {
+    return mongoose.Types.ObjectId(string);
   }
 };
