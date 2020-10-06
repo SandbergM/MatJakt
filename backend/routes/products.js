@@ -1,5 +1,4 @@
 const { Product } = require("../models/product");
-const ProductScorer = require("../Shared/ProductScorer");
 const express = require("express");
 const router = express.Router();
 
