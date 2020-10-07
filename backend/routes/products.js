@@ -1,6 +1,7 @@
 const { Product } = require("../models/product");
 const ShoppingListService = require("../services/ShoppingListService");
 const express = require("express");
+const ProductService = require("../services/ProductService");
 const router = express.Router();
 
 
@@ -16,13 +17,21 @@ router.post("/generateList", async (req, res) => {
   res.send(list);
 });
 
-router.get("/test", async (req, res) => {
-  const query = req.body;
+router.post("/generate-list", async (req, res) => {
+  let query = req.body;
   const products = await ShoppingListService.generateList(query);
   res.json(products);
 });
 
-module.exports = router;
+router.post("/test", async (req, res) => {
+  let query = req.body;
+  const products = await ProductService.findProductsByQuery({
+    name: new RegExp(query[0].name, "i"),
+    storeId: "5f59e826f158c91676980f44",
+  });
+  res.json(products);
+})
+
 router.post("/singleProductSearch", async (req, res) => {
   let stores = { "5f59e877f158c91676980f45": [], "5f59e826f158c91676980f44": [], "5f59e688f158c91676980f43": [] };
   for (let [key, value] of Object.entries(stores)) {
