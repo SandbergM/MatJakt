@@ -1,18 +1,19 @@
 const Scrubber = require("./Scrubber");
 
 module.exports = class CoopScrubber extends Scrubber {
-
   static translateSchema = {
     name: (x) => x.name,
     storeId: (x) => this.stringToObjectId("5f59e826f158c91676980f44"),
     categoryIds: (x) => this.getCategoryIds(x),
     brand: (x) => x.manufacturer,
     price: (x) => x.price.value,
-    packagingSize: (x) => x.packageSize,
+    packagingSize: (x) => parseInt(x.packageSize),
     pricePerUnit: (x) =>
-      x.comparisonPrice.formattedValue
-        .replace(/[^\d:-]/g, "")
-        .replace(":", "."),
+      parseFloat(
+        x.comparisonPrice.formattedValue
+          .replace(/[^\d:-]/g, "")
+          .replace(":", ".")
+      ),
     quantityType: (x) => x.packageSizeUnit,
     discount: (x) => x.potentialPromotions,
     labels: (x) => this.getLabels(x),
