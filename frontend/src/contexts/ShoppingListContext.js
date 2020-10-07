@@ -71,14 +71,14 @@ export default function ShoppingListContextProvider(props) {
   };
 
   const fetchGeneratedShoppingLists = async () => {
-    let data = await fetch(`http://127.0.0.1:3000/products/generateList`, {
+    const raw = await fetch(`http://127.0.0.1:3000/products/generate-list`, {
       method: "POST",
       body: JSON.stringify(productsToBeSearched),
       mode: "cors",
       headers: { "Content-type": "application/json;charset=utf-8" },
-    }).then(async (data) => {
-      setGeneratedShoppingList(await data.json());
     });
+    const data = await raw.json();
+    setGeneratedShoppingList(data);
   };
 
   const values = {
