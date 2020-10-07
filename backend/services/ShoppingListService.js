@@ -14,13 +14,12 @@ module.exports = class ShoppingListService {
     this.storeIds.forEach((id) => {
       list[id] = [];
     });
-    for(let c of criteriaList) {
-      for(let id of this.storeIds) {
+    for (let c of criteriaList) {
+      for (let id of this.storeIds) {
         let query = this.#queryBuilder({ ...c, storeId: id });
         let products = await ProductService.findProductsByQuery(query);
         products = this.#weightProducts(products, c.name);
-        list[id].push(products[0]);
-        list[id].push(products[1]);
+        list[id].push(this.#getCheapestProduct(products));
       }
     }
     return list;
@@ -29,7 +28,7 @@ module.exports = class ShoppingListService {
   static #weightProducts(products, weight) {
     let weightProducts = [];
     products.forEach((p) => {
-      let weightProduct = this.#weightProduct(p, weight);
+      let weightProduct = this.#weightProduct(p, weight.toLowerCase());
       weightProducts.push(weightProduct);
     });
     weightProducts.sort((a, b) => b.weight - a.weight);
@@ -38,18 +37,18 @@ module.exports = class ShoppingListService {
 
   static #weightProduct(product, weight) {
     let weightProduct = { ...product, weight: 0 };
-    if (product.name === weight) {
-      weightProduct.weight += 3;
+    const productName = product.name.toLowerCase().replace(/[,.']/g, "").split(" ");
+    if (productName.includes(weight)) {
+      weightProduct.weight += 5;
     }
-    if (product.name.includes(weight)) {
-      weightProduct.weight += 1;
-    }
-    product.labels.forEach((l) => {
-      if (l === weight) {
+    productName.forEach(p => {
+      if(p.includes(weight)) {
         weightProduct.weight += 1;
       }
-      if (l.includes(weight)) {
-        weightProduct.weight += 0.1;
+    })
+    product.labels.forEach((l) => {
+      if (l.toLowerCase() === weight) {
+        weightProduct.weight += 1;
       }
     });
     return weightProduct;
@@ -66,5 +65,16 @@ module.exports = class ShoppingListService {
       }
     }
     return builtQuery;
+  }
+
+  static #getCheapestProduct(products) {
+    const filteredProducts = products.filter(
+      (p) => p.weight === products[0].weight
+    );
+    const cheapestProducts = filteredProducts.sort(
+      (a, b) => a.pricePerUnit - b.pricePerUnit
+    );
+    // console.log(cheapestProducts);
+    return cheapestProducts[0];
   }
 };
