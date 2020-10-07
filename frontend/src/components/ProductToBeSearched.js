@@ -5,7 +5,6 @@ import { MdDelete, MdEdit, MdSave } from "react-icons/md";
 
 export default function ProductToBeSearched(props) {
   const {
-    addProductFromShoppingList,
     removeProductFromShoppingList,
   } = useContext(ShoppingListContext);
 

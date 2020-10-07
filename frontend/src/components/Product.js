@@ -14,7 +14,12 @@ export default function Product(props) {
         style={{ backgroundImage: `url(${props.product.imageUrl})` }}
       >
         <div className="icons">
-          <div className="add">
+          <div
+            className="add"
+            onClick={() => {
+              props.handleChange(props.product);
+            }}
+          >
             <MdAddCircle className="white-icon" />
           </div>
           <div className="remove">
