@@ -59,14 +59,15 @@ module.exports = class ShoppingListService {
   }
 
   static #queryBuilder(query) {
-    let keys = Object.keys(query);
-    let builtQuery = {};
-    for (let key of keys) {
-      if (key === "name") {
-        builtQuery[key] = new RegExp(query[key], "i");
-      } else {
-        builtQuery[key] = query[key];
-      }
+    const builtQuery = {};
+    if (query.name) {
+      builtQuery.name = new RegExp(query.name, "i");
+    }
+    if (query.hasOwnProperty("categoryId") && query.categoryId !== -1) {
+      builtQuery.categoryIds = query.categoryId;
+    }
+    if (query.isEcological) {
+      builtQuery.isEcological = query.isEcological;
     }
     return builtQuery;
   }
@@ -78,7 +79,6 @@ module.exports = class ShoppingListService {
     const cheapestProducts = filteredProducts.sort(
       (a, b) => a.pricePerUnit - b.pricePerUnit
     );
-    // console.log(cheapestProducts);
     return cheapestProducts[0];
   }
 
