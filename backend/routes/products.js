@@ -1,7 +1,5 @@
 const { Product } = require("../models/product");
-const ProductService = require("../services/productService");
 const ShoppingListService = require("../services/ShoppingListService");
-const ProductScorer = require('../Shared/ProductScorer');
 const express = require("express");
 const router = express.Router();
 
