@@ -55,7 +55,7 @@ module.exports = class CoopScrubber extends Scrubber {
         ids.push(matJaktCategories[i].id);
       } else {
         //If nothing fits, return the category "Övrigt"
-        ids.push(matJaktCategories[matJaktCategories.length - 1]);
+        ids.push(matJaktCategories[matJaktCategories.length - 1].id);
       }
       return ids;
     }
