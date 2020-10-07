@@ -1,7 +1,7 @@
 import React from "react";
-import { Button, Col, Row, Container } from "reactstrap";
-import ReactDOM from "react-dom";
-import ReactToPdf from "react-to-pdf";
+import { Button, Col } from "reactstrap";
+/* import ReactDOM from "react-dom";
+import ReactToPdf from "react-to-pdf"; */
 
 export default function BottomButtons() {
   function print() {
@@ -13,8 +13,8 @@ export default function BottomButtons() {
   return (
     <div className="col-12" ref={ref}>
       <Col className="text-center">
-        <Button className="b1 ml-5 matjaktDarkGreen-bg" onClick={print}>
-          PRINT/SAVE
+        <Button className="b1 matjaktDarkGreen-bg bottombutton drop-shadow" onClick={print}>
+          Skriv ut din inköpslista
         </Button>
       </Col>
     </div>

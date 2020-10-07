@@ -3,14 +3,17 @@ import Product from "../components/Product";
 
 export default function ProductsList(props) {
 
- //console.log(props);
-  
-
   return (
     <div className="search-results">
       <div className="results">
-        {props.products.map((product) => {
-          return <Product handleChange={props.handleChange} product={product} />
+        {props.products.map((product, i) => {
+          return (
+            <Product
+              product={product}
+              handleChange={props.handleChange}
+              key={i}
+            />
+          );
         })}
       </div>
     </div>

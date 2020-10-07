@@ -1,11 +1,27 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ProductsList from "../components/ProductsList";
+import { Collapse, Card } from "reactstrap";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
-import { Collapse, Card, CardBody } from "reactstrap";
 
 export default function Store(props) {
+  const {
+    generatedShoppingList,
+    addSelectedProductToGeneratedShoppingList,
+    singleProductSearchResult,
+  } = useContext(ShoppingListContext);
+
   const [isOpen, setIsOpen] = useState(true);
-  const { handleChangeNewProduct } = useContext(ShoppingListContext);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    let sum = 0;
+    if (generatedShoppingList[props.store._id]) {
+      generatedShoppingList[props.store._id].map((product) => {
+        sum += product.price;
+      });
+    }
+    setTotalPrice(sum);
+  }, [generatedShoppingList[props.store._id]]);
 
   return (
     <div className=" col-lg-4 col-12 mb-5">
@@ -15,19 +31,31 @@ export default function Store(props) {
         }}
         className="store-name"
         align="center"
-        style={{ backgroundColor: `${props.store.color}` }}
+        style={{
+          backgroundColor: `${props.store.color}`,
+        }}
       >
         {props.store.name}
       </h4>
       <Collapse isOpen={isOpen}>
-        <Card>
-          <ProductsList mb-3 products={props.singleProductSearchResults} />
-          <ProductsList
-            products={props.generatedShoppingList}
-            handleChange={handleChangeNewProduct}
-          />
+        <Card style={{ backgroundColor: "rgba(255, 255, 255, 0.74" }}>
+          <div className="mb-5">
+            <ProductsList
+              products={singleProductSearchResult[props.store._id] || []}
+              handleChange={addSelectedProductToGeneratedShoppingList}
+            />
+          </div>
+          <div>
+            <ProductsList
+              products={generatedShoppingList[props.store._id] || []}
+              handleChange={addSelectedProductToGeneratedShoppingList}
+            />
+          </div>
         </Card>
       </Collapse>
+      <div className="text-center total-price matjaktDarkGreen-text">
+        {Math.round(totalPrice)} <span className="sek">SEK</span>
+      </div>
     </div>
   );
 }

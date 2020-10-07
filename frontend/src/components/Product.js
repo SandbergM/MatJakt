@@ -2,10 +2,13 @@ import React from "react";
 import { MdDelete, MdAddCircle, MdRemoveCircle } from "react-icons/md";
 
 export default function Product(props) {
-  console.log(props);
-
   return (
-    <div className="row product">
+    <div
+      className="row product"
+      onClick={() => {
+        props.handleChange(props.product.storeId, props.product);
+      }}
+    >
       <div
         className="col-3 product-image"
         style={{ backgroundImage: `url(${props.product.imageUrl})` }}

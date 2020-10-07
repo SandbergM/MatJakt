@@ -1,21 +1,21 @@
 const Scrubber = require("./Scrubber");
-const Translator = require("../Shared/CategoryTranslator");
+const Translator = require("../Shared/Translator");
 const { removePrimitiveDuplicates } = require("../Shared/Helpers");
-const categoryTranslations = Translator.categories;
-const labelTranslations = Translator.labels;
+const { stringToObjectId } = require("./Scrubber");
+const translations = Translator.translations;
 
 module.exports = class IcaScrubber extends Scrubber {
   static translateSchema = {
     name: (x) => x.name,
-    storeId: (x) => "5f59e688f158c91676980f43",
-    categoryIds: (x) => filterCategories(x.inCategories),
+    storeId: (x) => this.stringToObjectId("5f59e688f158c91676980f43"),
+    categoryIds: (x) => translator(x.inCategories, "category"),
     brand: (x) => x.brand,
     price: (x) => (x.price === undefined ? "N/A" : x.price),
     packagingSize: (x) => getpackagingSize(x.name),
     pricePerUnit: (x) => (x.compare === undefined ? "N/A" : x.compare.price),
     quantityType: (x) => getQuantityType(x.name),
     discount: (x) => x.promotions, // TODO
-    labels: (x) => labelMaker(x.inCategories, x.name),
+    labels: (x) => translator(x.inCategories, "label", x.name),
     isEcological: (x) =>
       x.markings.environmental === undefined
         ? false
@@ -26,24 +26,6 @@ module.exports = class IcaScrubber extends Scrubber {
       `https://assets.icanet.se/t_product_large_v1,f_auto/${x.sku}.jpg`,
   };
 };
-async function filterCategories(categories) {
-  let productCategoryArray = [];
-  categories.forEach((category) => {
-    categoryTranslations.has(category.slug)
-      ? productCategoryArray.push(categoryTranslations.get(category.slug))
-      : "";
-    if (category.path) {
-      category.path.forEach((subCategory) => {
-        categoryTranslations.has(subCategory.slug)
-          ? productCategoryArray.push(
-            categoryTranslations.get(subCategory.slug)
-          )
-          : "";
-      });
-    }
-  });
-  return removePrimitiveDuplicates(productCategoryArray);
-}
 
 function ecologicalCheck(markings) {
   for (let i = 0; i < markings.length; i++) {
@@ -81,19 +63,29 @@ function getpackagingSize(productName) {
       return productName[i].replace(/[^0-9]/g, "");
     }
   }
-  return "N/A";
+  return "st";
 }
 
-const labelMaker = (productCategories) => {
-  let labels = [];
-  productCategories.forEach((category) => {
-    category['path'].forEach((subCategory) => {
-      if (labelTranslations.get(subCategory.slug)) {
-        labelTranslations.get(subCategory.slug).split(",").forEach((x) => {
-          labels.push(x);
-        })
+const translator = (categories, type, productName) => {
+  let arr = [];
+
+  if (type === "label") { arr.push(...productName.toLowerCase().replace(/&/g, " ").split(" ")) }
+
+  categories.forEach((category) => {
+    if (translations.get(category.slug)) {
+      if (translations.get(category.slug)[type] !== undefined) {
+        arr.push(...translations.get(category.slug)[type])
       }
-    });
+    }
+    if (category.path) {
+      category.path.forEach((subCategory) => {
+        if (translations.get(subCategory.slug)) {
+          if (translations.get(subCategory.slug)[type] !== undefined) {
+            arr.push(...translations.get(subCategory.slug)[type])
+          }
+        }
+      })
+    }
   });
-  return removePrimitiveDuplicates(labels);
-}
+  return removePrimitiveDuplicates(arr);
+};

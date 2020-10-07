@@ -3,11 +3,14 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
+const Translator = require("./Shared/Translator");
+
+
 
 module.exports = class Server {
   dbURI =
     "mongodb+srv://matjakt:FoodHunt123@mat-jakt.mpf5m.mongodb.net/mat-jakt?retryWrites=true&w=majority";
-  constructor() {}
+  constructor() { }
 
   // Connects to db and starts express server
   async run() {
@@ -23,6 +26,7 @@ module.exports = class Server {
       useFindAndModify: false,
     });
     console.log("Connected to db...");
+    await Translator.fetchTranslations();
   }
 
   startServer() {
