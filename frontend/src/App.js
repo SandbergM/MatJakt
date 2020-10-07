@@ -31,6 +31,7 @@ function App() {
                   <ProductsToBeSearchedList />
                   <StoreList />
                   <BottomButtons />
+                
                 </div>
               </main>
               <Footer />
