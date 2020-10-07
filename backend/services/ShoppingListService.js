@@ -37,16 +37,18 @@ module.exports = class ShoppingListService {
 
   static #weightProduct(product, weight) {
     product.weight = 0;
-    const productName = product.name.toLowerCase().replace(/[,.']/g, "").split(" ");
+    const productName = product.name
+      .toLowerCase()
+      .replace(/[,.']/g, "")
+      .split(" ");
     if (productName.includes(weight)) {
       product.weight += 5;
     }
-    productName.forEach(p => {
-      if(p.includes(weight)) {
+    productName.forEach((p) => {
+      if (p.includes(weight)) {
         product.weight += 1;
       }
-    })
-    product.categoryIds.includes(20)
+    });
     product.labels.forEach((l) => {
       if (l.toLowerCase() === weight) {
         product.weight += 1;
@@ -54,18 +56,18 @@ module.exports = class ShoppingListService {
     });
 
     product.weight -= this.#getCategoryWeight(product.categoryIds);
-    
+
     return product;
   }
 
   static #queryBuilder(query) {
     const builtQuery = {
-      storeId: query.storeId
+      storeId: query.storeId,
     };
     if (query.name) {
       builtQuery.name = new RegExp(query.name, "i");
     }
-    if (query.hasOwnProperty("categoryId") && query.categoryId !== -1) {
+    if (query.categoryId !== null) {
       builtQuery.categoryIds = query.categoryId;
     }
     if (query.isEcological) {
@@ -86,7 +88,7 @@ module.exports = class ShoppingListService {
 
   static #getCategoryWeight(ids) {
     let value = 0;
-    ids.forEach(id => value += parseInt(id));
+    ids.forEach((id) => (value += parseInt(id)));
     return value;
   }
 };
