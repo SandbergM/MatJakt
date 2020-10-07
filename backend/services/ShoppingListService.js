@@ -36,22 +36,26 @@ module.exports = class ShoppingListService {
   }
 
   static #weightProduct(product, weight) {
-    let weightProduct = { ...product, weight: 0 };
+    product.weight = 0;
     const productName = product.name.toLowerCase().replace(/[,.']/g, "").split(" ");
     if (productName.includes(weight)) {
-      weightProduct.weight += 5;
+      product.weight += 5;
     }
     productName.forEach(p => {
       if(p.includes(weight)) {
-        weightProduct.weight += 1;
+        product.weight += 1;
       }
     })
+    product.categoryIds.includes(20)
     product.labels.forEach((l) => {
       if (l.toLowerCase() === weight) {
-        weightProduct.weight += 1;
+        product.weight += 1;
       }
     });
-    return weightProduct;
+
+    product.weight -= this.#getCategoryWeight(product.categoryIds);
+    
+    return product;
   }
 
   static #queryBuilder(query) {
@@ -76,5 +80,11 @@ module.exports = class ShoppingListService {
     );
     // console.log(cheapestProducts);
     return cheapestProducts[0];
+  }
+
+  static #getCategoryWeight(ids) {
+    let value = 0;
+    ids.forEach(id => value += parseInt(id));
+    return value;
   }
 };
