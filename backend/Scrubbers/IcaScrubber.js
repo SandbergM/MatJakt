@@ -69,22 +69,32 @@ function getpackagingSize(productName) {
 const translator = (categories, type, productName) => {
   let arr = [];
 
-  if (type === "label") { arr.push(...productName.toLowerCase().replace(/&/g, " ").split(" ")) }
+  if (type === "label") {
+    arr.push(...productName.toLowerCase().replace(/&/g, " ").split(" "));
+  }
 
   categories.forEach((category) => {
     if (translations.get(category.slug)) {
       if (translations.get(category.slug)[type] !== undefined) {
-        arr.push(...translations.get(category.slug)[type])
+        if (type === "label") {
+          arr.push(...translations.get(category.slug)[type]);
+        } else {
+          arr.push(+translations.get(category.slug)[type]);
+        }
       }
     }
     if (category.path) {
       category.path.forEach((subCategory) => {
         if (translations.get(subCategory.slug)) {
           if (translations.get(subCategory.slug)[type] !== undefined) {
-            arr.push(...translations.get(subCategory.slug)[type])
+            if (type === "label") {
+              arr.push(...translations.get(subCategory.slug)[type]);
+            } else {
+              arr.push(+translations.get(subCategory.slug)[type]);
+            }
           }
         }
-      })
+      });
     }
   });
   return removePrimitiveDuplicates(arr);
