@@ -74,7 +74,7 @@ module.exports = class Harvester {
     console.log(`Commencing database write operation...`);
     let startTime = Date.now();
     await TempProduct.collection.insertMany(this.scrubbedProducts);
-    Product.collection.drop();
+    await Product.collection.drop();
     await this.db.collection("tempproducts").rename("products");
     console.log(
       `Database write operation completed in ${Date.now() - startTime} ms.`
