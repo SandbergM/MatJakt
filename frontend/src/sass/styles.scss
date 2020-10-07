@@ -118,4 +118,13 @@ Button {
 
 .info{
   z-index: 999 !important;
+  position: absolute;
+  width: 300px;
 }
+
+.questionmark{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+

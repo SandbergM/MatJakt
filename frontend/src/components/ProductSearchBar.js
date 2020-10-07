@@ -26,7 +26,7 @@ export default function ProductSearchBar(props) {
         <SearchBarHeader />
       </div>
       <div className="col-2">
-        <Questionmark />
+        
         </div>
         </div>
       <div id="matjakt-searchbar-content-container" className="d-flex justify-content-around mb-4">
