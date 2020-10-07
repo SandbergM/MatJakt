@@ -59,7 +59,9 @@ module.exports = class ShoppingListService {
   }
 
   static #queryBuilder(query) {
-    const builtQuery = {};
+    const builtQuery = {
+      storeId: query.storeId
+    };
     if (query.name) {
       builtQuery.name = new RegExp(query.name, "i");
     }
