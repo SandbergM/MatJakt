@@ -125,6 +125,28 @@ Button {
   cursor: pointer;
 }
 
+.info{
+  z-index: 1 !important;
+  position: absolute;
+  left: -200px;
+  width: 300px;
+  background-color: white;
+  padding: 2em;
+  border-radius: 15px;
+  font-size: 14px;
+}
+
+.questionmark .btn-secondary{
+  font-size: 22px;
+ background-color: rgba(255, 0, 0, 0) !important;
+}
+
+.questionmark{
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+
 /* Located in store.js */
 .total-price {
   background-color: rgba(255, 255, 255, 0.74);

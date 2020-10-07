@@ -83,17 +83,9 @@ module.exports = class WillysScrubber extends Scrubber {
       labels.push(...nameLabels);
       product.breadCrumbs.forEach((x) => {
         if (translations.has(x.categoryCode)) {
-          translations
-            .get(x.categoryCode)
-            .label.toLowerCase()
-            .replace(/[\s\s]/g, "")
-            .replace(/&/g, " ")
-            .split(" ")
-            .forEach((y) => {
-              if (y !== "") {
-                labels.push(y);
-              }
-            });
+          translations.get(x.categoryCode).label.forEach((l) => {
+            labels.push(l)
+          })
         }
       });
     }

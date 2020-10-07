@@ -9,6 +9,15 @@ export default function ShoppingListContextProvider(props) {
   );
   const [generatedShoppingList, setGeneratedShoppingList] = useState({});
 
+  const handleChangeNewProduct = (product, attribute, value) => {
+    console.log(product, attribute, value)
+    // for (let i = 0; i < generatedShoppingList.length; i++) {
+    //   if (generatedShoppingList[i] == product) {
+    //     generatedShoppingList[i] = { ...product, [attribute]: value}
+    //   }
+    // }
+  };
+
   useEffect(() => {
     loadFromLocalStorage();
   }, []);
@@ -94,6 +103,7 @@ export default function ShoppingListContextProvider(props) {
     editProductInShoppingList,
     removeProductFromShoppingList,
     fetchGeneratedShoppingLists,
+    handleChangeNewProduct,
     generatedShoppingList,
     singleProductSearchResult,
     addSelectedProductToGeneratedShoppingList,
