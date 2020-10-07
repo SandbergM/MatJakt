@@ -21,14 +21,9 @@ export default function ProductSearchBar(props) {
 
   return (
     <div className="col-12 justify-content-center">
-      <div className="row">
-      <div className="col-10">
+      
         <SearchBarHeader />
-      </div>
-      <div className="col-2">
-        
-        </div>
-        </div>
+     
       <div id="matjakt-searchbar-content-container" className="d-flex justify-content-around mb-4">
         <form id="products-search-form">
           <div className="row">
