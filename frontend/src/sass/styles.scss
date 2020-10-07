@@ -137,12 +137,13 @@ Button {
 }
 
 .questionmark .btn-secondary{
+  font-size: 22px;
  background-color: rgba(255, 0, 0, 0) !important;
 }
 
 .questionmark{
   position: absolute;
-  right: 5px;
+  right: 10px;
   top: 5px;
 }
 

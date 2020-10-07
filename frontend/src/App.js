@@ -7,7 +7,6 @@ import StoreList from "./components/StoreList";
 import ProductSearchBar from "./components/ProductSearchBar";
 import ProductsToBeSearchedList from "./components/ProductsToBeSearchedList";
 import BottomButtons from "./components/BottomButtons";
-import Questionmark from "./components/Questionmark";
 
 // CONTEXTPROVIDERS
 import ShoppingListContextProvider from "./contexts/ShoppingListContext";

@@ -80,7 +80,7 @@ export default function ShoppingListContextProvider(props) {
   };
 
   const fetchGeneratedShoppingLists = async () => {
-    let data = await fetch(`http://127.0.0.1:3000/products/generateList`, {
+    await fetch(`http://127.0.0.1:3000/products/generateList`, {
       method: "POST",
       body: JSON.stringify(productsToBeSearched),
       mode: "cors",

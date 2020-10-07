@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { Button } from 'reactstrap'
 
-function Questionmark() {
+function Questionmark(props) {
   const [isShown, setIsShown] = useState(false);
 
-  function changeBg(e) {
-    //e.target.style.background = 'green';
-  }
   return (
     <div className="questionmark">
       <Button
@@ -16,7 +13,7 @@ function Questionmark() {
       </Button>
       {isShown && (
         <div className="info">
-          Skriv här viken produkt vill du söka efter.
+          {props.text}
         </div>
       )}
     </div>
