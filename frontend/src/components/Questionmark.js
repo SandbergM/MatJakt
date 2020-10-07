@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button } from 'reactstrap'
-//import './App.css';
 
 function Questionmark() {
   const [isShown, setIsShown] = useState(false);

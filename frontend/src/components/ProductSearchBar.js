@@ -7,8 +7,6 @@ import ProductInputField from './CustomInputFields/ProductInputField.js';
 import ProductSelect from './CustomInputFields/ProductSelect.js';
 import SearchBarHeader from './SearchBarHearder.js'
 import EcologicalToggleButton from './CustomInputFields/EcologicalToggleButton.js'
-import AddToListButton from './AddToListButton.js'
-import Questionmark from "./Questionmark";
 
 export default function ProductSearchBar(props) {
   const { addProductToShoppingList, singleProductSearch } = useContext(ShoppingListContext);
