@@ -17,15 +17,8 @@ router.post("/generateList", async (req, res) => {
 });
 
 router.get("/test", async (req, res) => {
-  const products = await ShoppingListService.generateList([
-    {
-      name: "mjölk",
-      isEcological: true,
-    },
-    {
-      name: "potatis",
-    },
-  ]);
+  const query = req.body;
+  const products = await ShoppingListService.generateList(query);
   res.json(products);
 });
 
