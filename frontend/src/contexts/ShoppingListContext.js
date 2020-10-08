@@ -82,6 +82,7 @@ export default function ShoppingListContextProvider(props) {
       }
     );
     data = await data.json();
+    console.log(data);
     setSingleProductSearchResult(data);
   };
 
