@@ -53,9 +53,6 @@ export default function Product(props) {
             <span className="price-text"> {props.product.price} SEK</span>
           </div>
         </div>
-        <Button className="add-button" onClick={add}>
-          Lägg till
-        </Button>
         <div className="divider mt-3 mb-2"></div>
       </div>
       <div className="delete align-items-center right-icons">
