@@ -7,13 +7,15 @@ export default function ProductsToBeSearchedList() {
   const { productsToBeSearched, fetchGeneratedShoppingLists } = useContext(
     ShoppingListContext
   );
-
+  
   const list = () => {
     return productsToBeSearched.map((product, index) => {
-      return <ProductsToBeSearched key={index} product={product} />;
+      console.log(product)
+      return <ProductsToBeSearched key={index} index={index} product={product} />;
     });
   };
-  
+
+
   return (
     <div className="col-12 mb-5 mt-4">
       <div className="col-12" id="product-to-be-searched-list">
