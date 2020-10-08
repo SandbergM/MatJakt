@@ -48,7 +48,7 @@ module.exports = class ShoppingListService {
     })
     product.categoryIds.includes(20)
     product.labels.forEach((l) => {
-      if (l.toLowerCase() === weight) {
+      if (l === weight) {
         product.weight += 1;
       }
     });
@@ -86,7 +86,17 @@ module.exports = class ShoppingListService {
 
   static #getCategoryWeight(ids) {
     let value = 0;
-    ids.forEach(id => value += parseInt(id));
-    return value;
+    ids.forEach((id) => {
+      if (id === 2 || id === 4 || id === 7) {
+        value += 1 * id;
+      } else if (id === 0 || id === 1 || id === 6 || id === 5) {
+        value += 10 * id;
+      } else if (id === 3 || id === 8 || id === 9 || id === 10) {
+        value += 25 * id;
+      } else {
+        value += 200 * id;
+      }
+    });
+    return value === 0 ? 1000 : value;
   }
 };

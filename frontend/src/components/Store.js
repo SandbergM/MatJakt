@@ -17,6 +17,7 @@ export default function Store(props) {
     let sum = 0;
     if (generatedShoppingList[props.store._id]) {
       generatedShoppingList[props.store._id].map((product) => {
+        console.log(sum);
         sum += product.price;
       });
     }
@@ -54,7 +55,7 @@ export default function Store(props) {
         </Card>
       </Collapse>
       <div className="text-center total-price matjaktDarkGreen-text">
-        {Math.round(totalPrice)} <span className="sek">SEK</span>
+        {totalPrice.toFixed(2)} <span className="sek">SEK</span>
       </div>
     </div>
   );

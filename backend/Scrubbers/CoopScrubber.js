@@ -19,7 +19,8 @@ module.exports = class CoopScrubber extends Scrubber {
     labels: (x) => this.getLabels(x),
     isEcological: (x) => this.getEcological(x),
     countryOfOrigin: (x) => (x.fromSweden ? "Sweden" : "Other"), //TODO: Can't find the specific country on Coop if not from Sweden - it seems to be in some of the product titles though
-    imageUrl: (x) => x.images[0].url,
+    imageUrl: (x) =>
+      x.images[0].url.slice(0, x.images[0].url.length - 5) + ".jpg",
   };
 
   static getCategoryIds(product) {
