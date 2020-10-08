@@ -65,7 +65,7 @@ module.exports = class ShoppingListService {
     if (query.name) {
       builtQuery.name = new RegExp(query.name, "i");
     }
-    if (query.hasOwnProperty("categoryId") && query.categoryId !== -1) {
+    if (query.categoryId !== null) {
       builtQuery.categoryIds = query.categoryId;
     }
     if (query.isEcological) {
