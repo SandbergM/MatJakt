@@ -1,0 +1,25 @@
+#product-to-be-searched-list {
+  border-radius: 15px;
+  padding: 15px 15px 35px 15px;
+  margin: 0 !important;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.product-to-be-searched-item {
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 1);
+  font-size: 20px;
+  font-weight: 500;
+}
+.thomas-list-icons{
+  white-space: nowrap;
+}
+#generate-list-button{
+  background-color: #66c46c;
+  border: none;
+  border-radius: 15px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 17px;
+  position: absolute;
+  top: -20.5px;
+}

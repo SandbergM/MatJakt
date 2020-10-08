@@ -1,12 +1,4 @@
 const fetch = require("node-fetch");
-
-/* 
-Todo, Store / Addres harvest
-https://handla.ica.se/api/editorial-content/v1/store-info/store/ica-supermarket-linero-torg-id_15172
-Store : name, websiteUrl, openingHours
-Address : country, region, city, zipCode, streetNumber, streetName
-*/
-
 module.exports = class IcaHarvester {
   static async getCategories() {
     const storeId = "15172"; // Unique id for ica-supermarket-linero-torg
@@ -61,8 +53,8 @@ module.exports = class IcaHarvester {
 
       let raw = await fetch(`
             https://handla.ica.se/api/content/v1/collection/customer-type/B2C/store/ica-supermarket-linero-torg-id_15172/products-data?skus=${query.join(
-              ","
-            )}`);
+        ","
+      )}`);
 
       let res = await raw.json();
       if (i >= adjustStepsBackAt) {
@@ -72,6 +64,7 @@ module.exports = class IcaHarvester {
         products = [...products, ...res];
       } catch (error) {
         if (res.message == "Internal server error") {
+          console.log(`Kokhöna not found ;)`);
           if (steps === 100) {
             i--;
             adjustStepsBackAt = i + 99;

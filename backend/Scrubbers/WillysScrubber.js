@@ -1,14 +1,20 @@
 const fetch = require("node-fetch");
 const Scrubber = require("./Scrubber");
-const { getRandomNumber } = require("../Shared/Helpers");
+const Translator = require("../Shared/Translator");
+const translations = Translator.translations;
+
+const {
+  getRandomNumber,
+  removePrimitiveDuplicates,
+} = require("../Shared/Helpers");
 
 module.exports = class WillysScrubber extends Scrubber {
-  static detailedProduct;
+  detailedProduct;
 
   static translateSchema = {
     name: (x) => x.name,
-    categoryId: async (x) => await this.getCategoryId(x.code),
-    storeId: (x) => "Willys", // TODO: Add real storeId
+    categoryIds: async (x) => await this.getCategoryIds(x.code),
+    storeId: (x) => this.stringToObjectId("5f59e877f158c91676980f45"),
     brand: (x) => x.manufacturer,
     price: (x) => x.priceValue,
     packagingSize: (x) =>
@@ -21,15 +27,18 @@ module.exports = class WillysScrubber extends Scrubber {
     discount: (x) => x.savingsAmount,
     labels: async (x) => await this.getLabels(x.code),
     isEcological: (x) => x.labels.includes("ecological"),
-    countryOfOrigin: (x) =>
-      x.labels.includes("swedish_flag") ? "Sweden" : "Other",
+    countryOfOrigin: (x) => this.getCountryOfOrigin(x.code),
     imageUrl: (x) => x.image && x.image.url,
   };
 
+  // Checks if detailedProduct isn't null
+  // and if the product.code matches detailedProduct.code
+  // if both statements are truthy it returns the detailedProduct
+  // otherwise it fetches and returns the detailed product view.
   static async getDetailedProduct(productCode) {
     return this.detailedProduct && this.detailedProduct.code === productCode
       ? this.detailedProduct
-      : this.fetchDetailedProduct(productCode);
+      : await this.fetchDetailedProduct(productCode);
   }
 
   // Fetches the detailed product view
@@ -46,29 +55,46 @@ module.exports = class WillysScrubber extends Scrubber {
     return this.detailedProduct;
   }
 
-  // TODO: Add logic
-  static async getCategoryId(productCode) {
-    // let product = await this.getDetailedProduct(productCode);
-    // if (product) {
-    //   return "CategoryId";
-    // }
-    return "Not found";
+  static async getCategoryIds(productCode) {
+    let categoryIds = [];
+    const product = await this.getDetailedProduct(productCode);
+    if (product) {
+      product.breadCrumbs.forEach((x) => {
+        if (
+          translations.has(x.categoryCode) &&
+          translations.get(x.categoryCode).category
+        ) {
+          categoryIds.push(translations.get(x.categoryCode).category);
+        }
+      });
+    }
+    return removePrimitiveDuplicates(categoryIds);
   }
 
-  // TODO: Add logic
   static async getLabels(productCode) {
-    // let product = await this.getDetailedProduct(productCode);
-    // if (product) {
-    //   return ["This", "is", "a", "label"];
-    // }
-    return ["Not found"];
+    const product = await this.getDetailedProduct(productCode);
+    let labels = [];
+    //const translations = CategoryTranslator.categories;
+    if (product) {
+      const nameLabels = product.name
+        .toLowerCase()
+        .replace(/[\s\s+&]/g, " ")
+        .split(" ");
+      labels.push(...nameLabels);
+      product.breadCrumbs.forEach((x) => {
+        if (translations.has(x.categoryCode)) {
+          translations.get(x.categoryCode).label.forEach((l) => {
+            labels.push(l)
+          })
+        }
+      });
+    }
+    return removePrimitiveDuplicates(labels);
   }
 
   static async getCountryOfOrigin(productCode) {
-    // let product = await this.getDetailedProduct(productCode);
-    // return product && product.tradeItemCountryOfOrigin;
-
-    return "Nåt land";
+    let product = await this.getDetailedProduct(productCode);
+    return product && product.tradeItemCountryOfOrigin;
   }
 
   static getVolume(displayVolume) {

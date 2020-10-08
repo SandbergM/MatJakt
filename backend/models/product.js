@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
   name: { type: String, required: true },
-  storeId: { type: mongoose.Types.ObjectId, ref: "Store", required: true },
-  categoryId: [{ type: mongoose.Types.ObjectId, ref: "Category" }],
+  storeId: { type: Schema.Types.ObjectId, ref: 'store', required: true },
+  categoryIds: [{ type: Schema.Types.ObjectId, ref: 'category' }],
   brand: { type: String },
   price: { type: Number, required: true },
   packagingSize: { type: Number },
@@ -18,6 +18,6 @@ const productSchema = new Schema({
 });
 
 module.exports = {
-  Product: mongoose.model("Product", productSchema),
+  Product: mongoose.model("product", productSchema),
   TempProduct: mongoose.model("tempProduct", productSchema),
 };

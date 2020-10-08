@@ -1,0 +1,30 @@
+#input-edit, #input-edit-quantity, #input-edit-quantity-type, #eko-button-input {
+   padding: 0 0 0 5px;
+}
+
+#input-edit input {
+  height: 25px !important;
+  border: 1px solid rgb(133, 207, 164) !important;
+  
+}
+#input-edit-quantity input {
+  height: 25px !important;
+  border: 1px solid rgb(133, 207, 164) !important;
+}
+#input-edit-quantity-type select {
+  height: 25px !important;
+  border: 1px solid rgb(133, 207, 164) !important;
+}
+.ecological-button {
+  align-items: center;
+  border-radius: 25px !important;
+  border: #66c46c solid 1px !important;
+  font-size: 14px !important;
+}
+.ecological-text {
+  font-size: 14px;
+}
+#eko-button-input button {
+  height: 25px !important;
+  border: 1px solid rgb(133, 207, 164) !important;
+}
