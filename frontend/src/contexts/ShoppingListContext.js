@@ -4,8 +4,19 @@ export const ShoppingListContext = createContext();
 
 export default function ShoppingListContextProvider(props) {
   const [productsToBeSearched, setProductsToBeSearched] = useState([]);
-  const [singleProductSearchResult, setSingleProductSearchResult] = useState({});
+  const [singleProductSearchResult, setSingleProductSearchResult] = useState(
+    {}
+  );
   const [generatedShoppingList, setGeneratedShoppingList] = useState({});
+
+  const handleChangeNewProduct = (product, attribute, value) => {
+    console.log(product, attribute, value)
+    // for (let i = 0; i < generatedShoppingList.length; i++) {
+    //   if (generatedShoppingList[i] == product) {
+    //     generatedShoppingList[i] = { ...product, [attribute]: value}
+    //   }
+    // }
+  };
 
   useEffect(() => {
     loadFromLocalStorage();
@@ -26,6 +37,20 @@ export default function ShoppingListContextProvider(props) {
     }
   };
 
+  const addSelectedProductToGeneratedShoppingList = (storeId, product) => {
+    if (!generatedShoppingList[storeId]) {
+      setGeneratedShoppingList({
+        ...generatedShoppingList,
+        [storeId]: [product],
+      });
+    } else {
+      setGeneratedShoppingList({
+        ...generatedShoppingList,
+        [storeId]: [...generatedShoppingList[storeId], product],
+      });
+    }
+  };
+
   const addProductToShoppingList = async (product) => {
     setProductsToBeSearched((productsToBeSearched) => [
       ...productsToBeSearched,
@@ -33,7 +58,13 @@ export default function ShoppingListContextProvider(props) {
     ]);
   };
 
-  const removeProductToShoppingList = async (productToRemove) => {
+  const editProductInShoppingList = async (index, productToEdit) => {
+    let editedProduct = productsToBeSearched;
+    editedProduct.splice(index, 1, productToEdit);
+    setProductsToBeSearched([...editedProduct]);
+  };
+
+  const removeProductFromShoppingList = async (productToRemove) => {
     setProductsToBeSearched(
       productsToBeSearched.filter((product) => product !== productToRemove)
     );
@@ -41,19 +72,22 @@ export default function ShoppingListContextProvider(props) {
 
   const singleProductSearch = async (product) => {
     setSingleProductSearchResult({});
-    let data = await fetch(`http://127.0.0.1:3000/products/singleProductSearch`, {
-      method: "POST",
-      body: JSON.stringify(product),
-      mode: "cors",
-      headers: { "Content-type": "application/json;charset=utf-8" }
-    });
+    let data = await fetch(
+      `http://127.0.0.1:3000/products/singleProductSearch`,
+      {
+        method: "POST",
+        body: JSON.stringify(product),
+        mode: "cors",
+        headers: { "Content-type": "application/json;charset=utf-8" },
+      }
+    );
     data = await data.json();
     console.log(data);
     setSingleProductSearchResult(data);
   };
 
   const fetchGeneratedShoppingLists = async () => {
-    let data = await fetch(`http://127.0.0.1:3000/products/generateList`, {
+    await fetch(`http://127.0.0.1:3000/products/generateList`, {
       method: "POST",
       body: JSON.stringify(productsToBeSearched),
       mode: "cors",
@@ -67,10 +101,13 @@ export default function ShoppingListContextProvider(props) {
     productsToBeSearched,
     singleProductSearch,
     addProductToShoppingList,
-    removeProductToShoppingList,
+    editProductInShoppingList,
+    removeProductFromShoppingList,
     fetchGeneratedShoppingLists,
+    handleChangeNewProduct,
     generatedShoppingList,
     singleProductSearchResult,
+    addSelectedProductToGeneratedShoppingList,
   };
 
   return (

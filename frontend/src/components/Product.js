@@ -1,32 +1,40 @@
 import React from "react";
-import { useState } from "react";
 import { MdDelete, MdAddCircle, MdRemoveCircle } from "react-icons/md";
 import { Button } from 'reactstrap';
-import Shoppinglist from './ShoppingList'
-
 
 export default function Product(props) {
-  const [todos, setToadd] = useState(['hej'])
-
-  function add(e) {
-    
-
-  }
   return (
-    <div className="row product">
-      <Shoppinglist todos={todos}/>
+    <div
+      className="row product"
+      onClick={() => {
+        props.handleChange(props.product.storeId, props.product);
+      }}
+    >
       <div
         className="col-3 product-image"
         style={{ backgroundImage: `url(${props.product.imageUrl})` }}
       >
-        <div className="icons">
-          <div className="add">
-            <MdAddCircle className="white-icon" />
+        {props.type === "chosen" ? (
+          <div className="icons">
+            <div className="add">
+              <MdAddCircle className="white-icon" />
+            </div>
+            <div className="remove">
+              <MdRemoveCircle className="white-icon" />
+            </div>
           </div>
-          <div className="remove">
-            <MdRemoveCircle className="white-icon" />
+        ) : (
+          ""
+        )}
+        {props.type === "search" ? (
+          <div className="iconsChosen">
+            <div className="">
+              <MdAddCircle className="white-icon" />
+            </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
       </div>
       <div className="col-7">
         <div className="row align-items-start">
