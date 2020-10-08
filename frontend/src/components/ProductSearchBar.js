@@ -19,7 +19,7 @@ export default function ProductSearchBar(props) {
       name: "",
       quantity: 0,
       quantityType: "st",
-      categoryId: 0,
+      categoryId: null,
       isEcological: false
     }
   )
