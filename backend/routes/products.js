@@ -14,7 +14,7 @@ router.post("/generateList", async (req, res) => {
   res.send(list);
 });
 
-router.get("/test", async (req, res) => {
+router.post("/generate-list", async (req, res) => {
   const query = req.body;
   const products = await ShoppingListService.generateList(query);
   res.json(products);
