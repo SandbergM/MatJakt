@@ -88,13 +88,13 @@ module.exports = class ShoppingListService {
     let value = 0;
     ids.forEach((id) => {
       if (id === 2 || id === 4 || id === 7) {
-        value += 1 * id;
+        value += 1;
       } else if (id === 0 || id === 1 || id === 6 || id === 5) {
-        value += 10 * id;
+        value += 10;
       } else if (id === 3 || id === 8 || id === 9 || id === 10) {
-        value += 25 * id;
+        value += 25;
       } else {
-        value += 200 * id;
+        value += 200;
       }
     });
     return value === 0 ? 1000 : value;
