@@ -5,7 +5,7 @@ import { CategoryContext } from "../contexts/CategoryContext";
 
 import ProductInputField from './CustomInputFields/ProductInputField.js';
 import ProductSelect from './CustomInputFields/ProductSelect.js';
-import SearchBarHeader from './SearchBarHeader.js'
+import SearchBarHeader from './SearchBarHearder.js'
 import EcologicalToggleButton from './CustomInputFields/EcologicalToggleButton.js'
 
 export default function ProductSearchBar(props) {
@@ -107,6 +107,7 @@ export default function ProductSearchBar(props) {
             >
               <Button
                 id="single-product-search-button"
+              
                 onClick={() => {
                   singleProductSearch(product);
                 }}

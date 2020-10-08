@@ -42,14 +42,12 @@ export default function Store(props) {
         <Card style={{ backgroundColor: "rgba(255, 255, 255, 0.74" }}>
           <div className="mb-5">
             <ProductsList
-              type={"search"}
               products={singleProductSearchResult[props.store._id] || []}
               handleChange={addSelectedProductToGeneratedShoppingList}
             />
           </div>
           <div>
             <ProductsList
-              type={"chosen"}
               products={generatedShoppingList[props.store._id] || []}
               handleChange={addSelectedProductToGeneratedShoppingList}
             />

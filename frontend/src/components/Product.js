@@ -13,27 +13,19 @@ export default function Product(props) {
         className="col-3 product-image"
         style={{ backgroundImage: `url(${props.product.imageUrl})` }}
       >
-        {props.type === "chosen" ? (
-          <div className="icons">
-            <div className="add">
-              <MdAddCircle className="white-icon" />
-            </div>
-            <div className="remove">
-              <MdRemoveCircle className="white-icon" />
-            </div>
+        <div className="icons">
+          <div
+            className="add"
+            onClick={() => {
+              props.handleChange(props.product);
+            }}
+          >
+            <MdAddCircle className="white-icon" />
           </div>
-        ) : (
-          ""
-        )}
-        {props.type === "search" ? (
-          <div className="iconsChosen">
-            <div className="">
-              <MdAddCircle className="white-icon" />
-            </div>
+          <div className="remove">
+            <MdRemoveCircle className="white-icon" />
           </div>
-        ) : (
-          ""
-        )}
+        </div>
       </div>
       <div className="col-7">
         <div className="row align-items-start">
