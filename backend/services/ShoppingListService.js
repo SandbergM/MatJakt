@@ -37,20 +37,19 @@ module.exports = class ShoppingListService {
 
   static #weightProduct(product, weight) {
     product.weight = 0;
+
     const productName = product.name.toLowerCase().replace(/[,.']/g, "").split(" ");
     if (productName.includes(weight)) {
       product.weight += 5;
     }
+
     productName.forEach(p => {
-      if(p.includes(weight)) {
-        product.weight += 1;
-      }
+      if(p.includes(weight)) {product.weight += 1;}
+      if(p.toLowerCase() === weight){product.weight += 100}
     })
-    product.categoryIds.includes(20)
     product.labels.forEach((l) => {
-      if (l === weight) {
-        product.weight += 1;
-      }
+      if (weight.includes(l)) { product.weight += 1; }
+      if(weight === l){ product.weight += 100 }
     });
 
     product.weight -= this.#getCategoryWeight(product.categoryIds);
@@ -87,16 +86,33 @@ module.exports = class ShoppingListService {
   static #getCategoryWeight(ids) {
     let value = 0;
     ids.forEach((id) => {
-      if (id === 2 || id === 4 || id === 7) {
-        value += 1;
-      } else if (id === 0 || id === 1 || id === 6 || id === 5) {
-        value += 10;
-      } else if (id === 3 || id === 8 || id === 9 || id === 10) {
-        value += 25;
-      } else {
-        value += 200;
+      id = parseInt(id)
+      switch (id) {
+        case 0: value -= 5;
+          break;
+        case 1: value += 50;
+          break;
+        case 2: value -= 100;
+          break;
+        case 3: value += 55;
+          break;
+        case 4: value -= 50;
+          break;
+        case 5: value += 25;
+          break;
+        case 6: value += 75;
+          break;
+        case 7: value -= 25;
+          break;
+        case 8: value += 100;
+          break;
+        case 9: value += 25;
+          break;
+        case 18: value += 1000;
+          break;
+        default: value += 0;
       }
     });
-    return value === 0 ? 1000 : value;
+    return value === 0 ? 10000 : value;
   }
 };
