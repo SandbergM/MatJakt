@@ -104,7 +104,7 @@ module.exports = class CoopScrubber extends Scrubber {
           labels.push(x.replace(/[,]/g, ""));
         }
       });
-    return [...new Set(labels)];
+    return labels;
   }
 
   static getEcological(product) {

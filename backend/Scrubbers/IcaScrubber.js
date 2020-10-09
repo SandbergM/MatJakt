@@ -94,5 +94,5 @@ const translator = (categories, type, productName) => {
       })
     }
   });
-  return removePrimitiveDuplicates(arr);
+  return arr;
 };

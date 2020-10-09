@@ -8,7 +8,7 @@ export default function List() {
   return (
     <div className="col-12 storelist">
       {stores.map((store, i) => {
-        return <Store className="store-list" key={i} store={store} x />;
+        return <Store className="store-list" key={i} store={store}/>;
       })}
     </div>
   );

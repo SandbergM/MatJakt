@@ -17,7 +17,6 @@ export default function Store(props) {
     let sum = 0;
     if (generatedShoppingList[props.store._id]) {
       generatedShoppingList[props.store._id].map((product) => {
-        console.log(sum);
         sum += product.price;
       });
     }

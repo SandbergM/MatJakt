@@ -19,8 +19,13 @@ module.exports = class ShoppingListService {
         let query = this.#queryBuilder({ ...c, storeId: id });
         let products = await ProductService.findProductsByQuery(query);
         products = this.#weightProducts(products, c.name);
-        list[id].push(this.#getCheapestProduct(products));
+        console.log(products.length, "  products");
+        let cheapest = this.#getCheapestProduct(products);
+        cheapest && list[id].push(cheapest);
       }
+    }
+    for (let key in list) {
+      console.log(key, list[key].length)
     }
     return list;
   }
@@ -44,12 +49,17 @@ module.exports = class ShoppingListService {
     }
 
     productName.forEach(p => {
-      if(p.includes(weight)) {product.weight += 1;}
-      if(p.toLowerCase() === weight){product.weight += 100}
+      if (p.includes(weight)) { product.weight += 1; }
+      else { product.weight -= 5 }
+
+      if(p.toLowerCase() === weight) { product.weight += 100 }
+      
     })
     product.labels.forEach((l) => {
-      if (weight.includes(l)) { product.weight += 1; }
-      if(weight === l){ product.weight += 100 }
+      if (weight.includes(l)) { product.weight += 1; } 
+      else { product.weight -= 5 }
+      
+      if(weight === l){ product.weight += 50 }
     });
 
     product.weight -= this.#getCategoryWeight(product.categoryIds);
@@ -80,6 +90,7 @@ module.exports = class ShoppingListService {
     const cheapestProducts = filteredProducts.sort(
       (a, b) => a.pricePerUnit - b.pricePerUnit
     );
+    console.log(cheapestProducts);
     return cheapestProducts[0];
   }
 
@@ -88,29 +99,31 @@ module.exports = class ShoppingListService {
     ids.forEach((id) => {
       id = parseInt(id)
       switch (id) {
-        case 0: value -= 5;
+        case 0: value -= 10;
           break;
         case 1: value += 50;
           break;
-        case 2: value -= 100;
+        case 2: value -= 200;
           break;
-        case 3: value += 55;
+        case 3: value -= 45;
           break;
-        case 4: value -= 50;
+        case 4: value -= 60;
           break;
         case 5: value += 25;
           break;
         case 6: value += 75;
           break;
-        case 7: value -= 25;
+        case 7: value -= 45;
           break;
-        case 8: value += 100;
+        case 8: value += 150;
           break;
         case 9: value += 25;
           break;
-        case 18: value += 1000;
+        case 13: value += 5;
           break;
-        default: value += 0;
+        case 18: value += 500;
+          break;
+        default: value += 1000;
       }
     });
     return value === 0 ? 10000 : value;
