@@ -25,41 +25,40 @@ module.exports = class CoopScrubber extends Scrubber {
 
   static getCategoryIds(product) {
     //TODO EXCHANGE THIS ARRAY WITH CATEGORIES FROM THE DB
-    const matJaktCategories = [
-      { categoryName: "Mejeri & Ägg", id: 0 },
-      { categoryName: "Ost", id: 1 },
-      { categoryName: "Frukt & Grönsaker", id: 2 },
-      { categoryName: "Skafferi", id: 3 },
-      { categoryName: "Kött & Fågel", id: 4 },
-      { categoryName: "Chark & Pålägg", id: 5 },
-      { categoryName: "Vegetariskt", id: 6 },
-      { categoryName: "Fisk & Skaldjur", id: 7 },
-      { categoryName: "Dryck", id: 8 },
-      { categoryName: "Bröd & Bageri", id: 9 },
-      { categoryName: "Smaksättare", id: 10 },
-      { categoryName: "Färdigmat", id: 11 },
-      { categoryName: "Hem & Hushåll", id: 12 },
-      { categoryName: "Frys", id: 13 },
-      { categoryName: "Barn", id: 14 },
-      { categoryName: "Skönhet & Hygien", id: 15 },
-      { categoryName: "Hälsa & Tillskott", id: 16 },
-      { categoryName: "Tobak", id: 17 },
-      { categoryName: "Husdjur", id: 18 },
-      { categoryName: "Världens Mat", id: 19 },
-      { categoryName: "Övrigt", id: 20 },
-    ];
+    const matJaktCategories = {
+      "Mejeri & Ägg": 0,
+      "Ost": 1,
+      "Frukt & Grönsaker": 2,
+      "Skafferi": 3 ,
+      "Kött & Fågel": 4 ,
+      "Chark & Pålägg": 5,
+      "Vegetariskt": 6,
+      "Fisk & Skaldjur":7,
+      "Dryck" : 8,
+      "Bröd & Bageri": 9,
+      "Smaksättare": 10 ,
+      "Färdigmat": 11 ,
+      "Hem & Hushåll": 12 ,
+      "Frys": 13,
+      "Barn": 14 ,
+      "Skönhet & Hygien": 15 ,
+      "Hälsa & Tillskott": 16 ,
+      "Tobak": 17 ,
+      "Husdjur": 18 ,
+      "Världens Mat": 19 ,
+      "Övrigt": 20 ,
+  };
     const ids = [];
-    for (let i = 0; i < matJaktCategories.length - 1; i++) {
       if (
-        product.categories[0].name.includes(matJaktCategories[i].categoryName)
+        matJaktCategories[product.categories[0].name]
       ) {
-        ids.push(matJaktCategories[i].id);
+        ids.push(matJaktCategories[product.categories[0].name]);
+        console.log(matJaktCategories[product.categories[0].name]);
       } else {
         //If nothing fits, return the category "Övrigt"
-        ids.push(matJaktCategories[matJaktCategories.length - 1].id);
+        ids.push(20);
       }
       return ids;
-    }
   }
 
   static getPricePerUnit(productPrice, productUnit) {
@@ -104,7 +103,7 @@ module.exports = class CoopScrubber extends Scrubber {
           labels.push(x.replace(/[,]/g, ""));
         }
       });
-    return labels;
+    return [...new Set(labels)];
   }
 
   static getEcological(product) {
