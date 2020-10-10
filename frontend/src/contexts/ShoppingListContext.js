@@ -58,12 +58,6 @@ export default function ShoppingListContextProvider(props) {
     ]);
   };
 
-  const editProductInShoppingList = async (index, productToEdit) => {
-    let editedProduct = productsToBeSearched;
-    editedProduct.splice(index, 1, productToEdit);
-    setProductsToBeSearched([...editedProduct]);
-  };
-
   const removeProductFromShoppingList = async (productToRemove) => {
     setProductsToBeSearched(
       productsToBeSearched.filter((product) => product !== productToRemove)
@@ -82,26 +76,24 @@ export default function ShoppingListContextProvider(props) {
       }
     );
     data = await data.json();
-    console.log(data);
     setSingleProductSearchResult(data);
   };
 
   const fetchGeneratedShoppingLists = async () => {
-    await fetch(`http://127.0.0.1:3000/products/generateList`, {
+    const raw = await fetch(`http://127.0.0.1:3000/products/generate-list`, {
       method: "POST",
       body: JSON.stringify(productsToBeSearched),
       mode: "cors",
       headers: { "Content-type": "application/json;charset=utf-8" },
-    }).then(async (data) => {
-      setGeneratedShoppingList(await data.json());
     });
+    const products = await raw.json();
+    setGeneratedShoppingList(products);
   };
 
   const values = {
     productsToBeSearched,
     singleProductSearch,
     addProductToShoppingList,
-    editProductInShoppingList,
     removeProductFromShoppingList,
     fetchGeneratedShoppingLists,
     handleChangeNewProduct,

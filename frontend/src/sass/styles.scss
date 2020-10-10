@@ -128,13 +128,11 @@ Button {
 .info{
   z-index: 1 !important;
   position: absolute;
-  top: -10px;
-  left: -300px;
+  left: -200px;
   width: 300px;
   background-color: white;
-  padding: 1em;
+  padding: 2em;
   border-radius: 15px;
-  border: 1px solid rgb(122, 122, 122) !important;
   font-size: 14px;
 }
 
@@ -149,12 +147,6 @@ Button {
   top: 5px;
 }
 
-.modal-content{
-  color: #245a2f;
-  padding: 1.7rem !important;
-  border-radius: 15px !important;
-}
-
 /* Located in store.js */
 .total-price {
   background-color: rgba(255, 255, 255, 0.74);
@@ -166,4 +158,3 @@ Button {
 .sek {
   font-size: 16px;
 }
-

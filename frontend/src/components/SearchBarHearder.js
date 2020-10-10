@@ -12,7 +12,7 @@ export default function SearchBarHeader(props) {
         >
           Sök efter produkt
         </p>
-        <Questionmark text={"Mer information kring hur den här hemsidan fungerar kan ni hitta genom att klicka på 'Om Oss'."} />
+        <Questionmark text={"Skriv här vilken produkt vill du söka efter."} />
       </div>
     );
 }

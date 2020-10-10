@@ -41,14 +41,12 @@ export default function Store(props) {
         <Card style={{ backgroundColor: "rgba(255, 255, 255, 0.74" }}>
           <div className="mb-5">
             <ProductsList
-              type={"search"}
               products={singleProductSearchResult[props.store._id] || []}
               handleChange={addSelectedProductToGeneratedShoppingList}
             />
           </div>
           <div>
             <ProductsList
-              type={"chosen"}
               products={generatedShoppingList[props.store._id] || []}
               handleChange={addSelectedProductToGeneratedShoppingList}
             />
@@ -56,7 +54,7 @@ export default function Store(props) {
         </Card>
       </Collapse>
       <div className="text-center total-price matjaktDarkGreen-text">
-        {Math.round(totalPrice)} <span className="sek">SEK</span>
+        {totalPrice.toFixed(2)} <span className="sek">SEK</span>
       </div>
     </div>
   );
