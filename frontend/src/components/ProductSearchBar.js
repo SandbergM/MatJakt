@@ -12,24 +12,20 @@ export default function ProductSearchBar(props) {
   const { addProductToShoppingList, singleProductSearch } = useContext(ShoppingListContext);
   const { categories } = useContext(CategoryContext);
   const temporaryCountriesOfOrigin = [{ _id: 'Sverige', value: 'Sverige' }, { _id: 'Annat', value: 'Annat' }]
-  const temporaryMeasurements = [{ _id: 'st', value: 'Styck' }, { _id: 'kg', value: 'Kilogram' }, { _id: 'l', value: 'Liter' }, { _id: 'Sverige', value: 'Sverige' }]
+  const temporaryMeasurements = [{ _id: 'kg', value: 'Kilogram' }, { _id: 'l', value: 'Liter' }, { _id: 'Sverige', value: 'Sverige' }]
 
   const productInitState = {
-      name: null,
-      quantity: 0,
-      quantityType: "st",
-      categoryId: null,
-      isEcological: false
+    name: null,
+    quantity: null,
+    quantityType: "st",
+    categoryId: null,
+    isEcological: false
   }
 
   const [product, setProduct] = useState(productInitState)
 
-  useEffect(() => {
-    console.log(typeof product.categoryId);
-  }, [product])
-
   const addToList = () => {
-    if(product.name){
+    if (product.name && product.quantity) {
       addProductToShoppingList(product)
       document.getElementById("products-search-form").reset()
       setProduct(productInitState)
@@ -112,7 +108,7 @@ export default function ProductSearchBar(props) {
             >
               <Button
                 id="single-product-search-button"
-              
+
                 onClick={() => {
                   singleProductSearch(product);
                 }}

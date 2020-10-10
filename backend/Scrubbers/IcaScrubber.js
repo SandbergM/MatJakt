@@ -1,6 +1,5 @@
 const Scrubber = require("./Scrubber");
 const Translator = require("../Shared/Translator");
-const { removePrimitiveDuplicates } = require("../Shared/Helpers");
 const translations = Translator.translations;
 
 module.exports = class IcaScrubber extends Scrubber {
@@ -22,7 +21,7 @@ module.exports = class IcaScrubber extends Scrubber {
     countryOfOrigin: (x) =>
       x.countryOfOrigin === undefined ? "N/A" : x.countryOfOrigin.name,
     imageUrl: (x) =>
-      `https://assets.icanet.se/t_product_large_v1,f_auto/${x.sku}.jpg`,
+      `https://assets.icanet.se/t_product_large_v1,f_auto/${x.cloudinaryImageId}.jpg`,
   };
 };
 
@@ -72,7 +71,7 @@ const translator = (categories, type, productName) => {
 
   categories.forEach((category) => {
     if (translations.get(category.slug)) {
-      if (translations.get(category.slug)[type] !== undefined) {
+      if (translations.has(category.slug)[type] !== undefined) {
         if (type === "label") {
           arr.push(...translations.get(category.slug)[type])
         } else {
@@ -82,7 +81,7 @@ const translator = (categories, type, productName) => {
     }
     if (category.path) {
       category.path.forEach((subCategory) => {
-        if (translations.get(subCategory.slug)) {
+        if (translations.has(subCategory.slug)) {
           if (translations.get(subCategory.slug)[type] !== undefined) {
             if (type === "label") {
               arr.push(...translations.get(subCategory.slug)[type])
