@@ -28,7 +28,7 @@ module.exports = class CoopScrubber extends Scrubber {
   static getCategoryIds(product) {
     const ids = [];
     product.categories.forEach((category) => {
-      if (translations.has(category.code)) { ids.push(+this.translations.get(category.code).category) }
+      if (translations.has(category.code)) { ids.push(+translations.get(category.code).category) }
     })
     return [...new Set(ids)];
   }

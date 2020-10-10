@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import ProductsList from "../components/ProductsList";
 import { Collapse, Card } from "reactstrap";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
+import PriceFormater from '../helpers/PriceFormater';
 
 export default function Store(props) {
   const {
@@ -54,7 +55,7 @@ export default function Store(props) {
         </Card>
       </Collapse>
       <div className="text-center total-price matjaktDarkGreen-text">
-        {totalPrice.toFixed(2)} <span className="sek">SEK</span>
+        {PriceFormater.standardizedPriceFormat(totalPrice) || 0} <span className="sek">SEK</span>
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ export default function ProductsToBeSearchedList() {
       return <ProductsToBeSearched key={index} product={product} />;
     });
   };
-  
+
   return (
     <div className="col-12 mb-5 mt-4">
       <div className="col-12" id="product-to-be-searched-list">

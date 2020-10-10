@@ -5,7 +5,7 @@ export default function EcologicalToggleButton(props) {
     const [isEcological, setIsEcological] = useState(false);
 
     useEffect(() => {
-        props.handleChange(props.product, props.field, isEcological);
+        props.handleChange({ ...props.product, [props.field]: isEcological });
     }, [isEcological])
 
     return (

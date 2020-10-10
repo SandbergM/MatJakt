@@ -1,7 +1,5 @@
 import React from "react";
 import { Button, Col } from "reactstrap";
-/* import ReactDOM from "react-dom";
-import ReactToPdf from "react-to-pdf"; */
 
 export default function BottomButtons() {
   function print() {
