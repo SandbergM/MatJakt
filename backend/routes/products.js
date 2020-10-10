@@ -1,4 +1,5 @@
 const { Product } = require("../models/product");
+const ShoppingListService = require("../services/ShoppingListService");
 const express = require("express");
 const router = express.Router();
 
@@ -11,6 +12,21 @@ router.post("/generateList", async (req, res) => {
     list.push(match);
   }
   res.send(list);
+});
+
+router.post("/generate-list", async (req, res) => {
+  const query = req.body;
+  const products = await ShoppingListService.generateList(query);
+  res.json(products);
+});
+
+router.post("/test", async (req, res) => {
+  let query = req.body;
+  const products = await ProductService.findProductsByQuery({
+    name: new RegExp(query[0].name, "i"),
+    storeId: "5f59e826f158c91676980f44",
+  });
+  res.json(products);
 });
 
 router.post("/singleProductSearch", async (req, res) => {
