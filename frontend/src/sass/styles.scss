@@ -1,0 +1,160 @@
+@import "./searchresults.scss";
+@import "./shoppinglist.scss";
+@import "./list.scss";
+@import "./product.scss";
+@import "./listToBeSearched.scss";
+@import "./productToBeSearched.scss";
+@import "./matjaktSearchbar.scss";
+
+* {
+  box-sizing: border-box;
+  border: 0 !important;
+}
+
+.App {
+  background-image: url("../images/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: scroll;
+  min-height: 100vh !important;
+}
+
+// since we have fixed footer we need margin-bottom on App
+.App {
+  padding-bottom: 60px !important;
+}
+
+.drop-shadow {
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.13);
+}
+
+.bottombutton {
+  font-weight: 500 !important;
+  font-size: 17px !important;
+  padding: 10px 30px !important;
+  border-radius: 25px !important;
+}
+
+.bigDiv {
+  margin-bottom: 20px;
+}
+
+.matjaktDarkGreen-bg {
+  background-color: #245a2f !important;
+}
+.matjaktDarkGreen-text {
+  color: #245a2f !important;
+}
+.matjaktRed-bg {
+  background-color: #e83f39 !important;
+}
+.matJaktLightGreen-bg {
+  background-color: #66c46c !important;
+}
+.matJaktLightGreen-text {
+  color: #66c46c;
+}
+.matjaktLightPurple-bg {
+  background-color: #743ebb !important;
+}
+.matjaktWhite-bg {
+  background-color: #ffffff !important;
+}
+.matjaktWhite-text {
+  color: #ffffff !important;
+}
+.matjakt-inputfield {
+  background-color: rgb(255, 255, 255) !important;
+}
+.white-icon {
+  background-color: white;
+  border-radius: 50%;
+}
+.oblique {
+  font-style: oblique;
+}
+footer {
+  position: fixed;
+  display: flex;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: green;
+  text-align: center;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  font-family: rage;
+}
+
+// .footertext{
+//  align-items:center;
+//         justify-content:center;
+// }
+
+.header-container {
+  background-color: white;
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+Button {
+  background-color: #66c46c;
+}
+
+.logo {
+  font-family: rage;
+  font-size: 30px;
+  color: #66c46c;
+  padding-left: 30px;
+}
+
+.shoppingLista {
+  color: #245a2f;
+}
+
+.omOss {
+  padding-right: 30px;
+  color: #66c46c;
+}
+.pointer {
+  cursor: pointer;
+}
+
+.info{
+  z-index: 1 !important;
+  position: absolute;
+  left: -200px;
+  width: 300px;
+  background-color: white;
+  padding: 2em;
+  border-radius: 15px;
+  font-size: 14px;
+}
+
+.questionmark .btn-secondary{
+  font-size: 22px;
+ background-color: rgba(255, 0, 0, 0) !important;
+}
+
+.questionmark{
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+
+/* Located in store.js */
+.total-price {
+  background-color: rgba(255, 255, 255, 0.74);
+  border-radius: 0px 0px 10px 10px;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.sek {
+  font-size: 16px;
+}
