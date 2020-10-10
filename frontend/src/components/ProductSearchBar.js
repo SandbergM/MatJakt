@@ -15,17 +15,17 @@ export default function ProductSearchBar(props) {
   const temporaryMeasurements = [{ _id: 'kg', value: 'Kilogram' }, { _id: 'l', value: 'Liter' }, { _id: 'Sverige', value: 'Sverige' }]
 
   const productInitState = {
-    name: null,
-    quantity: null,
+    name: "",
+    quantity: 0,
     quantityType: "st",
     categoryId: null,
-    isEcological: false
+    isEcological: false,
   }
 
   const [product, setProduct] = useState(productInitState)
 
   const addToList = () => {
-    if (product.name && product.quantity) {
+    if (product.name) {
       addProductToShoppingList(product)
       document.getElementById("products-search-form").reset()
       setProduct(productInitState)
@@ -74,6 +74,7 @@ export default function ProductSearchBar(props) {
                 field={"categoryId"}
                 options={categories}
                 product={product}
+                defaultOption={"Kategorier"}
                 handleChange={setProduct}
               />
             </div>

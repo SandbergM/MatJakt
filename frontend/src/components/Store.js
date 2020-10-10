@@ -2,11 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import ProductsList from "../components/ProductsList";
 import { Collapse, Card } from "reactstrap";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
+import PriceFormater from '../helpers/PriceFormater';
 
 export default function Store(props) {
   const {
     generatedShoppingList,
-    addSelectedProductToGeneratedShoppingList,
     singleProductSearchResult,
   } = useContext(ShoppingListContext);
 
@@ -17,7 +17,7 @@ export default function Store(props) {
     let sum = 0;
     if (generatedShoppingList[props.store._id]) {
       generatedShoppingList[props.store._id].map((product) => {
-        sum += product.price;
+        sum += product.price * (product.amount || 1);
       });
     }
     setTotalPrice(sum);
@@ -42,19 +42,19 @@ export default function Store(props) {
           <div className="mb-5">
             <ProductsList
               products={singleProductSearchResult[props.store._id] || []}
-              handleChange={addSelectedProductToGeneratedShoppingList}
+              type={"searched"}
             />
           </div>
           <div>
             <ProductsList
               products={generatedShoppingList[props.store._id] || []}
-              handleChange={addSelectedProductToGeneratedShoppingList}
+              type={"chosen"}
             />
           </div>
         </Card>
       </Collapse>
       <div className="text-center total-price matjaktDarkGreen-text">
-        {totalPrice.toFixed(2)} <span className="sek">SEK</span>
+        {PriceFormater.standardizedPriceFormat(totalPrice) || 0} <span className="sek">SEK</span>
       </div>
     </div>
   );

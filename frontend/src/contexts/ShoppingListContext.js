@@ -9,13 +9,10 @@ export default function ShoppingListContextProvider(props) {
   );
   const [generatedShoppingList, setGeneratedShoppingList] = useState({});
 
-  const handleChangeNewProduct = (product, attribute, value) => {
-    console.log(product, attribute, value)
-    // for (let i = 0; i < generatedShoppingList.length; i++) {
-    //   if (generatedShoppingList[i] == product) {
-    //     generatedShoppingList[i] = { ...product, [attribute]: value}
-    //   }
-    // }
+  const updateGeneratedShoppingList = (store, product, action) => {
+    if (action === "increment") { }
+    if (action === "decrease") { }
+    if (action === "remove") { }
   };
 
   useEffect(() => {
@@ -90,16 +87,27 @@ export default function ShoppingListContextProvider(props) {
     setGeneratedShoppingList(products);
   };
 
+  const editProductInShoppingList = async (
+    index,
+    oldProduct,
+    productToEdit
+  ) => {
+    let editedProduct = productsToBeSearched;
+    editedProduct.splice(index, 1, productToEdit);
+    setProductsToBeSearched([...editedProduct]);
+  };
+
   const values = {
     productsToBeSearched,
     singleProductSearch,
     addProductToShoppingList,
     removeProductFromShoppingList,
     fetchGeneratedShoppingLists,
-    handleChangeNewProduct,
     generatedShoppingList,
     singleProductSearchResult,
     addSelectedProductToGeneratedShoppingList,
+    updateGeneratedShoppingList,
+    editProductInShoppingList
   };
 
   return (

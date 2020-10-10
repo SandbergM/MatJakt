@@ -64,7 +64,7 @@ module.exports = class WillysScrubber extends Scrubber {
           translations.has(x.categoryCode) &&
           translations.get(x.categoryCode).category
         ) {
-          categoryIds.push(translations.get(x.categoryCode).category);
+          categoryIds.push(+translations.get(x.categoryCode).category);
         }
       });
     }
