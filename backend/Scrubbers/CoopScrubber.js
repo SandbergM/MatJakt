@@ -34,11 +34,6 @@ module.exports = class CoopScrubber extends Scrubber {
   }
 
   static getPricePerUnit(productPrice, productUnit) {
-    //productPrice = x.comparisonPrice.formattedValue.replace(/[^\d:-]/g, "").replace(":", "."),
-    //productUnit = x.comparisonPrice.formattedValue.substr(x.comparisonPrice.formattedValue.lastIndexOf("/") + 1)
-    //---------------------------------------------------------------------------------------------------------
-    //Currently looks like we don't need to use the productUnit to change the value of comparisonPrice, but when we find out we do need to, we can do it here
-    //As far as I can see so far Coop has already done the calculating for us: productUnit is either l, kg, or st.
     return productPrice;
   }
 
