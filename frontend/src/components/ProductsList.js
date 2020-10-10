@@ -9,6 +9,7 @@ export default function ProductsList(props) {
         {props.products.map((product, i) => {
           return (
             <Product
+              type={props.type}
               product={product}
               handleChange={props.handleChange}
               key={i}

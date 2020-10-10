@@ -15,8 +15,8 @@ export default function ProductSearchBar(props) {
   const temporaryMeasurements = [{ _id: 'kg', value: 'Kilogram' }, { _id: 'l', value: 'Liter' }, { _id: 'Sverige', value: 'Sverige' }]
 
   const productInitState = {
-    name: null,
-    quantity: null,
+    name: "",
+    quantity: 0,
     quantityType: "st",
     categoryId: null,
     isEcological: false,

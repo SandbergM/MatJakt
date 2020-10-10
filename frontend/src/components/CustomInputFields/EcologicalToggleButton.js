@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Label } from "reactstrap";
 
 export default function EcologicalToggleButton(props) {
-    const [isEcological, setIsEcological] = useState(false);
+    const [isEcological, setIsEcological] = useState(props.product.isEcological || false);
 
     useEffect(() => {
         props.handleChange({ ...props.product, [props.field]: isEcological });

@@ -87,6 +87,16 @@ export default function ShoppingListContextProvider(props) {
     setGeneratedShoppingList(products);
   };
 
+  const editProductInShoppingList = async (
+    index,
+    oldProduct,
+    productToEdit
+  ) => {
+    let editedProduct = productsToBeSearched;
+    editedProduct.splice(index, 1, productToEdit);
+    setProductsToBeSearched([...editedProduct]);
+  };
+
   const values = {
     productsToBeSearched,
     singleProductSearch,
@@ -97,6 +107,7 @@ export default function ShoppingListContextProvider(props) {
     singleProductSearchResult,
     addSelectedProductToGeneratedShoppingList,
     updateGeneratedShoppingList,
+    editProductInShoppingList
   };
 
   return (

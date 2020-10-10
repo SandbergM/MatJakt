@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
 import { MdDelete, MdEdit, MdSave } from "react-icons/md";
 
@@ -15,6 +15,10 @@ export default function ProductToBeSearched(props) {
 
   const [product, setProduct] = useState(props.product);
 
+  useEffect(() => {
+    setProduct(product)
+  }, [product])
+
   const temporaryMeasurements = [
     { _id: "st", value: "Styck" },
     { _id: "kg", value: "Kilogram" },
@@ -25,11 +29,13 @@ export default function ProductToBeSearched(props) {
     setIsBeingEdited(!isBeingEdited);
   };
 
-  const editProductInList = (index, editedProduct) => {
-    if (editedProduct.name.length > 1) {
-      editProductInShoppingList(index, editedProduct);
-      toggleEdit();
-    }
+  useEffect(() => {
+    console.log(product);
+  }, [product])
+
+  const editProductInList = (index, oldProduct, editedProduct) => {
+    editProductInShoppingList(index, oldProduct, editedProduct);
+    toggleEdit();
   };
 
   return (
@@ -43,9 +49,9 @@ export default function ProductToBeSearched(props) {
                 <ProductInputField
                   field={"name"}
                   placeholder={product.name}
-                  value={product.name}
                   type={"text"}
                   product={product}
+                  value={product.name}
                   handleChange={setProduct}
                 />
               </div>
@@ -58,7 +64,6 @@ export default function ProductToBeSearched(props) {
                 <ProductInputField
                   field={"quantity"}
                   placeholder={product.quantity}
-                  value={product.quantity}
                   type={"number"}
                   product={product}
                   handleChange={setProduct}
@@ -78,7 +83,6 @@ export default function ProductToBeSearched(props) {
                 <ProductSelect
                   field={"quantityType"}
                   placeholder={product.quantityType}
-                  value={product.quantityType}
                   options={temporaryMeasurements}
                   product={product}
                   handleChange={setProduct}
@@ -94,7 +98,6 @@ export default function ProductToBeSearched(props) {
                   field={"isEcological"}
                   label={"Ekologisk"}
                   product={product}
-                  value={product.isEcological}
                   handleChange={setProduct}
                 />
               </div>
@@ -111,7 +114,7 @@ export default function ProductToBeSearched(props) {
           ) : (
               <MdSave
                 onClick={() =>
-                  editProductInList(props.index, product)
+                  editProductInList(props.index, props.product, product)
                 }
               />
             )}
