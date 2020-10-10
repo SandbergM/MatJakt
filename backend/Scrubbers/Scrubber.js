@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
+const Translator = require("../Shared/Translator");
+
 
 module.exports = class Scrubber {
+  static translations = Translator.translations;
   // Method that scrubs a product
   // based on the translateSchema in our subClass
   static async scrubOne(product) {

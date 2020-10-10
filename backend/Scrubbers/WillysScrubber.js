@@ -68,7 +68,7 @@ module.exports = class WillysScrubber extends Scrubber {
         }
       });
     }
-    return removePrimitiveDuplicates(categoryIds);
+    return categoryIds;
   }
 
   static async getLabels(productCode) {
@@ -89,7 +89,7 @@ module.exports = class WillysScrubber extends Scrubber {
         }
       });
     }
-    return removePrimitiveDuplicates(labels);
+    return labels;
   }
 
   static async getCountryOfOrigin(productCode) {

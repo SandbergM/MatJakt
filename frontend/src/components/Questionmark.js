@@ -12,7 +12,7 @@ function Questionmark(props) {
         ?
       </Button>
       {isShown && (
-        <div className="info drop-shadow">
+        <div className="info">
           {props.text}
         </div>
       )}
