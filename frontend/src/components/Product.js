@@ -5,7 +5,14 @@ import { ShoppingListContext } from '../contexts/ShoppingListContext';
 
 
 export default function Product(props) {
-  const { updateGeneratedShoppingList, addSelectedProductToGeneratedShoppingList } = useContext(ShoppingListContext);
+  const { updateGeneratedShoppingList, addSelectedProductToGeneratedShoppingList, removeFromList } = useContext(ShoppingListContext);
+
+
+  const removeProduct = () => {
+    removeFromList(props.product, props.type)
+  }
+
+
   return (
     <div
       className="row product"
@@ -65,7 +72,7 @@ export default function Product(props) {
         </div>
         <div className="divider mt-3 mb-2"></div>
       </div>
-      <div className="delete align-items-center right-icons">
+      <div className="delete align-items-center right-icons" onClick={() => { removeProduct() }}>
         <div className="delete amount">{}</div>
         <MdDelete />
       </div>
