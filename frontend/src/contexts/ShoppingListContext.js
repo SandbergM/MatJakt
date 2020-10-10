@@ -61,6 +61,24 @@ export default function ShoppingListContextProvider(props) {
     );
   };
 
+  const removeFromList = async (product, type) => {
+    let tempArr, index;
+    switch (type) {
+      case "chosen": ;
+        tempArr = generatedShoppingList[product.storeId];
+        index = generatedShoppingList[product.storeId].indexOf(product);
+        tempArr.splice(index, 1);
+        setGeneratedShoppingList({ ...generatedShoppingList, [product.storeId]: [...tempArr] })
+        break;
+      case "searched": ;
+        tempArr = singleProductSearchResult[product.storeId];
+        index = singleProductSearchResult[product.storeId].indexOf(product);
+        tempArr.splice(index, 1);
+        setSingleProductSearchResult({ ...singleProductSearchResult, [product.storeId]: [...tempArr] })
+        break;
+    }
+  }
+
   const singleProductSearch = async (product) => {
     setSingleProductSearchResult({});
     let data = await fetch(
@@ -107,7 +125,8 @@ export default function ShoppingListContextProvider(props) {
     singleProductSearchResult,
     addSelectedProductToGeneratedShoppingList,
     updateGeneratedShoppingList,
-    editProductInShoppingList
+    editProductInShoppingList,
+    removeFromList,
   };
 
   return (
