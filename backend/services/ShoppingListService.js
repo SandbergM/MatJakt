@@ -16,27 +16,27 @@ module.exports = class ShoppingListService {
     });
     for (let c of criteriaList) {
       for (let id of this.storeIds) {
-        let query = this.#queryBuilder({ ...c, storeId: id });
+        let query = this.queryBuilder({ ...c, storeId: id });
         let products = await ProductService.findProductsByQuery(query);
-        products = this.#weightProducts(products, c.name);
-        let cheapest = this.#getCheapestProduct(products);
+        products = this.weightProducts(products, c.name);
+        let cheapest = this.getCheapestProduct(products);
         cheapest && list[id].push(cheapest);
       }
     }
     return list;
   }
 
-  static #weightProducts(products, weight) {
+  static weightProducts(products, weight) {
     let weightProducts = [];
     products.forEach((p) => {
-      let weightProduct = this.#weightProduct(p, weight.toLowerCase());
+      let weightProduct = this.weightProduct(p, weight.toLowerCase());
       weightProducts.push(weightProduct);
     });
     weightProducts.sort((a, b) => b.weight - a.weight);
     return weightProducts;
   }
 
-  static #weightProduct(product, weight) {
+  static weightProduct(product, weight) {
     product.weight = 0;
 
     const productName = product.name.toLowerCase().replace(/[,.']/g, "").split(" ");
@@ -58,12 +58,12 @@ module.exports = class ShoppingListService {
       if (weight === l) { product.weight += 50 }
     });
 
-    product.weight -= this.#getCategoryWeight(product.categoryIds);
+    product.weight -= this.getCategoryWeight(product.categoryIds);
 
     return product;
   }
 
-  static #queryBuilder(query) {
+  static queryBuilder(query) {
     const builtQuery = {
       storeId: query.storeId
     };
@@ -79,7 +79,7 @@ module.exports = class ShoppingListService {
     return builtQuery;
   }
 
-  static #getCheapestProduct(products) {
+  static getCheapestProduct(products) {
     const filteredProducts = products.filter(
       (p) => p.weight === products[0].weight
     );
@@ -89,7 +89,7 @@ module.exports = class ShoppingListService {
     return cheapestProducts[0];
   }
 
-  static #getCategoryWeight(ids) {
+  static getCategoryWeight(ids) {
     let value = 0;
     ids.forEach((id) => {
       id = parseInt(id)
