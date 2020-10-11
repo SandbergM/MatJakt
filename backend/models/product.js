@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
   name: { type: String, required: true },
-  storeId: { type: mongoose.Types.ObjectId, ref: "Store", required: true },
-  categoryIds: [{ type: [mongoose.Types.ObjectId], ref: "Category" }],
+  storeId: { type: Schema.Types.ObjectId, ref: 'store', required: true },
+  categoryIds: [{ type: Number }],
   brand: { type: String },
   price: { type: Number, required: true },
   packagingSize: { type: Number },

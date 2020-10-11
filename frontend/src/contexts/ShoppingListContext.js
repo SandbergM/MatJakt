@@ -4,7 +4,16 @@ export const ShoppingListContext = createContext();
 
 export default function ShoppingListContextProvider(props) {
   const [productsToBeSearched, setProductsToBeSearched] = useState([]);
-  const [generatedShoppingList, setGeneratedShoppingList] = useState([]);
+  const [singleProductSearchResult, setSingleProductSearchResult] = useState(
+    {}
+  );
+  const [generatedShoppingList, setGeneratedShoppingList] = useState({});
+
+  const updateGeneratedShoppingList = (store, product, action) => {
+    if (action === "increment") { }
+    if (action === "decrease") { }
+    if (action === "remove") { }
+  };
 
   useEffect(() => {
     loadFromLocalStorage();
@@ -18,41 +27,106 @@ export default function ShoppingListContextProvider(props) {
   }, [productsToBeSearched]);
 
   const loadFromLocalStorage = async () => {
-    let data = localStorage.getItem('matjaktLocalSave')
+    let data = localStorage.getItem("matjaktLocalSave");
     if (data) {
-      data = await JSON.parse(data)
-      setProductsToBeSearched(data)
+      data = await JSON.parse(data);
+      setProductsToBeSearched(data);
+    }
+  };
+
+  const addSelectedProductToGeneratedShoppingList = (storeId, product) => {
+    if (!generatedShoppingList[storeId]) {
+      setGeneratedShoppingList({
+        ...generatedShoppingList,
+        [storeId]: [product],
+      });
+    } else {
+      setGeneratedShoppingList({
+        ...generatedShoppingList,
+        [storeId]: [...generatedShoppingList[storeId], product],
+      });
     }
   };
 
   const addProductToShoppingList = async (product) => {
-    setProductsToBeSearched(productsToBeSearched => ([...productsToBeSearched, product]));
+    setProductsToBeSearched((productsToBeSearched) => [
+      ...productsToBeSearched,
+      product,
+    ]);
   };
 
-  const removeProductToShoppingList = async (productToRemove) => {
-    setProductsToBeSearched(productsToBeSearched.filter((product) => product != productToRemove))
+  const removeProductFromShoppingList = async (productToRemove) => {
+    setProductsToBeSearched(
+      productsToBeSearched.filter((product) => product !== productToRemove)
+    );
   };
+
+  const removeFromList = async (product, type) => {
+    let tempArr, index;
+    switch (type) {
+      case "chosen": ;
+        tempArr = generatedShoppingList[product.storeId];
+        index = generatedShoppingList[product.storeId].indexOf(product);
+        tempArr.splice(index, 1);
+        setGeneratedShoppingList({ ...generatedShoppingList, [product.storeId]: [...tempArr] })
+        break;
+      case "searched": ;
+        tempArr = singleProductSearchResult[product.storeId];
+        index = singleProductSearchResult[product.storeId].indexOf(product);
+        tempArr.splice(index, 1);
+        setSingleProductSearchResult({ ...singleProductSearchResult, [product.storeId]: [...tempArr] })
+        break;
+    }
+  }
 
   const singleProductSearch = async (product) => {
-    console.log(product);
+    setSingleProductSearchResult({});
+    let data = await fetch(
+      `http://127.0.0.1:3000/products/singleProductSearch`,
+      {
+        method: "POST",
+        body: JSON.stringify(product),
+        mode: "cors",
+        headers: { "Content-type": "application/json;charset=utf-8" },
+      }
+    );
+    data = await data.json();
+    setSingleProductSearchResult(data);
   };
 
   const fetchGeneratedShoppingLists = async () => {
-    fetch(`http://127.0.0.1:3000/products/generateList`, {
+    const raw = await fetch(`http://127.0.0.1:3000/products/generate-list`, {
       method: "POST",
       body: JSON.stringify(productsToBeSearched),
       mode: "cors",
-      headers: { "Content-type": "application/json;charset=utf-8" }
-    }).then(async (data) => { setGeneratedShoppingList(await data.json()) })
-  }
+      headers: { "Content-type": "application/json;charset=utf-8" },
+    });
+    const products = await raw.json();
+    setGeneratedShoppingList(products);
+  };
+
+  const editProductInShoppingList = async (
+    index,
+    oldProduct,
+    productToEdit
+  ) => {
+    let editedProduct = productsToBeSearched;
+    editedProduct.splice(index, 1, productToEdit);
+    setProductsToBeSearched([...editedProduct]);
+  };
 
   const values = {
     productsToBeSearched,
     singleProductSearch,
     addProductToShoppingList,
-    removeProductToShoppingList,
+    removeProductFromShoppingList,
     fetchGeneratedShoppingLists,
     generatedShoppingList,
+    singleProductSearchResult,
+    addSelectedProductToGeneratedShoppingList,
+    updateGeneratedShoppingList,
+    editProductInShoppingList,
+    removeFromList,
   };
 
   return (

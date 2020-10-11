@@ -1,3 +1,7 @@
+.storelist{
+  display: contents;
+}
+
 .store-list {
   display: inline-block;
   padding: 1em;
@@ -14,4 +18,34 @@
 .list-contents {
   background-color: rgba(255, 255, 255, 0.603);
   border-radius: 10px;
+}
+
+.list-hidden{
+  overflow: hidden!important;
+  animation: hide 2s ease-in-out;
+  height: 0%!important;
+}
+
+.list-displayed{
+  overflow: hidden!important;
+  animation: show 2s ease-in-out;
+  height: 100%!important;
+}
+
+@keyframes hide{
+  from{
+    height: 100%;
+  }
+  to{
+    height: 0%;
+  }
+}
+
+@keyframes show{
+  from{
+    height: 0%;
+  }
+  to{
+    height: 100%;
+  }
 }

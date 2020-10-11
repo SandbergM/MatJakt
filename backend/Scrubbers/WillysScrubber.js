@@ -1,14 +1,20 @@
 const fetch = require("node-fetch");
 const Scrubber = require("./Scrubber");
-const CategoryTranslator = require("../Shared/CategoryTranslator");
-const { getRandomNumber } = require("../Shared/Helpers");
+const Translator = require("../Shared/Translator");
+const translations = Translator.translations;
+
+const {
+  getRandomNumber,
+  removePrimitiveDuplicates,
+} = require("../Shared/Helpers");
+
 module.exports = class WillysScrubber extends Scrubber {
   detailedProduct;
 
   static translateSchema = {
     name: (x) => x.name,
     categoryIds: async (x) => await this.getCategoryIds(x.code),
-    storeId: (x) => "5f59e877f158c91676980f45",
+    storeId: (x) => this.stringToObjectId("5f59e877f158c91676980f45"),
     brand: (x) => x.manufacturer,
     price: (x) => x.priceValue,
     packagingSize: (x) =>
@@ -50,25 +56,40 @@ module.exports = class WillysScrubber extends Scrubber {
   }
 
   static async getCategoryIds(productCode) {
+    let categoryIds = [];
     const product = await this.getDetailedProduct(productCode);
-    const translations = CategoryTranslator.categories;
-    let productCategories = [];
     if (product) {
-      product.breadCrumbs.forEach((b) => {
-        translations.forEach((t) => {
-          if (t._id == b.categoryCode) {
-            productCategories.push(t.categoryTranslation);
-          }
-        });
+      product.breadCrumbs.forEach((x) => {
+        if (
+          translations.has(x.categoryCode) &&
+          translations.get(x.categoryCode).category
+        ) {
+          categoryIds.push(+translations.get(x.categoryCode).category);
+        }
       });
     }
-    productCategories = Array.from(new Set(productCategories));
-    return productCategories;
+    return categoryIds;
   }
 
-  // TODO: Add logic
   static async getLabels(productCode) {
-    return ["N/A"];
+    const product = await this.getDetailedProduct(productCode);
+    let labels = [];
+    //const translations = CategoryTranslator.categories;
+    if (product) {
+      const nameLabels = product.name
+        .toLowerCase()
+        .replace(/[\s\s+&]/g, " ")
+        .split(" ");
+      labels.push(...nameLabels);
+      product.breadCrumbs.forEach((x) => {
+        if (translations.has(x.categoryCode)) {
+          translations.get(x.categoryCode).label.forEach((l) => {
+            labels.push(l)
+          })
+        }
+      });
+    }
+    return labels;
   }
 
   static async getCountryOfOrigin(productCode) {

@@ -1,11 +1,12 @@
 const HarvestingMetaData = require("./models/HarvestingMetaData");
 const Harvester = require("./Harvesters/Harvester");
+const Translator = require("./Shared/Translator");
 
 module.exports = class HarvestScheduler {
   harvesterMetaData;
-  
+
   constructor() { }
-  
+
   run() {
     this.harvester = new Harvester();
     setInterval(async () => {
@@ -36,6 +37,7 @@ module.exports = class HarvestScheduler {
 
   async harvest() {
     let updatedMetaData = this.harvesterMetaData;
+    await Translator.fetchTranslations();
     updatedMetaData.harvesterIsRunning = true;
     await HarvestingMetaData.findOneAndUpdate({ _id: 1 }, updatedMetaData, {
       upsert: true,

@@ -3,16 +3,16 @@ const HarvesterScheduler = require("./HarvestScheduler");
 // const cors = require("cors");
 
 class App {
-  constructor(){
+  constructor() {
     this.server = new Server();
     this.harvesterScheduler = new HarvesterScheduler();
     this.run();
   }
 
   async run() {
-    console.log("Running server...")
+    console.log("Running server...");
     await this.server.run();
-    console.log("Running harvester...")
+    console.log("Running harvester...");
     this.harvesterScheduler.run();
   }
 }
