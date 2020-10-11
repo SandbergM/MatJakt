@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 module.exports = class Scrubber {
   // Method that scrubs a product
   // based on the translateSchema in our subClass

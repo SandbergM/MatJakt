@@ -64,11 +64,11 @@ module.exports = class WillysScrubber extends Scrubber {
           translations.has(x.categoryCode) &&
           translations.get(x.categoryCode).category
         ) {
-          categoryIds.push(translations.get(x.categoryCode).category);
+          categoryIds.push(+translations.get(x.categoryCode).category);
         }
       });
     }
-    return removePrimitiveDuplicates(categoryIds);
+    return categoryIds;
   }
 
   static async getLabels(productCode) {
@@ -89,7 +89,7 @@ module.exports = class WillysScrubber extends Scrubber {
         }
       });
     }
-    return removePrimitiveDuplicates(labels);
+    return labels;
   }
 
   static async getCountryOfOrigin(productCode) {

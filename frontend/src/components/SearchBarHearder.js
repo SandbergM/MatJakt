@@ -1,7 +1,9 @@
 import React from "react";
 import Questionmark from "./Questionmark";
 
+
 export default function SearchBarHeader() {
+
   return (
     <div id="matjakt-searchbar-header" className="matjaktDarkGreen-bg col-12">
       <p

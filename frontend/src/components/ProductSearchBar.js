@@ -12,17 +12,25 @@ export default function ProductSearchBar(props) {
   const { addProductToShoppingList, singleProductSearch } = useContext(ShoppingListContext);
   const { categories } = useContext(CategoryContext);
   const temporaryCountriesOfOrigin = [{ _id: 'Sverige', value: 'Sverige' }, { _id: 'Annat', value: 'Annat' }]
-  const temporaryMeasurements = [{ _id: 'st', value: 'Styck' }, { _id: 'kg', value: 'Kilogram' }, { _id: 'l', value: 'Liter' }, { _id: 'Sverige', value: 'Sverige' }]
+  const temporaryMeasurements = [{ _id: 'kg', value: 'Kilogram' }, { _id: 'l', value: 'Liter' }, { _id: 'Sverige', value: 'Sverige' }]
 
-  const [product, setProduct] = useState(
-    {
-      name: "",
-      quantity: 0,
-      quantityType: "st",
-      categoryId: 0,
-      isEcological: false
+  const productInitState = {
+    name: "",
+    quantity: 0,
+    quantityType: "st",
+    categoryId: null,
+    isEcological: false,
+  }
+
+  const [product, setProduct] = useState(productInitState)
+
+  const addToList = () => {
+    if (product.name) {
+      addProductToShoppingList(product)
+      document.getElementById("products-search-form").reset()
+      setProduct(productInitState)
     }
-  )
+  }
 
   return (
     <div className="col-12 justify-content-center">
@@ -55,17 +63,18 @@ export default function ProductSearchBar(props) {
               <ProductSelect
                 field={"quantityType"}
                 placeholder={"Typ"}
+                defaultOption={"Styck"}
                 options={temporaryMeasurements}
                 product={product}
                 handleChange={setProduct}
               />
             </div>
-            <div className="col-12 col-md-6 col-xl-3 d-flex mb-2">
+            <div className={`col-12 col-md-6 col-xl-3 d-flex mb-2 ${true}`}>
               <ProductSelect
                 field={"categoryId"}
-                defaultOption={"Kategorier"}
                 options={categories}
                 product={product}
+                defaultOption={"Kategorier"}
                 handleChange={setProduct}
               />
             </div>
@@ -89,24 +98,18 @@ export default function ProductSearchBar(props) {
             <div className="col-3 col-md-2 col-xl-1 d-flex mb-2">
               <Button
                 className="col-12 custom-searchbar-button matJaktLightGreen-bg matjaktWhite-text"
-                onClick={() => {
-                  addProductToShoppingList(product).then(
-                    document.getElementById("products-search-form").reset()
-                  );
-                }}
+                onClick={() => { addToList() }}
               >
                 <span className="button-icon ">&#x2b;</span>
               </Button>
             </div>
-            {/*   <div className="col-8 offset-2 col-sm-6 offset-sm-3 col-lg-4 col-lg-3 offset-lg-7 offset-xl-7 offset-xl-6 d-flex justify-content-center">
-              <Button id="generate-list-button" onClick={() => { singleProductSearch(product) }}>Hämta prisförslag</Button>
-            </div> */}
             <div
               id="single-product-search-container"
               className="col-8 offset-2 col-sm-6 offset-sm-3 col-lg-4 col-lg-3 offset-lg-7 offset-xl-7 offset-xl-6 d-flex mt-2 justify-content-center"
             >
               <Button
                 id="single-product-search-button"
+
                 onClick={() => {
                   singleProductSearch(product);
                 }}
