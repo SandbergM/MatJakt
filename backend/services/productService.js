@@ -10,7 +10,6 @@ module.exports = class ProductService {
         pricePerUnit: "asc",
       })
       .lean();
-    console.log(products.length);
     return products;
   }
 };

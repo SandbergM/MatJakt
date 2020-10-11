@@ -5,14 +5,14 @@ import { CategoryContext } from "../contexts/CategoryContext";
 
 import ProductInputField from './CustomInputFields/ProductInputField.js';
 import ProductSelect from './CustomInputFields/ProductSelect.js';
-import SearchBarHeader from './SearchBarHearder.js'
+import SearchBarHeader from './SearchBarHeader.js'
 import EcologicalToggleButton from './CustomInputFields/EcologicalToggleButton.js'
 
 export default function ProductSearchBar(props) {
   const { addProductToShoppingList, singleProductSearch } = useContext(ShoppingListContext);
   const { categories } = useContext(CategoryContext);
   const temporaryCountriesOfOrigin = [{ _id: 'Sverige', value: 'Sverige' }, { _id: 'Annat', value: 'Annat' }]
-  const temporaryMeasurements = [{ _id: 'kg', value: 'Kilogram' }, { _id: 'l', value: 'Liter' }, { _id: 'Sverige', value: 'Sverige' }]
+  const temporaryMeasurements = [{ _id: 'kg', value: 'Kilogram' }, { _id: 'l', value: 'Liter' }]
 
   const productInitState = {
     name: "",

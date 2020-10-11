@@ -6,11 +6,11 @@ function Questionmark(props) {
 
   return (
     <div className="questionmark">
-      <Button
+      <div
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}>
         ?
-      </Button>
+      </div>
       {isShown && (
         <div className="info">
           {props.text}

@@ -125,31 +125,33 @@ Button {
   cursor: pointer;
 }
 
-.info{
+.info {
   z-index: 1 !important;
   position: absolute;
   top: -10px;
-  left: -300px;
+  left: -310px;
   width: 300px;
   background-color: white;
   padding: 1em;
   border-radius: 15px;
   border: 1px solid rgb(122, 122, 122) !important;
   font-size: 14px;
+  color: #245a2f;
 }
 
-.questionmark .btn-secondary{
+.questionmark {
   font-size: 22px;
- background-color: rgba(255, 0, 0, 0) !important;
+  background-color: rgba(255, 0, 0, 0) !important;
 }
 
-.questionmark{
+.questionmark {
+  color: white;
   position: absolute;
-  right: 10px;
-  top: 5px;
+  right: 20px;
+  top: 8px;
 }
 
-.modal-content{
+.modal-content {
   color: #245a2f;
   padding: 1.7rem !important;
   border-radius: 15px !important;
